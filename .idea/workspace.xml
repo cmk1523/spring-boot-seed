@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="75e65b77-158f-4c92-94de-e7ee7e07daff" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/spring-boot-seed-server/spring-boot-seed-server.iml" afterPath="$PROJECT_DIR$/spring-boot-seed-server/spring-boot-seed-server.iml" />
-    </list>
+    <list default="true" id="75e65b77-158f-4c92-94de-e7ee7e07daff" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/spring-boot-seed-client/target/" />
     <ignored path="$PROJECT_DIR$/spring-boot-seed-server/target/" />
@@ -20,8 +17,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state relative-caret-position="391">
+              <caret line="23" column="20" lean-forward="true" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -374,12 +371,12 @@
       <workItem from="1522458432965" duration="1791000" />
       <workItem from="1522460240014" duration="1790000" />
       <workItem from="1522462053922" duration="1679000" />
-      <workItem from="1522464279573" duration="101000" />
+      <workItem from="1522464279573" duration="176000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14013000" />
+    <option name="totallyTimeSpent" value="14088000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="383" y="338" width="2053" height="1064" extended-state="0" />
@@ -750,8 +747,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state relative-caret-position="391">
+          <caret line="23" column="20" lean-forward="true" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
           <folding />
         </state>
       </provider>
