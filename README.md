@@ -14,3 +14,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Basic Favicon set (using https://realfavicongenerator.net/)
 - Basic example of Angular binding, routing and services
 
+##### TODO
+- Build number integration
+- "User" object management
+    - Display table
+    - CRUD form
+- Integrate client side in-memory test database
+- Integrate Angular Material Design
