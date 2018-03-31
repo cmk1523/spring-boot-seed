@@ -10,7 +10,7 @@ import * as moment from 'moment';
 export class MillisecondToDateComponent implements OnInit {
   public static MMMM_DD_YYYY = 'MMMM DD YYYY';
   @Input() public milliseconds = 0;
-  @Input() public format? = MillisecondToDateComponent.MMMM_DD_YYYY;
+  @Input() public format ? = MillisecondToDateComponent.MMMM_DD_YYYY;
   public formattedDate = '';
 
   constructor() {}

@@ -3,6 +3,10 @@ import { HomeComponent } from './home.component';
 import {Router} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
 import {Location} from '@angular/common';
+import {SharedComponentsModule} from '../shared/components/shared-components.module';
+import {UserService} from '../shared/services/User.service';
+import {HttpClientModule} from '@angular/common/http';
+import {AppService} from '../shared/services/app.service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -12,8 +16,16 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ],
+      declarations: [
+        HomeComponent,
+      ],
+      providers: [
+        UserService,
+        AppService
+      ],
       imports: [
+        SharedComponentsModule,
+        HttpClientModule,
         RouterTestingModule.withRoutes([]),
       ]
     })

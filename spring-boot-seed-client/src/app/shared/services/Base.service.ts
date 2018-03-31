@@ -9,7 +9,7 @@ export class BaseService {
 
   protected handleError(error: any) {
     if (error != null) {
-      let message = 'Path: ' + error.path +
+      const message = 'Path: ' + error.path +
         '<BR>Status: ' + error.status + ' (' + error.error + ')' +
         '<BR>Message: ' + error.message;
       toastr.error(message);

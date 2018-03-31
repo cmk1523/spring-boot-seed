@@ -30,7 +30,7 @@
     "label-position": true,
     "max-line-length": [
       true,
-      280
+      140
     ],
     "member-access": false,
     "member-ordering": [
@@ -107,7 +107,6 @@
         "variable-declaration": "nospace"
       }
     ],
-    "typeof-compare": true,
     "unified-signatures": true,
     "variable-name": false,
     "whitespace": [
