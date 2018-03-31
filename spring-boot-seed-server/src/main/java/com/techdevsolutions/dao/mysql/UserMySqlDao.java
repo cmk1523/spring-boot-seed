@@ -1,6 +1,6 @@
-package com.techdevsolutions.dao;
+package com.techdevsolutions.dao.mysql;
 
-import com.techdevsolutions.beans.User;
+import com.techdevsolutions.beans.auditable.User;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserDao extends BaseDao implements DaoInterface<User> {
+public class UserMySqlDao extends BaseMySqlDao implements DaoMySqlCrudInterface<User> {
     private static final String TABLE_NAME = "USERS";
     private static final String INSERT_FIELDS = "NAME, CREATEDBY, UPDATEDBY, CREATEDDATE, UPDATEDDATE";
     private static final String SELECT_FIELDS = "ID, " + INSERT_FIELDS;
@@ -28,7 +28,7 @@ public class UserDao extends BaseDao implements DaoInterface<User> {
     }
 
     public List<User> getAll() throws Exception {
-        final String sql = "SELECT " + UserDao.SELECT_FIELDS + " FROM " + UserDao.TABLE_NAME;
+        final String sql = "SELECT " + UserMySqlDao.SELECT_FIELDS + " FROM " + UserMySqlDao.TABLE_NAME;
         PreparedStatement ps = this.initQueryPreparedStatement(sql);
         ResultSet rs = ps.executeQuery();
         List<User> list = new ArrayList<>();
@@ -42,7 +42,7 @@ public class UserDao extends BaseDao implements DaoInterface<User> {
     }
 
     public User get(Integer id) throws Exception {
-        final String sql = "SELECT " + UserDao.SELECT_FIELDS + " FROM " + UserDao.TABLE_NAME + " WHERE id = ?";
+        final String sql = "SELECT " + UserMySqlDao.SELECT_FIELDS + " FROM " + UserMySqlDao.TABLE_NAME + " WHERE id = ?";
         PreparedStatement ps = this.initQueryPreparedStatement(sql);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
@@ -56,18 +56,18 @@ public class UserDao extends BaseDao implements DaoInterface<User> {
     }
 
     public void delete(Integer id) throws Exception {
-        final String sql = "DELETE FROM " + UserDao.TABLE_NAME + " WHERE id = ?";
+        final String sql = "DELETE FROM " + UserMySqlDao.TABLE_NAME + " WHERE id = ?";
         PreparedStatement ps = this.initQueryPreparedStatement(sql);
         ps.setInt(1, id);
         ps.executeUpdate();
     }
 
     public User create(User item) throws Exception {
-        if (!this.doesTableExist(UserDao.TABLE_NAME)) {
+        if (!this.doesTableExist(UserMySqlDao.TABLE_NAME)) {
             // TODO: Create table...
         }
 
-        final String sql = "INSERT INTO " + UserDao.TABLE_NAME + " (" + UserDao.INSERT_FIELDS + ") " +
+        final String sql = "INSERT INTO " + UserMySqlDao.TABLE_NAME + " (" + UserMySqlDao.INSERT_FIELDS + ") " +
                 "VALUES (?,?,?,?,?)";
         PreparedStatement ps = this.initCreatePreparedStatement(sql);
         ps.setString(1, item.getName());

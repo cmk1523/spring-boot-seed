@@ -1,12 +1,10 @@
-package com.techdevsolutions.dao;
+package com.techdevsolutions.dao.test;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-interface DaoInterface<T> {
-    T rowMapper(ResultSet rs) throws SQLException;
-
+interface DaoTestCrudInterface<T> {
     T get(Integer id) throws Exception;
 
     void delete(Integer id) throws Exception;

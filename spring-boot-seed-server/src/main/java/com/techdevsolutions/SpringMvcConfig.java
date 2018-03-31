@@ -18,9 +18,10 @@ import java.util.Collections;
 
 @Configuration
 @EnableSwagger2
-public class SpringMvcConfig extends WebMvcConfigurationSupport {
+public class SpringMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
+        // Need thymeleaf for this to work
         registry.addViewController("/login").setViewName("login");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }

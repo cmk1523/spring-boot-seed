@@ -1,8 +1,12 @@
-package com.techdevsolutions.beans;
+package com.techdevsolutions.beans.auditable;
 
+import com.techdevsolutions.beans.ValidationResponse;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.Serializable;
 import java.util.Objects;
 
-public class BaseItem {
+public class Auditable implements Serializable {
     private Integer id = 0;
     private String name = "";
     private String createdBy = "";
@@ -10,10 +14,42 @@ public class BaseItem {
     private Long createdDate = 0L;
     private Long updatedDate = 0L;
 
-    public BaseItem() {
+    public static ValidationResponse Validate(Auditable i) {
+        if (i == null) {
+            return new ValidationResponse(false, "", "Auditable is null");
+        }
+
+        if (i.getId() == null || i.getId() == 0) {
+            return new ValidationResponse(false, "id", "Auditable id is null or not set");
+        }
+
+        if (StringUtils.isEmpty(i.getName())) {
+            return new ValidationResponse(false, "name", "Auditable name is empty");
+        }
+
+        if (StringUtils.isEmpty(i.getCreatedBy())) {
+            return new ValidationResponse(false, "createdBy", "Auditable createdBy is empty");
+        }
+
+        if (i.getCreatedDate() == null || i.getCreatedDate() == 0L) {
+            return new ValidationResponse(false, "createdDate", "Auditable createdDate null or not set");
+        }
+
+        if (StringUtils.isEmpty(i.getUpdatedBy())) {
+            return new ValidationResponse(false, "updatedBy", "Auditable updatedBy is empty");
+        }
+
+        if (i.getUpdatedDate() == null || i.getUpdatedDate() == 0L) {
+            return new ValidationResponse(false, "updatedDate", "Auditable updatedDate null or not set");
+        }
+
+        return new ValidationResponse(true, "", "");
     }
 
-    public BaseItem(Integer id, String name, String createdBy, String updatedBy, Long createdDate, Long updatedDate) {
+    public Auditable() {
+    }
+
+    public Auditable(Integer id, String name, String createdBy, String updatedBy, Long createdDate, Long updatedDate) {
         this.id = id;
         this.name = name;
         this.createdBy = createdBy;
@@ -38,7 +74,7 @@ public class BaseItem {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BaseItem baseItem = (BaseItem) o;
+        Auditable baseItem = (Auditable) o;
         return Objects.equals(id, baseItem.id) &&
                 Objects.equals(name, baseItem.name) &&
                 Objects.equals(createdBy, baseItem.createdBy) &&

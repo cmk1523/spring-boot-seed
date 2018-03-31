@@ -25,8 +25,10 @@ public class SpringWebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                        "/assets/**"
                 )
                     .permitAll()
-                .antMatchers("/api/**")
+                .antMatchers("/api/v1/app/**")
                     .hasRole("USER")
+                .antMatchers("/api/v1/**")
+                    .hasRole("API")
                 .anyRequest()
                     .authenticated()
                 .and()
@@ -42,6 +44,9 @@ public class SpringWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("admin").password("password").roles("USER");
+        auth.inMemoryAuthentication()
+                .withUser("user").password("password").roles("USER")
+                .and()
+                .withUser("admin").password("password").roles("USER", "ADMIN", "API");
     }
 }

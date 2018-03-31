@@ -2,17 +2,17 @@ package com.techdevsolutions.controllers;
 
 import com.techdevsolutions.beans.Response;
 import com.techdevsolutions.beans.ResponseList;
-import com.techdevsolutions.beans.User;
+import com.techdevsolutions.beans.auditable.User;
 import com.techdevsolutions.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.logging.Logger;
 
 @RestController
 @EnableAutoConfiguration
@@ -22,7 +22,7 @@ public class UserController extends BaseController {
     UserService userService;
 
     @ResponseBody
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public Response search(HttpServletRequest request) {
         try {
             List<User> list = this.userService.getAll();

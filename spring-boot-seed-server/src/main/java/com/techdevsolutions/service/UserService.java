@@ -1,8 +1,8 @@
 package com.techdevsolutions.service;
 
-import com.techdevsolutions.beans.BaseItem;
-import com.techdevsolutions.beans.User;
-import com.techdevsolutions.dao.UserDao;
+import com.techdevsolutions.beans.auditable.User;
+import com.techdevsolutions.beans.ValidationResponse;
+import com.techdevsolutions.dao.test.UserTestDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,21 +14,32 @@ import java.util.logging.Logger;
 public class UserService implements BasicServiceInterface<User> {
     private Logger logger = Logger.getLogger(UserService.class.getName());
 
+//    @Autowired
+//    UserMySqlDao userDao;
+
     @Autowired
-    UserDao userDao;
+    UserTestDao userDao;
 
     public List<User> getAll() throws Exception {
         logger.info("UserService - getAll");
-        return this.userDao.getAll();
+        List<User> users = this.userDao.getAll();
+
+        for (User user : users) {
+            ValidationResponse vr = User.Validate(user);
+            if (!vr.getValid()) { throw new Exception("Invalid item: " + vr.getMessage()); }
+        }
+
+        return users;
     }
 
     public User get(User user) throws Exception {
         logger.info("UserService - delete - ID: " + user.getId());
         User item = this.userDao.get(user.getId());
 
-        if (item == null) {
-            throw new NoSuchElementException("UserService - get - Item was not found using ID: " + user.getId());
-        }
+        if (item == null) { throw new NoSuchElementException("UserService - get - Item was not found using ID: " + user.getId()); }
+
+        ValidationResponse vr = User.Validate(item);
+        if (!vr.getValid()) { throw new Exception("Invalid item: " + vr.getMessage()); }
 
         return item;
     }
@@ -40,11 +51,12 @@ public class UserService implements BasicServiceInterface<User> {
 
     public User create(User item) throws Exception {
         logger.info("UserService - create - ID: " + item.getId());
-        BaseItem i = this.get(item.getId());
 
-        if (i != null) {
-            throw new IllegalArgumentException("UserService - create - Item already exists with ID: " + item.getId());
-        }
+        ValidationResponse vr = User.Validate(item);
+        if (!vr.getValid()) { throw new Exception("Invalid item: " + vr.getMessage()); }
+
+        User i = this.get(item.getId());
+        if (i != null) { throw new Exception("UserService - create - Item already exists with ID: " + item.getId()); }
 
         return this.userDao.create(item);
     }
@@ -52,28 +64,25 @@ public class UserService implements BasicServiceInterface<User> {
     public void delete(Integer id) throws Exception {
         logger.info("UserService - delete - ID: " + id);
         User i = this.get(id);
-
-        if (i == null) {
-            throw new NoSuchElementException("UserService - delete - Item was not found using ID: "+ id);
-        }
-
+        if (i == null) { throw new NoSuchElementException("UserService - delete - Item was not found using ID: "+ id); }
         this.userDao.delete(id);
     }
 
     public User update(User item) throws Exception {
         logger.info("UserService - update - ID: " + item.getId());
-        User i = this.get(item.getId());
 
-        if (i == null) {
-            throw new NoSuchElementException("UserService - update - Item was not found using ID: " + item.getId());
-        }
+        ValidationResponse vr = User.Validate(item);
+        if (!vr.getValid()) { throw new Exception("Invalid item: " + vr.getMessage()); }
+
+        User i = this.get(item.getId());
+        if (i == null) { throw new NoSuchElementException("UserService - update - Item was not found using ID: " + item.getId()); }
 
         i.setName(item.getName());
         i.setUpdatedBy(item.getUpdatedBy());
         i.setUpdatedDate(item.getUpdatedDate());
-        return this.update(i);
+        return this.userDao.update(i);
 
         // OR
-        // return this.update(item);
+        // return this.userDao.update(item);
     }
 }

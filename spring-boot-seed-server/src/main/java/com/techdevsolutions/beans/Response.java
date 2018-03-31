@@ -1,6 +1,8 @@
 package com.techdevsolutions.beans;
 
-public class Response {
+import java.io.Serializable;
+
+public class Response implements Serializable {
     private Object data = null;
     private Long took = 0L;
     private String error = "";

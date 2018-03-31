@@ -1,4 +1,4 @@
-package com.techdevsolutions.dao;
+package com.techdevsolutions.dao.mysql;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -6,8 +6,8 @@ import org.springframework.core.env.Environment;
 import java.sql.*;
 import java.util.logging.Logger;
 
-public class BaseDao {
-    Logger logger = Logger.getLogger(BaseDao.class.getName());
+public class BaseMySqlDao {
+    Logger logger = Logger.getLogger(BaseMySqlDao.class.getName());
 
     @Autowired
     Environment environment;

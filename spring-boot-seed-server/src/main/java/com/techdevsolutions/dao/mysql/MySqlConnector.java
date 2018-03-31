@@ -1,4 +1,4 @@
-package com.techdevsolutions.dao;
+package com.techdevsolutions.dao.mysql;
 
 import org.springframework.core.env.Environment;
 

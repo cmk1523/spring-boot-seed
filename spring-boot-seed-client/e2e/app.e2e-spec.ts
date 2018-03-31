@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('tds-angular2 App', () => {
+describe('spring-boot-seed-client App', () => {
   let page: AppPage;
 
   beforeEach(() => {

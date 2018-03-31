@@ -1,3 +1,30 @@
 <div class="container">
-  hello world
+  <h1>
+    {{ appInfo.name }} v{{ appInfo.version }}
+  </h1>
+
+  <h2>
+    Authorities
+  </h2>
+
+  <div *ngIf="appInfo && appInfo.user && appInfo.user.authorities != null">
+    <p *ngIf="appInfo.user.authorities.length === 0"><i>No authorities to display</i></p>
+    <p *ngFor="let item of appInfo.user.authorities">
+      {{ item.authority }}
+    </p>
+  </div>
+
+  <h2>
+    Users
+  </h2>
+
+  <p *ngIf="users.length === 0"><i>No users to display</i></p>
+  <p *ngFor="let item of users">
+    ID: {{ item.id }} <br>
+    Name: {{ item.name }} <br>
+    Created Date: <app-millisecond-to-date [milliseconds]="item.createdDate"></app-millisecond-to-date> <br>
+    Created By: {{ item.createdBy }} <br>
+    Last Updated Date: <app-millisecond-to-date [milliseconds]="item.updatedDate"></app-millisecond-to-date> <br>
+    Last Updated By: {{ item.updatedBy }}
+  </p>
 </div>
