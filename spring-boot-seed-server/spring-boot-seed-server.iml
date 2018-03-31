@@ -2,7 +2,21 @@
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/java/com/techdevsolutions/Application.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/techdevsolutions/SpringMvcConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/com/techdevsolutions/SpringWebSecurityConfig.java</file>
+          <file>jar://$MAVEN_REPOSITORY$/io/springfox/springfox-schema/2.8.0/springfox-schema-2.8.0.jar!/springfox/documentation/schema/configuration/ModelsConfiguration.class</file>
+          <file>file://$MAVEN_REPOSITORY$/io/springfox/springfox-schema/2.8.0/springfox-schema-2.8.0.jar</file>
+          <file>jar://$MAVEN_REPOSITORY$/io/springfox/springfox-spring-web/2.8.0/springfox-spring-web-2.8.0.jar!/springfox/documentation/spring/web/SpringfoxWebMvcConfiguration.class</file>
+          <file>file://$MAVEN_REPOSITORY$/io/springfox/springfox-spring-web/2.8.0/springfox-spring-web-2.8.0.jar</file>
+          <file>jar://$MAVEN_REPOSITORY$/io/springfox/springfox-swagger-common/2.8.0/springfox-swagger-common-2.8.0.jar!/springfox/documentation/swagger/configuration/SwaggerCommonConfiguration.class</file>
+          <file>file://$MAVEN_REPOSITORY$/io/springfox/springfox-swagger-common/2.8.0/springfox-swagger-common-2.8.0.jar</file>
+          <file>jar://$MAVEN_REPOSITORY$/io/springfox/springfox-swagger2/2.8.0/springfox-swagger2-2.8.0.jar!/springfox/documentation/swagger2/configuration/Swagger2DocumentationConfiguration.class</file>
+          <file>file://$MAVEN_REPOSITORY$/io/springfox/springfox-swagger2/2.8.0/springfox-swagger2-2.8.0.jar</file>
+        </fileset>
+      </configuration>
     </facet>
     <facet type="web" name="Web">
       <configuration>
