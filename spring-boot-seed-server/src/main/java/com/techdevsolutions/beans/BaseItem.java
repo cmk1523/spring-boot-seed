@@ -1,0 +1,103 @@
+package com.techdevsolutions.beans;
+
+import java.util.Objects;
+
+public class BaseItem {
+    private Integer id = 0;
+    private String name = "";
+    private String createdBy = "";
+    private String updatedBy = "";
+    private Long createdDate = 0L;
+    private Long updatedDate = 0L;
+
+    public BaseItem() {
+    }
+
+    public BaseItem(Integer id, String name, String createdBy, String updatedBy, Long createdDate, Long updatedDate) {
+        this.id = id;
+        this.name = name;
+        this.createdBy = createdBy;
+        this.updatedBy = updatedBy;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+    }
+
+    @Override
+    public String toString() {
+        return "BaseItem{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", createdBy='" + createdBy + '\'' +
+                ", updatedBy='" + updatedBy + '\'' +
+                ", createdDate='" + createdDate + '\'' +
+                ", updatedDate='" + updatedDate + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BaseItem baseItem = (BaseItem) o;
+        return Objects.equals(id, baseItem.id) &&
+                Objects.equals(name, baseItem.name) &&
+                Objects.equals(createdBy, baseItem.createdBy) &&
+                Objects.equals(updatedBy, baseItem.updatedBy) &&
+                Objects.equals(createdDate, baseItem.createdDate) &&
+                Objects.equals(updatedDate, baseItem.updatedDate);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, name, createdBy, updatedBy, createdDate, updatedDate);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public Long getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Long createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Long getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Long updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+}

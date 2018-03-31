@@ -1,0 +1,82 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "angular-cli-seed"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        { "glob": "login.html", "input": "./", "output": "./" },
+        "assets",
+        "favicon.ico",
+        { "glob": "android-chrome-192x192.png", "input": "./assets/favicon", "output": "./" },
+        { "glob": "android-chrome-384x384.png", "input": "./assets/favicon", "output": "./" },
+        { "glob": "apple-touch-icon.png", "input": "./assets/favicon", "output": "./" },
+        { "glob": "browserconfig.xml", "input": "./assets/favicon", "output": "./" },
+        { "glob": "favicon.ico", "input": "./assets/favicon", "output": "./" },
+        { "glob": "favicon-16x16.png", "input": "./assets/favicon", "output": "./" },
+        { "glob": "favicon-32x32.png", "input": "./assets/favicon", "output": "./" },
+        { "glob": "manifest.json", "input": "./assets/favicon", "output": "./" },
+        { "glob": "mstile-150x150.png", "input": "./assets/favicon", "output": "./" },
+        { "glob": "safari-pinned-tab.svg", "input": "./assets/favicon", "output": "./" }
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "styles.css",
+        "../node_modules/toastr/build/toastr.css",
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot",
+        "../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.svg",
+        "../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf",
+        "../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff",
+        "../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2"
+      ],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/toastr/build/toastr.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "src/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": {}
+  }
+}
