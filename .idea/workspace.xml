@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="75e65b77-158f-4c92-94de-e7ee7e07daff" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/spring-boot-seed-server/.gitignore" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/spring-boot-seed-client/.gitignore" afterPath="$PROJECT_DIR$/spring-boot-seed-client/.gitignore" />
+      <change beforePath="$PROJECT_DIR$/spring-boot-seed-client/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/spring-boot-seed-client/target/" />
@@ -41,8 +39,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/spring-boot-seed-server/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+            <state relative-caret-position="306">
+              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -185,16 +183,6 @@
               <item name="spring-boot-seed" type="b2602c69:ProjectViewProjectNode" />
               <item name="spring-boot-seed" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="spring-boot-seed" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-boot-seed" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-boot-seed-client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="spring-boot-seed" type="b2602c69:ProjectViewProjectNode" />
-              <item name="spring-boot-seed" type="462c0819:PsiDirectoryNode" />
-              <item name="spring-boot-seed-server" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -217,6 +205,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Chris\Dropbox\Github\spring-boot-seed" />
       <recent name="C:\Users\Chris\Desktop\spring-boot-seed\spring-boot-seed-server\src\main\resources\public\error" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -402,12 +391,12 @@
       <workItem from="1522458432965" duration="1791000" />
       <workItem from="1522460240014" duration="1790000" />
       <workItem from="1522462053922" duration="1679000" />
-      <workItem from="1522464279573" duration="426000" />
+      <workItem from="1522464279573" duration="480000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14338000" />
+    <option name="totallyTimeSpent" value="14392000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="383" y="338" width="2053" height="1064" extended-state="0" />
@@ -735,11 +724,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spring-boot-seed-client/README.md">
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="221">
             <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -779,8 +769,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/spring-boot-seed-server/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="38" column="0" lean-forward="true" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        <state relative-caret-position="306">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
         </state>
       </provider>
