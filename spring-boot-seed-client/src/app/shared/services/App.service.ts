@@ -7,9 +7,7 @@ import {ReplaySubject} from 'rxjs/ReplaySubject';
 
 @Injectable()
 export class AppService extends BaseService {
-  // public static APP_INFO = {};
-  // private appUrl = 'api/v1/app';
-  private appUrl = 'api/app';
+  private appUrl = 'api/v1/app';
   public appInfo: ReplaySubject<any> = new ReplaySubject<any>();
 
   constructor(protected http: HttpClient) {
@@ -19,7 +17,7 @@ export class AppService extends BaseService {
   getAppInfo(): Observable<any> {
     return new Observable((observer) => {
       // if (Object.keys(AppService.APP_INFO).length === 0) {
-        const subscription = this.http.get<Response>(this.appUrl + '/info').subscribe(
+        const subscription = this.http.get<Response>(this.appUrl).subscribe(
           (rsp: Response) => {
             this.appInfo.next(rsp.data);
             // AppService.APP_INFO = rsp.data;

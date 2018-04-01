@@ -35,9 +35,9 @@ import {BaseResolver} from './shared/resolvers/BaseResolver';
 
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
 
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDatabase, { delay: 1000, dataEncapsulation: false }
-    )
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //   InMemoryDatabase, { delay: 1000, apiBase: 'api/v1/', dataEncapsulation: false }
+    // )
   ],
   providers: [
     AppService,

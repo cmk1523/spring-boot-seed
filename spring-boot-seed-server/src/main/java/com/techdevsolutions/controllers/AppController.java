@@ -28,7 +28,7 @@ public class AppController extends BaseController {
     Environment environment;
 
     @ResponseBody
-    @RequestMapping(value = "info", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public Response search(HttpServletRequest request, HttpServletResponse response) {
         try {
             Map<String, Object> map = new HashMap<>();

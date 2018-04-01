@@ -41,9 +41,9 @@ export class InMemoryDatabase implements InMemoryDbService {
   responseInterceptor(resOptions: ResponseOptions, reqInfo: RequestInfo) {
     const url = reqInfo['url'];
 
-    if (url === 'api/users') {
+    if (url === 'api/v1/users') {
       resOptions.body = InMemoryDatabase.Users;
-    } else if (url === 'api/app/info') {
+    } else if (url === 'api/v1/app') {
       resOptions.body = InMemoryDatabase.APP_INFO;
     }
 
@@ -51,10 +51,9 @@ export class InMemoryDatabase implements InMemoryDbService {
   }
 
   createDb() {
-
     return {
       app: [
-        { id: 'info' }
+        { id: 'app' }
       ],
       users: InMemoryDatabase.Users,
     };
