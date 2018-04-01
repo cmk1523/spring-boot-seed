@@ -1,2 +1,13 @@
-name: "spring-boot-seed"
-version: "0.1"
+parent-name: @parent.name@
+parent-version: @parent.version@
+server-name: @project.name@
+server-version: @project.version@
+build: @buildNumber@
+
+basic-user-name: "user"
+basic-user-password: "password"
+basic-user-roles: "USER"
+
+admin-name: "admin"
+admin-password: "password"
+admin-roles: "USER, ADMIN, API"

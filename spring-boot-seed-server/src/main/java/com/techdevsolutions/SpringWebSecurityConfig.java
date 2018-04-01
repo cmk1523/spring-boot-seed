@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,6 +15,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class SpringWebSecurityConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
+    Environment environment;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
@@ -44,9 +48,19 @@ public class SpringWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        String basicUserName = environment.getProperty("basic-user-name");
+        String basicUserPassword = environment.getProperty("basic-user-password");
+        String basicUserRoles = environment.getProperty("basic-user-roles");
+        String[] basicUserRolesList = basicUserRoles.split(",");
+
+        String adminUserName = environment.getProperty("admin-name");
+        String adminUserPassword = environment.getProperty("admin-password");
+        String adminUserRoles = environment.getProperty("admin-roles");
+        String[] adminUserRolesList = adminUserRoles.split(",");
+
         auth.inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER")
+                .withUser(basicUserName).password(basicUserPassword).roles(basicUserRolesList)
                 .and()
-                .withUser("admin").password("password").roles("USER", "ADMIN", "API");
+                .withUser(adminUserName).password(adminUserPassword).roles(adminUserRolesList);
     }
 }

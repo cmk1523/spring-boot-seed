@@ -32,8 +32,11 @@ public class AppController extends BaseController {
     public Response search(HttpServletRequest request, HttpServletResponse response) {
         try {
             Map<String, Object> map = new HashMap<>();
-            map.put("name", environment.getProperty("name"));
-            map.put("version", environment.getProperty("version"));
+            map.put("name", environment.getProperty("parent-name"));
+            map.put("version", environment.getProperty("parent-version"));
+            map.put("server-name", environment.getProperty("server-name"));
+            map.put("server-version", environment.getProperty("server-version"));
+            map.put("build", environment.getProperty("build"));
 
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
