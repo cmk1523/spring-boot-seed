@@ -6,9 +6,10 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "src/main/webapp",
       "assets": [
         { "glob": "login.html", "input": "./", "output": "./" },
+        "WEB-INF",
         "assets",
         "favicon.ico",
         { "glob": "android-chrome-192x192.png", "input": "./assets/favicon", "output": "./" },

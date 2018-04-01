@@ -11,12 +11,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import java.util.logging.Logger;
+
 @Configuration
 @EnableWebSecurity
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class SpringWebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    Environment environment;
+    private Logger logger = Logger.getLogger(SpringWebSecurityConfig.class.getName());
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -48,19 +49,9 @@ public class SpringWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        String basicUserName = environment.getProperty("basic-user-name");
-        String basicUserPassword = environment.getProperty("basic-user-password");
-        String basicUserRoles = environment.getProperty("basic-user-roles");
-        String[] basicUserRolesList = basicUserRoles.split(",");
-
-        String adminUserName = environment.getProperty("admin-name");
-        String adminUserPassword = environment.getProperty("admin-password");
-        String adminUserRoles = environment.getProperty("admin-roles");
-        String[] adminUserRolesList = adminUserRoles.split(",");
-
         auth.inMemoryAuthentication()
-                .withUser(basicUserName).password(basicUserPassword).roles(basicUserRolesList)
+                .withUser("user").password("password").roles("USER")
                 .and()
-                .withUser(adminUserName).password(adminUserPassword).roles(adminUserRolesList);
+                .withUser("admin").password("password").roles("USER", "API", "ADMIN");
     }
 }

@@ -15,7 +15,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Basic example of Angular binding, routing and services
 
 ##### TODO
-- Build number integration
 - "User" object management
     - Display table
     - CRUD form

@@ -13,11 +13,11 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-  <parent>
-    <groupId>com.techdevsolutions</groupId>
-    <artifactId>spring-boot-seed</artifactId>
-    <version>0.1</version>
-  </parent>
+  <!--<parent>-->
+    <!--<groupId>com.techdevsolutions</groupId>-->
+    <!--<artifactId>spring-boot-seed</artifactId>-->
+    <!--<version>0.1</version>-->
+  <!--</parent>-->
 
   <dependencies>
     <dependency>
@@ -35,14 +35,7 @@
         <artifactId>maven-war-plugin</artifactId>
         <version>3.2.0</version>
         <configuration>
-          <webappDirectory>dist/</webappDirectory>
-          <archive>
-            <manifestEntries>
-              <Specification-Title>${project.name}</Specification-Title>
-              <Specification-Version>${project.version}</Specification-Version>
-              <Build-number>${buildNumber}</Build-number>
-            </manifestEntries>
-          </archive>
+          <!--<webappDirectory>dist/</webappDirectory>-->
         </configuration>
       </plugin>
     </plugins>

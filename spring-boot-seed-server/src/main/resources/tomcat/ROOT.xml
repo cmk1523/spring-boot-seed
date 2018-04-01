@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Context docBase=".../src/main/webapp">
+<Context docBase=".../spring-boot-seed/spring-boot-seed-client/dist">
     <Resources className="org.apache.catalina.webresources.StandardRoot">
 
         <PostResources className="org.apache.catalina.webresources.DirResourceSet"
