@@ -54,29 +54,22 @@
 
     </dependencies>
 
-    <scm>
-        <connection>scm:git:https://github.com/cmk1523/spring-boot-seed</connection>
-        <developerConnection>scm:git:https://github.com/cmk1523/spring-boot-seed</developerConnection>
-    </scm>
-
     <build>
         <finalName>${project.artifactId}-${project.version}-r${buildNumber}</finalName>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>buildnumber-maven-plugin</artifactId>
-                <version>1.4</version>
-                <executions>
-                    <execution>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>create</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.1</version>
                 <configuration>
-                    <doCheck>true</doCheck>
-                    <doUpdate>true</doUpdate>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Implementation-Build>${buildNumber}</Implementation-Build>
+                        </manifestEntries>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>

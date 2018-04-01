@@ -24,4 +24,32 @@
         <module>spring-boot-seed-client</module>
         <module>spring-boot-seed-server</module>
     </modules>
+
+    <scm>
+        <connection>scm:git:https://github.com/cmk1523/spring-boot-seed</connection>
+        <developerConnection>scm:git:https://github.com/cmk1523/spring-boot-seed</developerConnection>
+    </scm>
+
+    <build>
+        <finalName>${project.artifactId}-${project.version}-r${buildNumber}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <doCheck>true</doCheck>
+                    <doUpdate>true</doUpdate>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

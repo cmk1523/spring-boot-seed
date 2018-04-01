@@ -34,7 +34,7 @@
             <manifestEntries>
               <Specification-Title>${project.name}</Specification-Title>
               <Specification-Version>${project.version}</Specification-Version>
-              <!--<Implementation-Version>${build.number}</Implementation-Version>-->
+              <Implementation-Version>${buildNumber}</Implementation-Version>
             </manifestEntries>
           </archive>
         </configuration>
