@@ -10,16 +10,20 @@ declare let toastr: any;
 })
 export class AppComponent implements OnInit {
   loading = true;
+  loadingAppAndUserInfo = true;
   loadingMessage = 'Loading application information...';
 
   constructor(private appService: AppService) { }
 
   ngOnInit(): void {
+    this.initToastr();
+
     const TRANSITION_TIME = 3000;
     const startTime = new Date().getTime();
 
     const subscription = this.appService.appInfo.subscribe(
       () => {
+        this.loadingAppAndUserInfo = false;
         let diff = new Date().getTime() - startTime;
 
         setTimeout(() => {
@@ -29,7 +33,9 @@ export class AppComponent implements OnInit {
       }, () => {
         subscription.unsubscribe();
       });
+  }
 
+  public initToastr() {
     toastr.options = {
       "closeButton": false,
       "debug": false,
