@@ -18,14 +18,13 @@ export class HomeComponent implements OnInit {
               private appService: AppService) { }
 
   ngOnInit() {
-    const subscription = this.appService.getAppInfo().subscribe(
+    const subscription = this.appService.appInfo.subscribe(
       (appInfo: any) => {
-        toastr.success('Successfully retrieved application info');
         this.appInfo = appInfo;
       }, () => {
       }, () => {
         subscription.unsubscribe();
-      }, );
+      });
 
     const subscription2 = this.userService.getAll().subscribe(
       (users: User[]) => {

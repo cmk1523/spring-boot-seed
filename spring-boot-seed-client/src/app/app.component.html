@@ -1,4 +1,17 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
-<app-footer></app-footer>
+<div *ngIf="loading">
+  <div class="two-second-animation fade-in" >
+    <h3>
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAAZdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuMTnU1rJkAAABzElEQVRYR+2XTStFURSGT/kKA5kRGfMDKOYMmMtYUoaEgcyUqZKMZeLbgIEQ/gJzv8DHQDKh8L7nnlfb7qx77j7pqNt96iln7XXPWmsf9rmiGtVEF6wr/Vg8nfADPsE5BopmCn4lbjBQNMdQDYwy8Fe0wEO4GF+l0wRfIYu/wWZIZuE+5D1y0QqvoSZbhmmMQOWcMAAWoGJXMLgJfsAtLgegzzrU+jTsd65lUBP+5HIX1kOfe8j1T9gNmbOTxFwrasKa3CreB5Vzy0BCriasyXmjtOLEfdYrDDgENRE6ubiByh1kwKOiJkKfuWiHPP2Y+wCtYzizicsk4JpVnExA5W8xUAariQsYnTsBuQezGtiGyh9noAwN8AC6NegZjLeB2+EvlmuC2/0ImfcO26AFi/M09e/PwXVqBjcxBJXDX0QLa3Ju/U9xEdLEKtS69fq1Jk8tLipt4g5qrZcBD2vyX9tukdVEjxPjMezDnODJfawm+KKZca7XoA9fWO5naFBx4TexBMkpVGyYgRSYq5xcxQWb4LOcj69KN+KXDt74BTZCC74n+IUkd/E0xqAmO2KgaDahGphkoGj4N/8M+RLqYOA/4DHMf0JqVANR9A0Hp+3+tgBdYQAAAABJRU5ErkJggg=="/>
+      Technical Development Solutions
+    </h3>
+    <div>{{ loadingMessage }}</div>
+  </div>
+</div>
+<div *ngIf="!loading">
+  <app-header></app-header>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</div>
+
+
 

@@ -18,5 +18,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - "User" object management
     - Display table
     - CRUD form
-- Integrate client side in-memory test database
 - Integrate Angular Material Design

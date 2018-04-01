@@ -16,6 +16,7 @@ import {AppService} from './shared/services/App.service';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDatabase} from './shared/InMemoryDatabase';
 import {TestInterceptor} from './shared/InMemoryDatabaseInterceptor';
+import {BaseResolver} from './shared/resolvers/BaseResolver';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,8 @@ import {TestInterceptor} from './shared/InMemoryDatabaseInterceptor';
   providers: [
     AppService,
     UserService,
+
+    BaseResolver,
 
     { provide: HTTP_INTERCEPTORS, useClass: TestInterceptor, multi: true }
   ],
