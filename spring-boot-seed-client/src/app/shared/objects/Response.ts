@@ -1,17 +1,18 @@
 export class Response {
   private _data: any = null;
-  private _tool = 0;
+  private _took = 0;
   private _error = '';
 
-  constructor() {
+  constructor(i: any = {}) {
+    Object.assign(this, i);
   }
 
-  get tool(): number {
-    return this._tool;
+  get took(): number {
+    return this._took;
   }
 
-  set tool(value: number) {
-    this._tool = value;
+  set took(value: number) {
+    this._took = value;
   }
 
   get error(): string {

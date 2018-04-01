@@ -3,8 +3,9 @@ import {Response} from './Response';
 export class ResponseList extends Response {
   private _size = 0;
 
-  constructor() {
+  constructor(i: any = {}) {
     super();
+    Object.assign(this, i);
   }
 
 

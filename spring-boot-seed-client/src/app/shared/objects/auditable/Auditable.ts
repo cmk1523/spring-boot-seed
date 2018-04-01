@@ -1,7 +1,7 @@
 import {ValidationResponse} from '../ValidationResponse';
 
 export class Auditable {
-  private _id = '';
+  private _id = 0;
   private _name = '';
   private _createdDate = 0;
   private _createdBy = '';
@@ -13,7 +13,7 @@ export class Auditable {
       return new ValidationResponse(false, '', 'Auditable is null');
     }
 
-    if (i._id == null || i._id === '') {
+    if (i._id == null || i._id === 0) {
       return new ValidationResponse(false, 'id', 'Auditable id is null or empty');
     }
 
@@ -44,11 +44,11 @@ export class Auditable {
     Object.assign(this, i);
   }
 
-  get id(): string {
+  get id(): number {
     return this._id;
   }
 
-  set id(value: string) {
+  set id(value: number) {
     this._id = value;
   }
 

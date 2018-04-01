@@ -9,7 +9,8 @@ import {Response} from '../objects/Response';
 
 @Injectable()
 export class UserService extends BaseService implements CrudInterface<User> {
-  private usersUrl = 'api/v1/users';
+  // private usersUrl = 'api/v1/users';
+  private usersUrl = 'api/users';
 
   constructor(protected http: HttpClient) {
     super(http);

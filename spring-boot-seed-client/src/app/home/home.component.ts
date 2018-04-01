@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../shared/services/User.service';
-import {AppService} from '../shared/services/app.service';
+import {AppService} from '../shared/services/App.service';
 import {User} from '../shared/objects/auditable/User';
 
 declare let toastr: any;

@@ -10,9 +10,12 @@ import { FooterComponent } from './footer/footer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {UserService} from './shared/services/User.service';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {SharedComponentsModule} from './shared/components/shared-components.module';
-import {AppService} from './shared/services/app.service';
+import {AppService} from './shared/services/App.service';
+import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
+import {InMemoryDatabase} from './shared/InMemoryDatabase';
+import {TestInterceptor} from './shared/InMemoryDatabaseInterceptor';
 
 @NgModule({
   declarations: [
@@ -29,11 +32,17 @@ import {AppService} from './shared/services/app.service';
 
     SharedComponentsModule,
 
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDatabase, { delay: 1000, dataEncapsulation: false }
+    )
   ],
   providers: [
     AppService,
-    UserService
+    UserService,
+
+    { provide: HTTP_INTERCEPTORS, useClass: TestInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

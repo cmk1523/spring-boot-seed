@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {BaseService} from './Base.service';
-import {User} from '../objects/auditable/User';
 import {Observable} from 'rxjs/Observable';
 import {Response} from '../objects/Response';
 import {HttpClient} from '@angular/common/http';
@@ -8,7 +7,8 @@ import {HttpClient} from '@angular/common/http';
 @Injectable()
 export class AppService extends BaseService {
   public static APP_INFO = {};
-  private appUrl = 'api/v1/app';
+  // private appUrl = 'api/v1/app';
+  private appUrl = 'api/app';
 
   constructor(protected http: HttpClient) {
     super(http);
