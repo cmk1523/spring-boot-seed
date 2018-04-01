@@ -55,7 +55,7 @@
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}-${project.version}-r${buildNumber}</finalName>
+        <!--<finalName>${project.artifactId}-${project.version}-r${buildNumber}</finalName>-->
         <!--<plugins>-->
             <!--<plugin>-->
                 <!--<groupId>org.apache.maven.plugins</groupId>-->
