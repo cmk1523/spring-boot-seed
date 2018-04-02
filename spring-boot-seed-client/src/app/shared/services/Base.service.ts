@@ -14,5 +14,7 @@ export class BaseService {
         '<BR>Message: ' + error.message;
       toastr.error(message);
     }
+
+    return error;
   }
 }

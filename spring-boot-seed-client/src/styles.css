@@ -17,12 +17,7 @@
   color: #fff;
 }
 
-.contact-us {
-  text-align: center;
-}
-
-iframe {
-  width: 100%;
-  max-width: 400px;
-  height: 300px;
+/* Text stuff */
+.text-right {
+  text-align: right;
 }

@@ -37,6 +37,7 @@ public class AppController extends BaseController {
             map.put("server-name", environment.getProperty("server-name"));
             map.put("server-version", environment.getProperty("server-version"));
             map.put("build", environment.getProperty("build"));
+            map.put("buildDateTime", environment.getProperty("buildDateTime"));
 
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();

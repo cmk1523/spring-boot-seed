@@ -3,3 +3,4 @@ parent-version: @parent.version@
 server-name: @project.name@
 server-version: @project.version@
 build: @buildNumber@
+buildDateTime: @timestamp@

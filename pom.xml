@@ -47,7 +47,9 @@
                 <configuration>
                     <doCheck>false</doCheck>
                     <doUpdate>false</doUpdate>
-                    <!--<shortRevisionLength>5</shortRevisionLength>-->
+                    <useLastCommittedRevision>true</useLastCommittedRevision>
+                    <shortRevisionLength>5</shortRevisionLength>
+                    <timestampFormat>{0,date,MM-dd-yyyy HH:mm}</timestampFormat>
                 </configuration>
             </plugin>
         </plugins>

@@ -22,8 +22,7 @@ export class UserService extends BaseService implements CrudInterface<User> {
           rsp.data = (rsp.data).map((item: any) => new User(item));
           observer.next(rsp.data);
         }, (rsp: any) => {
-          this.handleError(rsp.error);
-          observer.error(rsp.error);
+          observer.error(this.handleError(rsp.error));
         }, () => {
           observer.complete();
           subscription.unsubscribe();
@@ -37,8 +36,7 @@ export class UserService extends BaseService implements CrudInterface<User> {
         (rsp: Response) => {
           observer.next(new User(rsp.data as User));
         }, (rsp: any) => {
-          this.handleError(rsp.error);
-          observer.error(rsp.error);
+          observer.error(this.handleError(rsp.error));
         }, () => {
           observer.complete();
           subscription.unsubscribe();
@@ -52,8 +50,7 @@ export class UserService extends BaseService implements CrudInterface<User> {
         (rsp: Response) => {
           observer.next(new User(rsp.data as User));
         }, (rsp: any) => {
-          this.handleError(rsp.error);
-          observer.error(rsp.error);
+          observer.error(this.handleError(rsp.error));
         }, () => {
           observer.complete();
           subscription.unsubscribe();
@@ -67,8 +64,7 @@ export class UserService extends BaseService implements CrudInterface<User> {
         () => {
           observer.next();
         }, (rsp: any) => {
-          this.handleError(rsp.error);
-          observer.error(rsp.error);
+          observer.error(this.handleError(rsp.error));
         }, () => {
           observer.complete();
           subscription.unsubscribe();
@@ -82,8 +78,7 @@ export class UserService extends BaseService implements CrudInterface<User> {
         (rsp: Response) => {
           observer.next(new User(rsp.data));
         }, (rsp: any) => {
-          this.handleError(rsp.error);
-          observer.error(rsp.error);
+          observer.error(this.handleError(rsp.error));
         }, () => {
           observer.complete();
           subscription.unsubscribe();

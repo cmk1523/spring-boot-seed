@@ -13,11 +13,11 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
-  <!--<parent>-->
-    <!--<groupId>com.techdevsolutions</groupId>-->
-    <!--<artifactId>spring-boot-seed</artifactId>-->
-    <!--<version>0.1</version>-->
-  <!--</parent>-->
+  <parent>
+    <groupId>com.techdevsolutions</groupId>
+    <artifactId>spring-boot-seed</artifactId>
+    <version>0.1</version>
+  </parent>
 
   <dependencies>
     <dependency>
