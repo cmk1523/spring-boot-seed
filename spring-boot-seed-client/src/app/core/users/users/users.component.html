@@ -1,0 +1,33 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><a [routerLink]="['/']">Home</a></li>
+    <li>Users</li>
+  </ol>
+
+  <div>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Created By</th>
+          <th>Created Date</th>
+          <th>Updated By</th>
+          <th>Updated Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of users">
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.createdBy }}</td>
+          <td><app-millisecond-to-date [milliseconds]="item.createdDate"></app-millisecond-to-date></td>
+          <td>{{ item.updatedBy }}</td>
+          <td><app-millisecond-to-date [milliseconds]="item.updatedDate"></app-millisecond-to-date></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

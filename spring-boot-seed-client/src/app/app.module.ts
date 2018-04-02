@@ -20,6 +20,8 @@ import {UsersModule} from './core/users/users.module';
 import { BaseAngularComponent } from './shared/components/base-angular/base-angular.component';
 import { UserInfoComponent } from './core/user-info/user-info.component';
 import { AppInfoComponent } from './core/app-info/app-info.component';
+import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
+import {InMemoryDatabase} from './shared/InMemoryDatabase';
 
 @NgModule({
   declarations: [
@@ -41,9 +43,9 @@ import { AppInfoComponent } from './core/app-info/app-info.component';
 
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
 
-    // HttpClientInMemoryWebApiModule.forRoot(
-    //   InMemoryDatabase, { delay: 1000, apiBase: 'api/v1/', dataEncapsulation: false }
-    // )
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDatabase, { delay: 1000, apiBase: 'api/v1/', dataEncapsulation: false }
+    )
   ],
   providers: [
     AppService,

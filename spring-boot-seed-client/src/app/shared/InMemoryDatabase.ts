@@ -12,7 +12,19 @@ export class InMemoryDatabase implements InMemoryDbService {
     response.took = 1;
     response.data = {
       name: 'spring-boot-seed',
-      version: '0.1'
+      version: '0.1',
+      build: '00000',
+      buildDateTime: '01-01-2000 23:59',
+      serverName: 'spring-boot-seed-server',
+      serverVersion: '0.1',
+      user: {
+        username: 'user',
+        authorities: [
+          {
+            authority: 'ROLE_USER'
+          }
+        ]
+      }
     };
 
     return response;

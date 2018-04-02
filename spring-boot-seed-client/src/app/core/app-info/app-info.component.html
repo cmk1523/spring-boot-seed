@@ -1,0 +1,28 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><a [routerLink]="['/']">Home</a></li>
+    <li>Application Information</li>
+  </ol>
+
+  <p>
+    <b>Name: </b> {{ appInfo.name }}
+  </p>
+  <p>
+    <b>Version: </b> {{ appInfo.version }}
+  </p>
+  <p>
+    <b>Build: </b> {{ appInfo.build }}
+  </p>
+  <p>
+    <b>Build Date: </b> {{ appInfo.buildDateTime }}
+  </p>
+  <p>
+    <b>REST Service Name: </b> {{ appInfo['serverName'] }}
+  </p>
+  <p>
+    <b>REST Service Version: </b> {{ appInfo['serverVersion'] }}
+  </p>
+</div>
+
+
+
