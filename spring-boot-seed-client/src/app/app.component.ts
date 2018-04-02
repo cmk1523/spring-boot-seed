@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AppService} from './shared/services/App.service';
+import {BaseAngularComponent} from './shared/components/base-angular/base-angular.component';
 
 declare let toastr: any;
 
@@ -8,12 +9,13 @@ declare let toastr: any;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent extends BaseAngularComponent implements OnInit {
   loading = true;
   loadingData = true;
-  appInfo: any = null;
 
-  constructor(private appService: AppService) { }
+  constructor(protected appService: AppService) {
+    super();
+  }
 
   ngOnInit(): void {
     this.initToastr();

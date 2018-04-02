@@ -13,12 +13,13 @@ import {FormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {SharedComponentsModule} from './shared/components/shared-components.module';
 import {AppService} from './shared/services/App.service';
-import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
-import {InMemoryDatabase} from './shared/InMemoryDatabase';
 import {TestInterceptor} from './shared/InMemoryDatabaseInterceptor';
 import {BaseResolver} from './shared/resolvers/BaseResolver';
-import { UsersComponent } from './core/users/users.component';
-import { UserComponent } from './core/user/user.component';
+import {UsersResolver} from './shared/resolvers/UsersResolver';
+import {UsersModule} from './core/users/users.module';
+import { BaseAngularComponent } from './shared/components/base-angular/base-angular.component';
+import { UserInfoComponent } from './core/user-info/user-info.component';
+import { AppInfoComponent } from './core/app-info/app-info.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +28,8 @@ import { UserComponent } from './core/user/user.component';
     HeaderComponent,
     FooterComponent,
     PageNotFoundComponent,
-    UsersComponent,
-    UserComponent,
+    UserInfoComponent,
+    AppInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +37,7 @@ import { UserComponent } from './core/user/user.component';
     HttpClientModule,
 
     SharedComponentsModule,
+    UsersModule,
 
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
 
@@ -48,6 +50,7 @@ import { UserComponent } from './core/user/user.component';
     UserService,
 
     BaseResolver,
+    UsersResolver,
 
     { provide: HTTP_INTERCEPTORS, useClass: TestInterceptor, multi: true }
   ],

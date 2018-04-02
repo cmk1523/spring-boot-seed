@@ -31,14 +31,14 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css",
         "../node_modules/toastr/build/toastr.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.eot",
         "../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.svg",
         "../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf",
         "../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff",
-        "../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2"
+        "../node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2",
+        "styles.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",

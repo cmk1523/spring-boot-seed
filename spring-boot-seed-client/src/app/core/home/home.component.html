@@ -3,28 +3,20 @@
     {{ appInfo.name }} v{{ appInfo.version }}.{{ appInfo.build }}
   </h1>
 
-  <h2>
-    Authorities
-  </h2>
-
-  <div *ngIf="appInfo && appInfo.user && appInfo.user.authorities != null">
-    <p *ngIf="appInfo.user.authorities.length === 0"><i>No authorities to display</i></p>
-    <p *ngFor="let item of appInfo.user.authorities">
-      {{ item.authority }}
-    </p>
+  <div class="row">
+    <div class="col-sm-6 text-center">
+      <h2>Application Information</h2>
+      <p>View application information.</p>
+      <p>
+        <a class="btn btn-default" [routerLink]="['/appInfo']">App Information &raquo;</a>
+      </p>
+    </div>
+    <div class="col-sm-6 text-center">
+      <h2>Users</h2>
+      <p>Manage users by viewing, adding, updating and removing users.</p>
+      <p>
+        <a class="btn btn-default" [routerLink]="['/users']">Users &raquo;</a>
+      </p>
+    </div>
   </div>
-
-  <h2>
-    Users
-  </h2>
-
-  <p *ngIf="users.length === 0"><i>No users to display</i></p>
-  <p *ngFor="let item of users">
-    ID: {{ item.id }} <br>
-    Name: {{ item.name }} <br>
-    Created Date: <app-millisecond-to-date [milliseconds]="item.createdDate"></app-millisecond-to-date> <br>
-    Created By: {{ item.createdBy }} <br>
-    Last Updated Date: <app-millisecond-to-date [milliseconds]="item.updatedDate"></app-millisecond-to-date> <br>
-    Last Updated By: {{ item.updatedBy }}
-  </p>
 </div>

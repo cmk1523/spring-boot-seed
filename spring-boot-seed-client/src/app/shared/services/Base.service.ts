@@ -9,10 +9,15 @@ export class BaseService {
 
   protected handleError(error: any) {
     if (error != null) {
-      const message = 'Path: ' + error.path +
-        '<BR>Status: ' + error.status + ' (' + error.error + ')' +
-        '<BR>Message: ' + error.message;
-      toastr.error(message);
+      if (error.status == null) {
+        toastr.error('<b>Connection Lost</b>' +
+          '<BR>You have lost connection with the server. Check your network connection' +
+          ' and try again.');
+      } else {
+        toastr.error('<b>Path</b>: ' + error.path +
+          '<BR><b>Status</b>: ' + error.status + ' (' + error.error + ')' +
+          '<BR><b>Message</b>: ' + error.message);
+      }
     }
 
     return error;

@@ -34,8 +34,8 @@ public class AppController extends BaseController {
             Map<String, Object> map = new HashMap<>();
             map.put("name", environment.getProperty("parent-name"));
             map.put("version", environment.getProperty("parent-version"));
-            map.put("server-name", environment.getProperty("server-name"));
-            map.put("server-version", environment.getProperty("server-version"));
+            map.put("serverName", environment.getProperty("server-name"));
+            map.put("serverVersion", environment.getProperty("server-version"));
             map.put("build", environment.getProperty("build"));
             map.put("buildDateTime", environment.getProperty("buildDateTime"));
 
