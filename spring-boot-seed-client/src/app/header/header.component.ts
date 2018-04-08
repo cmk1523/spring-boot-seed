@@ -15,7 +15,4 @@ export class HeaderComponent extends BaseAngularComponent implements OnInit {
   ngOnInit() {
   }
 
-  accessBtnClicked() {
-
-  }
 }

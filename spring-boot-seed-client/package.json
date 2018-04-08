@@ -9,7 +9,7 @@
     "build:watch": "ng build --watch",
     "build:prod": "ng build --prod",
     "build:prod:watch": "ng build --prod --watch",
-    "test": "ng test",
+    "test": "ng test --sourcemaps=false",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

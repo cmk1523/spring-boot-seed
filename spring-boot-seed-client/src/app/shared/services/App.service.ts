@@ -4,11 +4,13 @@ import {Observable} from 'rxjs/Observable';
 import {Response} from '../objects/Response';
 import {HttpClient} from '@angular/common/http';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {InMemoryDatabase} from '../InMemoryDatabase';
 
 @Injectable()
 export class AppService extends BaseService {
-  private appUrl = 'api/v1/app';
   public static APP_INFO: any = null;
+
+  private appUrl = 'api/v1/app';
   public appInfo: ReplaySubject<any> = new ReplaySubject<any>();
 
   constructor(protected http: HttpClient) {

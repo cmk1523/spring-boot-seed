@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AppInfoComponent } from './app-info.component';
+import {SharedComponentsModule} from '../../shared/components/shared-components.module';
+import {HttpClientModule} from '@angular/common/http';
+import {RouterTestingModule} from '@angular/router/testing';
+import {InMemoryDatabase} from '../../shared/InMemoryDatabase';
 
 describe('AppInfoComponent', () => {
   let component: AppInfoComponent;
@@ -8,7 +12,13 @@ describe('AppInfoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppInfoComponent ]
+      declarations: [
+        AppInfoComponent
+      ],
+      imports: [
+        SharedComponentsModule,
+        RouterTestingModule.withRoutes([]),
+      ]
     })
     .compileComponents();
   }));
@@ -16,6 +26,7 @@ describe('AppInfoComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AppInfoComponent);
     component = fixture.componentInstance;
+    component.appInfo = InMemoryDatabase.APP_INFO.data;
     fixture.detectChanges();
   });
 

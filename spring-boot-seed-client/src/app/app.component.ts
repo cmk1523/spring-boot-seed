@@ -27,7 +27,7 @@ export class AppComponent extends BaseAngularComponent implements OnInit {
       (appInfo: any) => {
         this.appInfo = appInfo;
         this.loadingData = false;
-        let diff = new Date().getTime() - startTime;
+        const diff = new Date().getTime() - startTime;
 
         // This ensures the loading message will last 3 seconds long
         setTimeout(() => {
@@ -41,21 +41,21 @@ export class AppComponent extends BaseAngularComponent implements OnInit {
 
   public initToastr() {
     toastr.options = {
-      "closeButton": false,
-      "debug": false,
-      "newestOnTop": false,
-      "progressBar": false,
-      "positionClass": "toast-bottom-center",
-      "preventDuplicates": false,
-      "onclick": null,
-      "showDuration": "300",
-      "hideDuration": "1000",
-      "timeOut": "5000",
-      "extendedTimeOut": "1000",
-      "showEasing": "swing",
-      "hideEasing": "linear",
-      "showMethod": "fadeIn",
-      "hideMethod": "fadeOut"
-    }
+      'closeButton': false,
+      'debug': false,
+      'newestOnTop': false,
+      'progressBar': false,
+      'positionClass': 'toast-bottom-center',
+      'preventDuplicates': false,
+      'onclick': null,
+      'showDuration': '300',
+      'hideDuration': '1000',
+      'timeOut': '5000',
+      'extendedTimeOut': '1000',
+      'showEasing': 'swing',
+      'hideEasing': 'linear',
+      'showMethod': 'fadeIn',
+      'hideMethod': 'fadeOut'
+    };
   }
 }

@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FooterComponent } from './footer.component';
+import {SharedComponentsModule} from '../shared/components/shared-components.module';
+import {RouterTestingModule} from '@angular/router/testing';
+import {InMemoryDatabase} from '../shared/InMemoryDatabase';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -8,7 +11,13 @@ describe('FooterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FooterComponent ]
+      declarations: [
+        FooterComponent
+      ],
+      imports: [
+        SharedComponentsModule,
+        RouterTestingModule.withRoutes([]),
+      ]
     })
     .compileComponents();
   }));
@@ -16,6 +25,7 @@ describe('FooterComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
+    component.appInfo = InMemoryDatabase.APP_INFO.data;
     fixture.detectChanges();
   });
 

@@ -7,6 +7,7 @@ import {SharedComponentsModule} from '../../shared/components/shared-components.
 import {UserService} from '../../shared/services/User.service';
 import {HttpClientModule} from '@angular/common/http';
 import {AppService} from '../../shared/services/App.service';
+import {InMemoryDatabase} from '../../shared/InMemoryDatabase';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -37,6 +38,7 @@ describe('HomeComponent', () => {
     location = TestBed.get(Location);
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
+    component.appInfo = InMemoryDatabase.APP_INFO.data;
     fixture.detectChanges();
   });
 

@@ -3,6 +3,9 @@ import { HeaderComponent } from './header.component';
 import {Router} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
 import {Location} from '@angular/common';
+import {SharedComponentsModule} from '../shared/components/shared-components.module';
+import {InMemoryDatabase} from '../shared/InMemoryDatabase';
+import {AppService, MockAppService} from '../shared/services/App.service';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -12,8 +15,13 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ],
+      declarations: [
+        HeaderComponent
+      ],
+      providers: [
+      ],
       imports: [
+        SharedComponentsModule,
         RouterTestingModule.withRoutes([]),
       ]
     })
@@ -25,6 +33,7 @@ describe('HeaderComponent', () => {
     location = TestBed.get(Location);
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
+    component.appInfo = InMemoryDatabase.APP_INFO.data;
     fixture.detectChanges();
   });
 
