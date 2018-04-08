@@ -7,7 +7,7 @@ import {UserService} from '../services/user.service';
 import {User} from '../objects/auditable/User';
 
 @Injectable()
-export class UsersResolver extends BaseResolver implements Resolve<any> {
+export class UserResolver extends BaseResolver implements Resolve<any> {
   constructor(protected router: Router,
               protected appService: AppService,
               protected userService: UserService) {
@@ -18,11 +18,14 @@ export class UsersResolver extends BaseResolver implements Resolve<any> {
     return new Observable((observer) => {
       super.resolve(route, state).subscribe();
 
-      const subscription = this.userService.getAll().subscribe(
-        (users: User[]) => {
-          observer.next(users);
+      const idStr = route.paramMap.get('id');
+      const id = parseInt(idStr, 10);
+
+      const subscription = this.userService.get(id).subscribe(
+        (user: User) => {
+          observer.next(user);
         }, (err: any) => {
-          this.handleError('UserResolver - Unable to get users: ' + err);
+          this.handleError('UserResolver - Unable to get user: ' + err);
           this.router.navigate(['/home']);
           observer.complete();
         }, () => {

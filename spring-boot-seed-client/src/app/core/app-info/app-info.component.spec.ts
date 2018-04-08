@@ -26,7 +26,7 @@ describe('AppInfoComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AppInfoComponent);
     component = fixture.componentInstance;
-    component.appInfo = InMemoryDatabase.APP_INFO.data;
+    component.appInfo = InMemoryDatabase.APP_INFO_TEST.data;
     fixture.detectChanges();
   });
 

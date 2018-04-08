@@ -8,12 +8,12 @@ export class Auditable {
   private _updatedDate = 0;
   private _updatedBy = '';
 
-  public static Validate(i: Auditable): ValidationResponse {
+  public static Validate(i: Auditable, isNew = false): ValidationResponse {
     if (i == null) {
       return new ValidationResponse(false, '', 'Auditable is null');
     }
 
-    if (i._id == null || i._id === 0) {
+    if (!isNew && (i._id == null || i._id === 0)) {
       return new ValidationResponse(false, 'id', 'Auditable id is null or empty');
     }
 

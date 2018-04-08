@@ -18,6 +18,10 @@
 }
 
 /* Text */
+.clickable {
+  cursor: pointer;
+}
+
 .text-right {
   text-align: right;
 }
@@ -25,7 +29,6 @@
 .text-center {
   text-align: center;
 }
-
 
 @media(max-width:767px){
   body {
@@ -46,4 +49,19 @@
 
 .no-border {
   border: 0px;
+}
+
+
+/* Forms */
+
+.required-form-item {
+  color: red;
+}
+
+form div.alert {
+  margin-top: 5px;
+}
+
+.form-control-feedback.select {
+  padding-right: 15px;
 }

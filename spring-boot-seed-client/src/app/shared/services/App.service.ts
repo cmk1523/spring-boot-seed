@@ -16,7 +16,7 @@ export class AppService extends BaseService {
   public appInfo: ReplaySubject<any> = new ReplaySubject<any>();
 
   constructor(protected http: HttpClient, protected eventService: EventService) {
-    super(http);
+    super(http, eventService);
   }
 
   getAppInfo(): Observable<any> {

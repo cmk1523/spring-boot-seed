@@ -13,7 +13,7 @@ export class UserService extends BaseService implements CrudInterface<User> {
   private usersUrl = 'api/v1/users';
 
   constructor(protected http: HttpClient, protected eventService: EventService) {
-    super(http);
+    super(http, eventService);
   }
 
   getAll(): Observable<User[]> {
@@ -35,6 +35,7 @@ export class UserService extends BaseService implements CrudInterface<User> {
   }
 
   get(id: number): Observable<User> {
+    // console.log('UserService - get - id: ' + id);
     return new Observable((observer) => {
       this.eventService.loading.next(true);
 
@@ -55,10 +56,11 @@ export class UserService extends BaseService implements CrudInterface<User> {
     return new Observable((observer) => {
       this.eventService.loading.next(true);
 
-      const subscription = this.http.put<Response>(this.usersUrl + '/' + item.id, item).subscribe(
+      const subscription = this.http.put<Response>(this.usersUrl, item).subscribe(
         (rsp: Response) => {
           observer.next(new User(rsp.data as User));
         }, (rsp: any) => {
+          console.dir(rsp);
           observer.error(this.handleError(rsp.error));
         }, () => {
           this.eventService.loading.next(false);
@@ -93,6 +95,7 @@ export class UserService extends BaseService implements CrudInterface<User> {
         (rsp: Response) => {
           observer.next(new User(rsp.data));
         }, (rsp: any) => {
+          console.dir(rsp);
           observer.error(this.handleError(rsp.error));
         }, () => {
           this.eventService.loading.next(false);

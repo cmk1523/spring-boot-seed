@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Subject} from 'rxjs/Subject';
+import {EventService} from './event.service';
 
 declare let toastr: any;
 
 @Injectable()
 export class BaseService {
-  constructor(protected http: HttpClient) { }
+  constructor(protected http: HttpClient, protected eventService: EventService) { }
 
   public static IsDifferent(a: any, b: any) {
-    return JSON.stringify(a) === JSON.stringify(b);
+    return JSON.stringify(a) !== JSON.stringify(b);
   }
 
   protected handleError(error: any) {
+    this.eventService.loading.next('kill');
+
     if (error != null) {
       if (error.status == null) {
         toastr.error('<b>Connection Lost</b>' +

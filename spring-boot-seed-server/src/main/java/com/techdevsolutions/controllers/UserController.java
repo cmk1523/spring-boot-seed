@@ -48,7 +48,7 @@ public class UserController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "", method = RequestMethod.PUT)
     public Response put(HttpServletRequest request, @PathVariable Integer id, @RequestBody User data) {
         try {
             User newItem = this.userService.create(data);

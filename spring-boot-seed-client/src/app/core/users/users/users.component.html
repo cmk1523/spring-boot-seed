@@ -5,29 +5,41 @@
   </ol>
 
   <div>
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Created By</th>
-          <th>Created Date</th>
-          <th>Updated By</th>
-          <th>Updated Date</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of users">
-          <td>{{ item.id }}</td>
-          <td><a [routerLink]="['/users', item.id]">{{ item.name }}</a></td>
-          <td>{{ item.createdBy }}</td>
-          <td><app-millisecond-to-date [milliseconds]="item.createdDate"></app-millisecond-to-date></td>
-          <td>{{ item.updatedBy }}</td>
-          <td><app-millisecond-to-date [milliseconds]="item.updatedDate"></app-millisecond-to-date></td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="row">
+      <div class="col-md-12">
+        <button class="btn btn-primary" (click)="createBtnClicked()">Create User</button>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Created By</th>
+              <th>Created Date</th>
+              <th>Updated By</th>
+              <th>Updated Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of users">
+              <td>{{ item.id }}</td>
+              <td><a [routerLink]="['/users', item.id]">{{ item.name }}</a></td>
+              <td>{{ item.createdBy }}</td>
+              <td><app-millisecond-to-date [milliseconds]="item.createdDate"></app-millisecond-to-date></td>
+              <td>{{ item.updatedBy }}</td>
+              <td><app-millisecond-to-date [milliseconds]="item.updatedDate"></app-millisecond-to-date></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
 import {Location} from '@angular/common';
 import {SharedComponentsModule} from '../../shared/components/shared-components.module';
-import {UserService} from '../../shared/services/User.service';
+import {UserService} from '../../shared/services/user.service';
 import {HttpClientModule} from '@angular/common/http';
 import {AppService} from '../../shared/services/App.service';
 import {InMemoryDatabase} from '../../shared/InMemoryDatabase';
@@ -38,7 +38,7 @@ describe('HomeComponent', () => {
     location = TestBed.get(Location);
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
-    component.appInfo = InMemoryDatabase.APP_INFO.data;
+    component.appInfo = InMemoryDatabase.APP_INFO_TEST.data;
     fixture.detectChanges();
   });
 

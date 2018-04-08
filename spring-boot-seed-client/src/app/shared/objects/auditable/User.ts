@@ -7,9 +7,9 @@ export class User extends Auditable {
     Object.assign(this, i);
   }
 
-  public static Validate(i: Auditable): ValidationResponse {
-    if (!Auditable.Validate(i).isValid) {
-      return Auditable.Validate(i);
+  public static Validate(i: Auditable, isNew = false): ValidationResponse {
+    if (!Auditable.Validate(i, isNew).isValid) {
+      return Auditable.Validate(i, isNew);
     }
 
     return new ValidationResponse(true, '', '');

@@ -6,7 +6,13 @@ import {UsersComponent} from './core/users/users/users.component';
 import {UsersResolver} from './shared/resolvers/UsersResolver';
 import {UserInfoComponent} from './core/user-info/user-info.component';
 import {AppInfoComponent} from './core/app-info/app-info.component';
+import {UserComponent} from './core/users/user/user.component';
+import {UserResolver} from './shared/resolvers/UserResolver';
+import {CreateUserComponent} from './core/users/create-user/create-user.component';
 
+// **
+// REMINDER: Order is important!
+// **
 export const routes: Route[] = [
   {
     path: '',
@@ -40,14 +46,21 @@ export const routes: Route[] = [
     path: 'users',
     component: UsersComponent,
     resolve: {
-      users: UsersResolver
+      data: UsersResolver
+    }
+  },
+  {
+    path: 'users/create',
+    component: CreateUserComponent,
+    resolve: {
+      data: BaseResolver
     }
   },
   {
     path: 'users/:id',
-    component: UsersComponent,
+    component: UserComponent,
     resolve: {
-      data: BaseResolver
+      data: UserResolver
     }
   },
   {

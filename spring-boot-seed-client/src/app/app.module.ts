@@ -8,7 +8,7 @@ import {routes} from './app.routing';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import {UserService} from './shared/services/User.service';
+import {UserService} from './shared/services/user.service';
 import {FormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {SharedComponentsModule} from './shared/components/shared-components.module';
@@ -23,6 +23,8 @@ import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDatabase} from './shared/InMemoryDatabase';
 import {BaseService} from './shared/services/base.service';
 import {EventService} from './shared/services/event.service';
+import {UserResolver} from './shared/resolvers/UserResolver';
+import {PreferenceService} from './shared/services/preference.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,7 @@ import {EventService} from './shared/services/event.service';
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
 
     HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDatabase, { delay: 1000, apiBase: 'api/v1/', dataEncapsulation: false }
+      InMemoryDatabase, { delay: 750, apiBase: 'api/v1/', dataEncapsulation: false }
     )
   ],
   providers: [
@@ -53,9 +55,11 @@ import {EventService} from './shared/services/event.service';
     AppService,
     UserService,
     EventService,
+    PreferenceService,
 
     BaseResolver,
     UsersResolver,
+    UserResolver,
 
     { provide: HTTP_INTERCEPTORS, useClass: TestInterceptor, multi: true }
   ],

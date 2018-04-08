@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {AppComponent} from './app.component';
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {UserService} from './shared/services/User.service';
 import {AppService} from './shared/services/App.service';
 import {SharedComponentsModule} from './shared/components/shared-components.module';
 import {RouterTestingModule} from '@angular/router/testing';

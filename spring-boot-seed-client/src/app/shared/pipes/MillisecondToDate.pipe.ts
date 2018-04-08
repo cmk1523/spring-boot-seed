@@ -6,6 +6,7 @@ import * as moment from 'moment';
 })
 export class MillisecondToDate implements PipeTransform {
   public static DDMMMYYYY = 'DDMMMYYYY';
+  public static MMDDYYYY_HH_MM_SS = 'MM-DD-YYYY HH:mm:ss';
   public static DDMMMYYYY_HH_MM_SS = 'DDMMMYYYY HH:mm:ss';
   public static DDMMMYYYY_HH_MM_SS_Z = 'DDMMMYYYY HH:mm:ss Z';
   public static MMMM_DD_YYYY = 'MMMM DD, YYYY';
