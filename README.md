@@ -9,6 +9,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Swagger 2 (i.e. /v2/api-docs)
 - Custom error pages (i.e. 404, 500, ... etc)
 - Secured APIs (i.e. /api/v1/app, /api/v1/users)
+- Data models extend Auditable class
 
 ## Frontend (Angular) Features
 - Simple Angular 5 CLI application

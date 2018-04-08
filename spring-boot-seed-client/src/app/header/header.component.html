@@ -1,55 +1,44 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-              aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" [routerLink]="['/home']">
-        <div>
-          <img src="assets/images/tds_white_32x32.png">
-        </div>
-        <div>
-          Technical Development Solutions
-        </div>
-      </a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <form class="navbar-form navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <img class="user-image-100" src="./assets/images/unknown-user.png">
-              <div class="user-name dropdown-toggle">
-                {{ appInfo.user.name }}
-                <span class="caret"></span>
+    <div class="row header-row">
+      <div class="header-row-left col-xs-9">
+        <a class="header-row-link" [routerLink]="['/home']">
+          <div class="header-row-image">
+            <img src="assets/images/tds_white_32x32.png">
+          </div>
+          <div class="header-row-title">
+            Technical Development Solutions
+          </div>
+        </a>
+      </div>
+      <div class="header-row-right col-xs-3">
+        <a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <img class="user-image-100" src="./assets/images/unknown-user.png">
+          <div class="user-name dropdown-toggle">
+            {{ appInfo.user.name }}
+            <span class="caret"></span>
+          </div>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li class="user-description">
+            <a [routerLink]="['/userInfo']">
+              <div>
+                <img class="user-image-100" src="./assets/images/unknown-user.png">
+              </div>
+              <div>
+                {{ appInfo.user.username }}
+              </div>
+              <div>
+                {{ appInfo.user.email }}
               </div>
             </a>
-            <ul class="dropdown-menu">
-              <li class="user-description">
-                <a [routerLink]="['/userInfo']">
-                  <div>
-                    <img class="user-image-100" src="./assets/images/unknown-user.png">
-                  </div>
-                  <div>
-                    {{ appInfo.user.username }}
-                  </div>
-                  <div>
-                    {{ appInfo.user.email }}
-                  </div>
-                </a>
-              </li>
-              <li role="separator" class="divider"></li>
-              <!--<li><a (click)="routeBtnClicked()" [routerLink]="['/support']">Support</a></li>-->
-              <!--<li role="separator" class="divider"></li>-->
-              <li><a href="/logout">Sign Out</a></li>
-            </ul>
           </li>
+          <li role="separator" class="divider"></li>
+          <!--<li><a (click)="routeBtnClicked()" [routerLink]="['/support']">Support</a></li>-->
+          <!--<li role="separator" class="divider"></li>-->
+          <li><a href="/logout">Sign Out</a></li>
         </ul>
-      </form>
+      </div>
     </div>
   </div>
 </nav>
