@@ -17,11 +17,12 @@ import {TestInterceptor} from './shared/InMemoryDatabaseInterceptor';
 import {BaseResolver} from './shared/resolvers/BaseResolver';
 import {UsersResolver} from './shared/resolvers/UsersResolver';
 import {UsersModule} from './core/users/users.module';
-import { BaseAngularComponent } from './shared/components/base-angular/base-angular.component';
 import { UserInfoComponent } from './core/user-info/user-info.component';
 import { AppInfoComponent } from './core/app-info/app-info.component';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDatabase} from './shared/InMemoryDatabase';
+import {BaseService} from './shared/services/base.service';
+import {EventService} from './shared/services/event.service';
 
 @NgModule({
   declarations: [
@@ -48,8 +49,10 @@ import {InMemoryDatabase} from './shared/InMemoryDatabase';
     )
   ],
   providers: [
+    BaseService,
     AppService,
     UserService,
+    EventService,
 
     BaseResolver,
     UsersResolver,

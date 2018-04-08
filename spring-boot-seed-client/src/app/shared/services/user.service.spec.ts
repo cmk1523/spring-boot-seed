@@ -1,19 +1,23 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { AppService } from './App.service';
+import { UserService } from './User.service';
 import {HttpClientModule} from '@angular/common/http';
+import {EventService} from './event.service';
 
-describe('AppService', () => {
+describe('UserService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AppService],
+      providers: [
+        UserService,
+        EventService
+      ],
       imports: [
         HttpClientModule
       ]
     });
   });
 
-  it('should be created', inject([AppService], (service: AppService) => {
+  it('should be created', inject([UserService], (service: UserService) => {
     expect(service).toBeTruthy();
   }));
 });

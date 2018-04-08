@@ -6,6 +6,7 @@ import {AppService} from './shared/services/App.service';
 import {SharedComponentsModule} from './shared/components/shared-components.module';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientModule} from '@angular/common/http';
+import {EventService} from './shared/services/event.service';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -15,7 +16,7 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       providers: [
-        // UserService,
+        EventService,
         AppService
       ],
       declarations: [

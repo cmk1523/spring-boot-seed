@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Subject} from 'rxjs/Subject';
 
 declare let toastr: any;
 
 @Injectable()
 export class BaseService {
   constructor(protected http: HttpClient) { }
+
+  public static IsDifferent(a: any, b: any) {
+    return JSON.stringify(a) === JSON.stringify(b);
+  }
 
   protected handleError(error: any) {
     if (error != null) {

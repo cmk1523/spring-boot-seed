@@ -17,6 +17,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Basic Favicon set (using https://realfavicongenerator.net/)
 - Basic example of Angular binding, routing and services
 - Angular "in memory" database
+- Loading bar
 
 ##### TODO
 - "User" object management

@@ -4,7 +4,6 @@ import {Observable} from 'rxjs/Observable';
 import {AppService} from '../services/App.service';
 import {BaseResolver} from './BaseResolver';
 import {UserService} from '../services/User.service';
-import {ResponseList} from '../objects/ResponseList';
 import {User} from '../objects/auditable/User';
 
 @Injectable()

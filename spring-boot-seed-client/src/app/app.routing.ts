@@ -44,7 +44,7 @@ export const routes: Route[] = [
     }
   },
   {
-    path: 'users/id',
+    path: 'users/:id',
     component: UsersComponent,
     resolve: {
       data: BaseResolver

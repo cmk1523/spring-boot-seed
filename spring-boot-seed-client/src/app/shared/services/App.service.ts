@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import {BaseService} from './Base.service';
+import {BaseService} from './base.service';
 import {Observable} from 'rxjs/Observable';
 import {Response} from '../objects/Response';
 import {HttpClient} from '@angular/common/http';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {InMemoryDatabase} from '../InMemoryDatabase';
+import {Subject} from 'rxjs/Subject';
+import {EventService} from './event.service';
 
 @Injectable()
 export class AppService extends BaseService {
@@ -13,13 +15,15 @@ export class AppService extends BaseService {
   private appUrl = 'api/v1/app';
   public appInfo: ReplaySubject<any> = new ReplaySubject<any>();
 
-  constructor(protected http: HttpClient) {
+  constructor(protected http: HttpClient, protected eventService: EventService) {
     super(http);
   }
 
   getAppInfo(): Observable<any> {
     return new Observable((observer) => {
       if (!AppService.APP_INFO) {
+        this.eventService.loading.next(true);
+
         const subscription = this.http.get<Response>(this.appUrl).subscribe(
           (rsp: Response) => {
             this.appInfo.next(rsp.data);
@@ -28,6 +32,7 @@ export class AppService extends BaseService {
           }, (rsp: any) => {
             observer.error(this.handleError(rsp.error));
           }, () => {
+            this.eventService.loading.next(false);
             observer.complete();
             subscription.unsubscribe();
           });

@@ -3,20 +3,23 @@ import {CrudInterface} from './CrudInterface';
 import {Observable} from 'rxjs/Observable';
 import {User} from '../objects/auditable/User';
 import {HttpClient} from '@angular/common/http';
-import {BaseService} from './Base.service';
+import {BaseService} from './base.service';
 import {ResponseList} from '../objects/ResponseList';
 import {Response} from '../objects/Response';
+import {EventService} from './event.service';
 
 @Injectable()
 export class UserService extends BaseService implements CrudInterface<User> {
   private usersUrl = 'api/v1/users';
 
-  constructor(protected http: HttpClient) {
+  constructor(protected http: HttpClient, protected eventService: EventService) {
     super(http);
   }
 
   getAll(): Observable<User[]> {
     return new Observable((observer) => {
+      this.eventService.loading.next(true);
+
       const subscription = this.http.get<ResponseList>(this.usersUrl).subscribe(
         (rsp: ResponseList) => {
           rsp.data = (rsp.data).map((item: any) => new User(item));
@@ -24,6 +27,7 @@ export class UserService extends BaseService implements CrudInterface<User> {
         }, (rsp: any) => {
           observer.error(this.handleError(rsp.error));
         }, () => {
+          this.eventService.loading.next(false);
           observer.complete();
           subscription.unsubscribe();
         });
@@ -32,12 +36,15 @@ export class UserService extends BaseService implements CrudInterface<User> {
 
   get(id: number): Observable<User> {
     return new Observable((observer) => {
+      this.eventService.loading.next(true);
+
       const subscription = this.http.get<Response>(this.usersUrl + '/' + id).subscribe(
         (rsp: Response) => {
           observer.next(new User(rsp.data as User));
         }, (rsp: any) => {
           observer.error(this.handleError(rsp.error));
         }, () => {
+          this.eventService.loading.next(false);
           observer.complete();
           subscription.unsubscribe();
         });
@@ -46,12 +53,15 @@ export class UserService extends BaseService implements CrudInterface<User> {
 
   create(item: User): Observable<User> {
     return new Observable((observer) => {
+      this.eventService.loading.next(true);
+
       const subscription = this.http.put<Response>(this.usersUrl + '/' + item.id, item).subscribe(
         (rsp: Response) => {
           observer.next(new User(rsp.data as User));
         }, (rsp: any) => {
           observer.error(this.handleError(rsp.error));
         }, () => {
+          this.eventService.loading.next(false);
           observer.complete();
           subscription.unsubscribe();
         });
@@ -60,12 +70,15 @@ export class UserService extends BaseService implements CrudInterface<User> {
 
   delete(id: number): Observable<void> {
     return new Observable((observer) => {
+      this.eventService.loading.next(true);
+
       const subscription = this.http.delete<User>(this.usersUrl + '/' + id).subscribe(
         () => {
           observer.next();
         }, (rsp: any) => {
           observer.error(this.handleError(rsp.error));
         }, () => {
+          this.eventService.loading.next(false);
           observer.complete();
           subscription.unsubscribe();
         });
@@ -74,12 +87,15 @@ export class UserService extends BaseService implements CrudInterface<User> {
 
   update(item: User): Observable<User> {
     return new Observable((observer) => {
+      this.eventService.loading.next(true);
+
       const subscription = this.http.post<Response>(this.usersUrl + '/' + item.id, item).subscribe(
         (rsp: Response) => {
           observer.next(new User(rsp.data));
         }, (rsp: any) => {
           observer.error(this.handleError(rsp.error));
         }, () => {
+          this.eventService.loading.next(false);
           observer.complete();
           subscription.unsubscribe();
         });
