@@ -4,9 +4,7 @@ import { UserInfoComponent } from './user-info.component';
 import {SharedComponentsModule} from '../../shared/components/shared-components.module';
 import {RouterTestingModule} from '@angular/router/testing';
 import {InMemoryDatabase} from '../../shared/InMemoryDatabase';
-import {AppService, MockAppService} from '../../shared/services/App.service';
 import {HttpClientModule} from '@angular/common/http';
-import {BaseResolver} from '../../shared/resolvers/BaseResolver';
 import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 

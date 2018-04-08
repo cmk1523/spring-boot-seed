@@ -5,7 +5,6 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {Location} from '@angular/common';
 import {SharedComponentsModule} from '../shared/components/shared-components.module';
 import {InMemoryDatabase} from '../shared/InMemoryDatabase';
-import {AppService, MockAppService} from '../shared/services/App.service';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
