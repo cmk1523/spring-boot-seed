@@ -91,4 +91,16 @@ export class Auditable {
   set updatedBy(value: string) {
     this._updatedBy = value;
   }
+
+  toJsonString(): string {
+    let json = JSON.stringify(this);
+    Object.keys(this).filter(key => key[0] === "_").forEach(key => {
+      json = json.replace(key, key.substring(1));
+    });
+    return json;
+  }
+
+  removeGettersSetters(): any {
+    return JSON.parse(this.toJsonString());
+  }
 }

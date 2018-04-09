@@ -46,9 +46,9 @@ import {PreferenceService} from './shared/services/preference.service';
 
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
 
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDatabase, { delay: 750, apiBase: 'api/v1/', dataEncapsulation: false }
-    )
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //   InMemoryDatabase, { delay: 750, apiBase: 'api/v1/', dataEncapsulation: false }
+    // )
   ],
   providers: [
     BaseService,

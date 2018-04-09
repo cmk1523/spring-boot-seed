@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BaseAngularComponent} from '../../../shared/components/base-angular/base-angular.component';
 import {User} from '../../../shared/objects/auditable/User';
-import {ActivatedRoute, ActivatedRouteSnapshot, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../shared/services/user.service';
 import {PreferenceService} from '../../../shared/services/preference.service';
 
@@ -35,7 +35,7 @@ export class UserComponent extends BaseAngularComponent implements OnInit {
       }, () => {
         setTimeout(() => {
           this.router.navigate(['/users']);
-        }, 100);
+        }, 1000);
         subscription.unsubscribe();
       });
     }
@@ -55,12 +55,15 @@ export class UserComponent extends BaseAngularComponent implements OnInit {
       }, () => {
         toastr.error('Unable to save user');
       }, () => {
+        setTimeout(() => {
+          this.router.navigate(['/users']);
+        }, 1000);
         subscription.unsubscribe();
       });
     }
   }
 
   cancelBtnClicked() {
-
+    this.router.navigate(['/users']);
   }
 }

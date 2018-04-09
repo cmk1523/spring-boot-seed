@@ -15,11 +15,15 @@ public class Auditable implements Serializable {
     private Long updatedDate = 0L;
 
     public static ValidationResponse Validate(Auditable i) {
+        return Auditable.Validate(i, false);
+    }
+
+    public static ValidationResponse Validate(Auditable i, Boolean isNew) {
         if (i == null) {
             return new ValidationResponse(false, "", "Auditable is null");
         }
 
-        if (i.getId() == null || i.getId() == 0) {
+        if (!isNew && (i.getId() == null || i.getId() == 0)) {
             return new ValidationResponse(false, "id", "Auditable id is null or not set");
         }
 

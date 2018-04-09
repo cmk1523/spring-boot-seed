@@ -1,9 +1,9 @@
-package com.techdevsolutions.service;
+package com.techdevsolutions.service.user;
 
 import com.techdevsolutions.beans.auditable.User;
 import com.techdevsolutions.beans.ValidationResponse;
-import com.techdevsolutions.dao.test.UserTestDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.techdevsolutions.dao.mysql.user.UserMySqlDao;
+import com.techdevsolutions.service.BasicServiceInterface;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,15 +13,19 @@ import java.util.logging.Logger;
 @Service
 public class UserService implements BasicServiceInterface<User> {
     private Logger logger = Logger.getLogger(UserService.class.getName());
+//    UserTestDao userDao;
+    UserMySqlDao userDao;
 
-//    @Autowired
-//    UserMySqlDao userDao;
+//    public UserService(UserTestDao userDao) {
+//        this.userDao = userDao;
+//    }
 
-    @Autowired
-    UserTestDao userDao;
+    public UserService(UserMySqlDao userDao) {
+        this.userDao = userDao;
+    }
 
     public List<User> getAll() throws Exception {
-        logger.info("UserService - getAll");
+//        logger.info("UserService - getAll");
         List<User> users = this.userDao.getAll();
 
         for (User user : users) {
@@ -33,7 +37,7 @@ public class UserService implements BasicServiceInterface<User> {
     }
 
     public User get(User user) throws Exception {
-        logger.info("UserService - delete - ID: " + user.getId());
+//        logger.info("UserService - delete - ID: " + user.getId());
         User item = this.userDao.get(user.getId());
 
         if (item == null) { throw new NoSuchElementException("UserService - get - Item was not found using ID: " + user.getId()); }
@@ -45,14 +49,14 @@ public class UserService implements BasicServiceInterface<User> {
     }
 
     public User get(Integer id) throws Exception {
-        logger.info("UserService - get - ID: " + id);
+//        logger.info("UserService - get - ID: " + id);
         return this.userDao.get(id);
     }
 
     public User create(User item) throws Exception {
-        logger.info("UserService - create - ID: " + item.getId());
+//        logger.info("UserService - create - name: " + item.getName());
 
-        ValidationResponse vr = User.Validate(item);
+        ValidationResponse vr = User.Validate(item, true);
         if (!vr.getValid()) { throw new Exception("Invalid item: " + vr.getMessage()); }
 
         User i = this.get(item.getId());
@@ -62,14 +66,14 @@ public class UserService implements BasicServiceInterface<User> {
     }
 
     public void delete(Integer id) throws Exception {
-        logger.info("UserService - delete - ID: " + id);
+//        logger.info("UserService - delete - ID: " + id);
         User i = this.get(id);
         if (i == null) { throw new NoSuchElementException("UserService - delete - Item was not found using ID: "+ id); }
         this.userDao.delete(id);
     }
 
     public User update(User item) throws Exception {
-        logger.info("UserService - update - ID: " + item.getId());
+//        logger.info("UserService - update - ID: " + item.getId());
 
         ValidationResponse vr = User.Validate(item);
         if (!vr.getValid()) { throw new Exception("Invalid item: " + vr.getMessage()); }

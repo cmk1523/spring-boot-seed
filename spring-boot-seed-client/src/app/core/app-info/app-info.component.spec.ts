@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AppInfoComponent } from './app-info.component';
 import {SharedComponentsModule} from '../../shared/components/shared-components.module';
-import {HttpClientModule} from '@angular/common/http';
 import {RouterTestingModule} from '@angular/router/testing';
 import {InMemoryDatabase} from '../../shared/InMemoryDatabase';
 

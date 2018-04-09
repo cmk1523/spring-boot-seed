@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserTestDao implements DaoTestCrudInterface<User> {
@@ -40,13 +41,15 @@ public class UserTestDao implements DaoTestCrudInterface<User> {
         User user = this.get(id);
 
         if (user != null) {
-            UserTestDao.Users.stream().filter(item -> !item.getId().equals(id));
+            UserTestDao.Users = UserTestDao.Users.stream().filter(item -> !item.getId().equals(id)).collect(Collectors.toList());
         } else {
             throw new Exception("Unable to find item by id: " + id);
         }
     }
 
     public User create(User item) throws Exception {
+        item.setId(UserTestDao.Users.size() + 1);
+
         User user = this.get(item.getId());
 
         if (user == null) {

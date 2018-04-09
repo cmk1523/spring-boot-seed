@@ -1,7 +1,6 @@
 package com.techdevsolutions;
 
 import com.techdevsolutions.controllers.ControllerInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;

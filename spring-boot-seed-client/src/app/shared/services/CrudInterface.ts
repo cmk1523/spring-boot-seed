@@ -1,5 +1,4 @@
 import {Observable} from 'rxjs/Observable';
-import {User} from '../objects/auditable/User';
 
 export interface CrudInterface<T> {
   getAll(): Observable<T[]>;

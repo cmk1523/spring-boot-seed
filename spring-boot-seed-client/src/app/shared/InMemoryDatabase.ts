@@ -1,4 +1,4 @@
-import {InMemoryDbService, ResponseInterceptor, ResponseOptions} from 'angular-in-memory-web-api';
+import {InMemoryDbService, ResponseOptions} from 'angular-in-memory-web-api';
 import {User} from './objects/auditable/User';
 import {ResponseList} from './objects/ResponseList';
 import {Response} from './objects/Response';

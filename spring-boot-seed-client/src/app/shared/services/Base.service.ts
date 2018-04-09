@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Subject} from 'rxjs/Subject';
 import {EventService} from './event.service';
 
 declare let toastr: any;

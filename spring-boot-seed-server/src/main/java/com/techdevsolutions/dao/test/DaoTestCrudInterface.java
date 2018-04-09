@@ -1,7 +1,5 @@
 package com.techdevsolutions.dao.test;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 interface DaoTestCrudInterface<T> {

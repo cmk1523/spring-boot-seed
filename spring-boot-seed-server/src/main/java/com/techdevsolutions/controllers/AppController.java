@@ -1,9 +1,11 @@
 package com.techdevsolutions.controllers;
 
 import com.techdevsolutions.beans.Response;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.techdevsolutions.service.InstallerService;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,22 +16,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.security.Principal;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 @RestController
 @EnableAutoConfiguration
 @RequestMapping("/api/v1/app")
 public class AppController extends BaseController {
-    @Autowired
-    Environment environment;
+    private Environment environment;
+    private InstallerService installerService;
+
+    public AppController(Environment environment, InstallerService installerService) {
+        this.environment = environment;
+        this.installerService = installerService;
+    }
 
     @ResponseBody
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public Response search(HttpServletRequest request, HttpServletResponse response) {
+    public Object search(HttpServletRequest request, HttpServletResponse response) {
         try {
             Map<String, Object> map = new HashMap<>();
             map.put("name", environment.getProperty("parent-name"));
@@ -50,7 +54,19 @@ public class AppController extends BaseController {
             return new Response(map, this.getTimeTook(request));
         } catch (Exception e) {
             e.printStackTrace();
-            return new Response(e.toString());
+            return this.generateErrorResponse(request, HttpStatus.INTERNAL_SERVER_ERROR, e.toString());
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "install", method = RequestMethod.GET)
+    public Object install(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            this.installerService.install();
+            return new Response(null, this.getTimeTook(request));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return this.generateErrorResponse(request, HttpStatus.INTERNAL_SERVER_ERROR, e.toString());
         }
     }
 

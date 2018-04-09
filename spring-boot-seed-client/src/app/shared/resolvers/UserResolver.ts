@@ -25,7 +25,6 @@ export class UserResolver extends BaseResolver implements Resolve<any> {
         (user: User) => {
           observer.next(user);
         }, (err: any) => {
-          this.handleError('UserResolver - Unable to get user: ' + err);
           this.router.navigate(['/home']);
           observer.complete();
         }, () => {

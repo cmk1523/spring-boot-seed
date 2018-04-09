@@ -4,8 +4,6 @@ import {Observable} from 'rxjs/Observable';
 import {Response} from '../objects/Response';
 import {HttpClient} from '@angular/common/http';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
-import {InMemoryDatabase} from '../InMemoryDatabase';
-import {Subject} from 'rxjs/Subject';
 import {EventService} from './event.service';
 
 @Injectable()

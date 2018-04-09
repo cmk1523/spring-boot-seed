@@ -3,7 +3,7 @@
 }
 
 .header-row-left {
-  padding-right: 0px;
+  padding-right: 0;
   width: calc(100% - 75px);
 }
 
@@ -13,7 +13,7 @@
 }
 
 .header-row-right {
-  padding-left: 0px;
+  padding-left: 0;
   width: 75px
 }
 
@@ -39,10 +39,7 @@
 .user-image-100 {
   width: 26px;
   height: 26px;
-  border-top-left-radius: 50% 50%;
-  border-top-right-radius: 50% 50%;
-  border-bottom-right-radius: 50% 50%;
-  border-bottom-left-radius: 50% 50%;
+  border-radius: 50% 50% 50% 50%;
   margin-top: -4px;
 }
 

@@ -1,12 +1,8 @@
 package com.techdevsolutions.dao.mysql;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
-interface DaoMySqlCrudInterface<T> {
-    T rowMapper(ResultSet rs) throws SQLException;
-
+public interface DaoMySqlCrudInterface<T> {
     T get(Integer id) throws Exception;
 
     void delete(Integer id) throws Exception;

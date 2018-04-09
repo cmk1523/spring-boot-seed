@@ -10,6 +10,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Custom error pages (i.e. 404, 500, ... etc)
 - Secured APIs (i.e. /api/v1/app, /api/v1/users)
 - Data models extend Auditable class
+- MySql database (utilizing Spring JdbcTemplate)
+- Simple "in memory" database
 
 ## Frontend (Angular) Features
 - Simple Angular 5 CLI application
@@ -18,9 +20,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Basic example of Angular binding, routing and services
 - Angular "in memory" database
 - Loading bar
+- Basic CRUD views for reading, creating, updating and deleting a custom object
 
 ##### TODO
-- "User" object management
-    - Display table
-    - CRUD form
 - Integrate Angular Material Design
+- Implement backend item removal (vs item deletion)
+- Implement backend audit event system

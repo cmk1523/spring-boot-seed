@@ -22,7 +22,7 @@ export class UsersResolver extends BaseResolver implements Resolve<any> {
         (users: User[]) => {
           observer.next(users);
         }, (err: any) => {
-          this.handleError('UserResolver - Unable to get users: ' + err);
+          BaseResolver.HandleError('UserResolver - Unable to get users: ' + err);
           this.router.navigate(['/home']);
           observer.complete();
         }, () => {

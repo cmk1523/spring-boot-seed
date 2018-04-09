@@ -7,8 +7,12 @@ import java.io.Serializable;
 public class User extends Auditable implements Serializable {
 
     public static ValidationResponse Validate(Auditable i) {
-        if (!Auditable.Validate(i).getValid()) {
-            return Auditable.Validate(i);
+        return User.Validate(i, false);
+    }
+
+    public static ValidationResponse Validate(Auditable i, Boolean isNew) {
+        if (!Auditable.Validate(i, isNew).getValid()) {
+            return Auditable.Validate(i, isNew);
         }
 
         return new ValidationResponse(true, "", "");

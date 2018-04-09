@@ -1,7 +1,3 @@
-.navbar-brand {
-  padding-right: 5px;
-}
-
 .navbar-brand > div {
   display: inline-block;
   color: #fff;
@@ -10,11 +6,6 @@
 .navbar-brand > div > img {
   margin-top: -3px;
   width: 24px;
-}
-
-.jumbotron {
-  background-size: 100% 200%;
-  color: #fff;
 }
 
 /* Text */
@@ -48,7 +39,7 @@
 /* Borders */
 
 .no-border {
-  border: 0px;
+  border: 0;
 }
 
 

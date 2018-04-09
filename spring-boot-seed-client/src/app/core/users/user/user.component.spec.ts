@@ -9,7 +9,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {EventService} from '../../../shared/services/event.service';
 import {Location} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 describe('UserComponent', () => {

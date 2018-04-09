@@ -56,11 +56,10 @@ export class UserService extends BaseService implements CrudInterface<User> {
     return new Observable((observer) => {
       this.eventService.loading.next(true);
 
-      const subscription = this.http.put<Response>(this.usersUrl, item).subscribe(
+      const subscription = this.http.put<Response>(this.usersUrl, item.removeGettersSetters()).subscribe(
         (rsp: Response) => {
           observer.next(new User(rsp.data as User));
         }, (rsp: any) => {
-          console.dir(rsp);
           observer.error(this.handleError(rsp.error));
         }, () => {
           this.eventService.loading.next(false);
@@ -91,7 +90,7 @@ export class UserService extends BaseService implements CrudInterface<User> {
     return new Observable((observer) => {
       this.eventService.loading.next(true);
 
-      const subscription = this.http.post<Response>(this.usersUrl + '/' + item.id, item).subscribe(
+      const subscription = this.http.post<Response>(this.usersUrl + '/' + item.id, item.removeGettersSetters()).subscribe(
         (rsp: Response) => {
           observer.next(new User(rsp.data));
         }, (rsp: any) => {
