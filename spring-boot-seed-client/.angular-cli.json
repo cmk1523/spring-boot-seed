@@ -19,7 +19,7 @@
         { "glob": "favicon.ico", "input": "./assets/favicon", "output": "./" },
         { "glob": "favicon-16x16.png", "input": "./assets/favicon", "output": "./" },
         { "glob": "favicon-32x32.png", "input": "./assets/favicon", "output": "./" },
-        { "glob": "manifest.json", "input": "./assets/favicon", "output": "./" },
+        { "glob": "site.manifest.json", "input": "./assets/favicon", "output": "./" },
         { "glob": "mstile-150x150.png", "input": "./assets/favicon", "output": "./" },
         { "glob": "safari-pinned-tab.svg", "input": "./assets/favicon", "output": "./" }
       ],
