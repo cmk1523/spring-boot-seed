@@ -17,6 +17,7 @@ public class InstallerMySqlDao extends BaseMySqlDao {
                 "`UPDATEDBY` varchar(256) NOT NULL, " +
                 "`CREATEDDATE` bigint NOT NULL, " +
                 "`UPDATEDDATE` bigint NOT NULL, " +
+                "`REMOVED` tinyint(1) NOT NULL, " +
                 "PRIMARY KEY (`ID`)) " +
                 "ENGINE=InnoDB AUTO_INCREMENT=1 " +
                 "DEFAULT CHARSET=utf8";

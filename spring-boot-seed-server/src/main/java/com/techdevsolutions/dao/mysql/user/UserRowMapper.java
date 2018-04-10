@@ -15,6 +15,7 @@ public class UserRowMapper implements RowMapper<User> {
         i.setCreatedDate(rs.getLong("createdDate"));
         i.setUpdatedBy(rs.getString("updatedBy"));
         i.setUpdatedDate(rs.getLong("updatedDate"));
+        i.setRemoved(rs.getBoolean("removed"));
         return i;
     }
 }

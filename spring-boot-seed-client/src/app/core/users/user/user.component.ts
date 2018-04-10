@@ -28,7 +28,7 @@ export class UserComponent extends BaseAngularComponent implements OnInit {
 
   deleteBtnClicked() {
     if (confirm('Are you sure you want to delete this user?')) {
-      const subscription = this.userService.delete(this.user.id).subscribe(() => {
+      const subscription = this.userService.remove(this.user.id).subscribe(() => {
         toastr.success('Deleted Successfully');
       }, () => {
         toastr.error('Unable to delete user');

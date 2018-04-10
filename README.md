@@ -32,5 +32,5 @@ HttpClientInMemoryWebApiModule.forRoot(
 
 ##### TODO
 - Integrate Angular Material Design
-- Implement backend item removal (vs item deletion)
 - Implement backend audit event system
+- Add Java unit tests

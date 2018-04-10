@@ -7,34 +7,39 @@ export class Auditable {
   private _createdBy = '';
   private _updatedDate = 0;
   private _updatedBy = '';
+  private _removed = false;
 
   public static Validate(i: Auditable, isNew = false): ValidationResponse {
     if (i == null) {
       return new ValidationResponse(false, '', 'Auditable is null');
     }
 
-    if (!isNew && (i._id == null || i._id === 0)) {
+    if (!isNew && (i.id == null || i.id === 0)) {
       return new ValidationResponse(false, 'id', 'Auditable id is null or empty');
     }
 
-    if (i._name == null || i._name === '') {
+    if (i.name == null || i.name === '') {
       return new ValidationResponse(false, 'name', 'Auditable name is null or empty');
     }
 
-    if (i._createdDate == null) {
+    if (i.createdDate == null) {
       return new ValidationResponse(false, 'createdDate', 'Auditable createdDate is null');
     }
 
-    if (i._createdBy == null || i._createdBy === '') {
+    if (i.createdBy == null || i.createdBy === '') {
       return new ValidationResponse(false, 'createdBy', 'Auditable createdBy is null or empty');
     }
 
-    if (i._updatedDate == null) {
+    if (i.updatedDate == null) {
       return new ValidationResponse(false, 'updatedDate', 'Auditable updatedDate is null');
     }
 
-    if (i._updatedBy == null || i._updatedBy === '') {
+    if (i.updatedBy == null || i.updatedBy === '') {
       return new ValidationResponse(false, 'updatedBy', 'Auditable updatedBy is null or empty');
+    }
+
+    if (i.removed == null) {
+      return new ValidationResponse(false, 'removed', 'Auditable removed is null');
     }
 
     return new ValidationResponse(true, '', '');
@@ -92,9 +97,17 @@ export class Auditable {
     this._updatedBy = value;
   }
 
+  get removed(): boolean {
+    return this._removed;
+  }
+
+  set removed(value: boolean) {
+    this._removed = value;
+  }
+
   toJsonString(): string {
     let json = JSON.stringify(this);
-    Object.keys(this).filter(key => key[0] === "_").forEach(key => {
+    Object.keys(this).filter(key => key[0] === '_').forEach(key => {
       json = json.replace(key, key.substring(1));
     });
     return json;

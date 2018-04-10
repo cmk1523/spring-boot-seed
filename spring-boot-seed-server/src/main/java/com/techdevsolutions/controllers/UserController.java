@@ -6,11 +6,13 @@ import com.techdevsolutions.beans.auditable.User;
 import com.techdevsolutions.service.user.UserService;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @EnableAutoConfiguration
@@ -83,9 +85,14 @@ public class UserController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-    public Object delete(HttpServletRequest request, @PathVariable Integer id) {
+    public Object delete(HttpServletRequest request, @PathVariable Integer id, @RequestParam(value = "false") Optional<String> delete) {
         try {
-            this.userService.delete(id);
+            if (delete != null && delete.isPresent()) {
+                this.userService.delete(id);
+            } else {
+                this.userService.remove(id);
+            }
+
             return new Response(null, this.getTimeTook(request));
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,6 +1,7 @@
 package com.techdevsolutions.dao.test;
 
 import com.techdevsolutions.beans.auditable.User;
+import com.techdevsolutions.dao.DaoCrudInterface;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserTestDao implements DaoTestCrudInterface<User> {
+public class UserTestDao implements DaoCrudInterface<User> {
     private static List<User> Users = new ArrayList<>();
 
     public UserTestDao() {
@@ -24,17 +25,28 @@ public class UserTestDao implements DaoTestCrudInterface<User> {
     }
 
     public List<User> getAll() {
-        return UserTestDao.Users;
+        return UserTestDao.Users.stream().filter(item -> !item.getRemoved()).collect(Collectors.toList());
+
     }
 
     public User get(Integer id) {
         for (User item : UserTestDao.Users) {
-            if (item.getId().equals(id)) {
+            if (item.getId().equals(id) && !item.getRemoved()) {
                 return item;
             }
         }
 
         return null;
+    }
+
+    public void remove(Integer id) throws Exception {
+        User user = this.get(id);
+
+        if (user != null) {
+            user.setRemoved(true);
+        } else {
+            throw new Exception("Unable to find item by id: " + id);
+        }
     }
 
     public void delete(Integer id) throws Exception {

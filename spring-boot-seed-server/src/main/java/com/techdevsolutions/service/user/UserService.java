@@ -62,6 +62,13 @@ public class UserService implements BasicServiceInterface<User> {
         this.userDao.delete(id);
     }
 
+    public void remove(Integer id) throws Exception {
+        logger.info("UserService - remove - ID: " + id);
+        User i = this.get(id);
+        if (i == null) { throw new NoSuchElementException("UserService - remove - Item was not found using ID: "+ id); }
+        this.userDao.remove(id);
+    }
+
     public User update(User item) throws Exception {
         logger.info("UserService - update - ID: " + item.getId());
 
@@ -75,8 +82,5 @@ public class UserService implements BasicServiceInterface<User> {
         i.setUpdatedBy(item.getUpdatedBy());
         i.setUpdatedDate(item.getUpdatedDate());
         return this.userDao.update(i);
-
-        // OR
-        // return this.userDao.update(item);
     }
 }

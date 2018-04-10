@@ -69,11 +69,28 @@ export class UserService extends BaseService implements CrudInterface<User> {
     });
   }
 
-  delete(id: number): Observable<void> {
+  remove(id: number): Observable<void> {
     return new Observable((observer) => {
       this.eventService.loading.next(true);
 
       const subscription = this.http.delete<User>(this.usersUrl + '/' + id).subscribe(
+        () => {
+          observer.next();
+        }, (rsp: any) => {
+          observer.error(this.handleError(rsp.error));
+        }, () => {
+          this.eventService.loading.next(false);
+          observer.complete();
+          subscription.unsubscribe();
+        });
+    });
+  }
+
+  delete(id: number): Observable<void> {
+    return new Observable((observer) => {
+      this.eventService.loading.next(true);
+
+      const subscription = this.http.delete<User>(this.usersUrl + '/' + id + '?delete=true').subscribe(
         () => {
           observer.next();
         }, (rsp: any) => {

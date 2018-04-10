@@ -1,8 +1,8 @@
 package com.techdevsolutions.dao.mysql.user;
 
 import com.techdevsolutions.beans.auditable.User;
+import com.techdevsolutions.dao.DaoCrudInterface;
 import com.techdevsolutions.dao.mysql.BaseMySqlDao;
-import com.techdevsolutions.dao.mysql.DaoMySqlCrudInterface;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -14,9 +14,9 @@ import java.sql.*;
 import java.util.List;
 
 @Service
-public class UserMySqlDao extends BaseMySqlDao implements DaoMySqlCrudInterface<User> {
+public class UserMySqlDao extends BaseMySqlDao implements DaoCrudInterface<User> {
     private static final String TABLE_NAME = "users";
-    private static final String INSERT_FIELDS = "NAME, CREATEDBY, UPDATEDBY, CREATEDDATE, UPDATEDDATE";
+    private static final String INSERT_FIELDS = "NAME, CREATEDBY, UPDATEDBY, CREATEDDATE, UPDATEDDATE, REMOVED";
     private static final String SELECT_FIELDS = "ID, " + INSERT_FIELDS;
 
     public UserMySqlDao(JdbcTemplate jdbcTemplate) {
@@ -24,15 +24,18 @@ public class UserMySqlDao extends BaseMySqlDao implements DaoMySqlCrudInterface<
     }
 
     public List<User> getAll() throws Exception {
+        logger.info("UserMySqlDao - getAll");
         final String sql = "SELECT " + UserMySqlDao.SELECT_FIELDS +
-                " FROM " + UserMySqlDao.TABLE_NAME;
+                " FROM " + UserMySqlDao.TABLE_NAME +
+                " WHERE removed = 0";
         return this.jdbcTemplate.query(sql, new Object[] {}, new UserRowMapper());
     }
 
     public User get(Integer id) throws Exception {
+        logger.info("UserMySqlDao - get - id: " + id);
         final String sql = "SELECT " + UserMySqlDao.SELECT_FIELDS +
                 " FROM " + UserMySqlDao.TABLE_NAME +
-                " WHERE id = ?";
+                " WHERE removed = 0 and id = ?";
 
         try {
             return this.jdbcTemplate.queryForObject(sql, new Object[] {id}, new UserRowMapper());
@@ -41,25 +44,36 @@ public class UserMySqlDao extends BaseMySqlDao implements DaoMySqlCrudInterface<
         }
     }
 
+    public void remove(Integer id) throws Exception {
+        logger.info("UserMySqlDao - remove - id: " + id);
+        final String sql = "UPDATE " + UserMySqlDao.TABLE_NAME +
+                " SET removed=1" +
+                " WHERE id = ?";
+        this.jdbcTemplate.update(sql, new Object[] {id});
+    }
+
     public void delete(Integer id) throws Exception {
+        logger.info("UserMySqlDao - delete - id: " + id);
         final String sql = "DELETE FROM " + UserMySqlDao.TABLE_NAME +
                 " WHERE id = ?";
         this.jdbcTemplate.update(sql, new Object[] {id});
     }
 
     @Override
-    public User update(User user) throws Exception {
+    public User update(User item) throws Exception {
+        logger.info("UserMySqlDao - update - id: " + item.getId());
         final String sql = "UPDATE " + UserMySqlDao.TABLE_NAME +
                 " SET name=?, createdBy=?, updatedBy=?, createdDate=?, updatedDate=?" +
                 " WHERE id = ?";
-        this.jdbcTemplate.update(sql, new Object[] {user.getId()});
-        return this.get(user.getId());
+        this.jdbcTemplate.update(sql, new Object[] {item.getId()});
+        return this.get(item.getId());
     }
 
     public User create(User item) throws Exception {
+        logger.info("UserMySqlDao - create - id: " + item.getId());
         final String sql = "INSERT INTO " + UserMySqlDao.TABLE_NAME + "" +
                 " (" + UserMySqlDao.INSERT_FIELDS + ")" +
-                " VALUES (?,?,?,?,?)";
+                " VALUES (?,?,?,?,?,?)";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
@@ -71,6 +85,7 @@ public class UserMySqlDao extends BaseMySqlDao implements DaoMySqlCrudInterface<
                 ps.setString(3, item.getUpdatedBy());
                 ps.setLong(4, item.getCreatedDate());
                 ps.setLong(5, item.getUpdatedDate());
+                ps.setBoolean(6, item.getRemoved());
                 return ps;
             }
         }, keyHolder);

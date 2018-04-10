@@ -25,6 +25,7 @@ import {BaseService} from './shared/services/base.service';
 import {EventService} from './shared/services/event.service';
 import {UserResolver} from './shared/resolvers/UserResolver';
 import {PreferenceService} from './shared/services/preference.service';
+import {UtilitiesService} from './shared/services/utilities.service';
 
 @NgModule({
   declarations: [
@@ -46,9 +47,9 @@ import {PreferenceService} from './shared/services/preference.service';
 
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
 
-    // HttpClientInMemoryWebApiModule.forRoot(
-    //   InMemoryDatabase, { delay: 750, apiBase: 'api/v1/', dataEncapsulation: false }
-    // )
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDatabase, { delay: 750, apiBase: 'api/v1/', dataEncapsulation: false }
+    )
   ],
   providers: [
     BaseService,
@@ -56,6 +57,7 @@ import {PreferenceService} from './shared/services/preference.service';
     UserService,
     EventService,
     PreferenceService,
+    UtilitiesService,
 
     BaseResolver,
     UsersResolver,

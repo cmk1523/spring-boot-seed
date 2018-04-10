@@ -2,6 +2,7 @@ import {InMemoryDbService, ResponseOptions} from 'angular-in-memory-web-api';
 import {User} from './objects/auditable/User';
 import {ResponseList} from './objects/ResponseList';
 import {Response} from './objects/Response';
+import {UtilitiesService} from './services/utilities.service';
 
 export class InMemoryDatabase implements InMemoryDbService {
   public static APP_INFO: Response = new Response();
@@ -43,6 +44,7 @@ export class InMemoryDatabase implements InMemoryDbService {
     user.createdDate = new Date().getTime();
     user.updatedBy = user.createdBy;
     user.updatedDate = user.createdDate;
+    user.removed = false;
 
     InMemoryDatabase.Users.push(user);
     return InMemoryDatabase.GenerateUsersResponse();
@@ -59,7 +61,7 @@ export class InMemoryDatabase implements InMemoryDbService {
   responseInterceptor(resOptions: ResponseOptions, reqInfo: RequestInfo) {
     const url = reqInfo['url'];
 
-    // console.log('InMemoryDatabase - responseInterceptor - reqInfo - url: ' + url + ', reqInfo: ', reqInfo);
+    console.log('InMemoryDatabase - responseInterceptor - reqInfo - url: ' + url + ', reqInfo: ', reqInfo);
 
     if (url.indexOf('api/v1/users') > -1) {
       if (reqInfo['method'] === 'put' && url === 'api/v1/users') { // PUT (Create)
@@ -73,7 +75,8 @@ export class InMemoryDatabase implements InMemoryDbService {
             createdBy: itemSubmitted.createdBy,
             createdDate: itemSubmitted.createdDate,
             updatedBy: itemSubmitted.updatedBy,
-            updatedDate: itemSubmitted.updatedDate
+            updatedDate: itemSubmitted.updatedDate,
+            removed: itemSubmitted.removed
           });
 
           const vr = User.Validate(data, true);
@@ -90,28 +93,41 @@ export class InMemoryDatabase implements InMemoryDbService {
         }
       } else if (reqInfo['method'] === 'delete' && url.indexOf('api/v1/users/') > -1) {
         const id = this.getLastRestVariable(url);
+        const deleteParam = UtilitiesService.GetUrlParam(url, 'delete');
 
-        if (id != null) {
-          InMemoryDatabase.Users = InMemoryDatabase.Users.filter((i: User) => i.id !== parseInt(id, 10));
-          resOptions = this.generateDeleteResponse(resOptions);
+        if (deleteParam != null && deleteParam !== '' && (deleteParam === true || deleteParam === 'true')) {
+          if (id != null) {
+            InMemoryDatabase.Users = InMemoryDatabase.Users.filter((i: User) => i.id !== parseInt(id, 10));
+            resOptions = this.generateDeleteResponse(resOptions);
+          } else {
+            this.generateUnableToFindItemResponse(id, resOptions);
+          }
         } else {
-          this.generateUnableToFindItemResponse(id, resOptions);
+          if (id != null) {
+            const data: User = InMemoryDatabase.Users.filter((i: User) => i.id === parseInt(id, 10) && i.removed === false)[0];
+            data.removed = true;
+            resOptions = this.generateDeleteResponse(resOptions);
+          } else {
+            this.generateUnableToFindItemResponse(id, resOptions);
+          }
         }
       } else if (reqInfo['method'] === 'post' && url.indexOf('api/v1/users/') > -1) { // POST (Update)
         const itemSubmitted = reqInfo['req'].body;
-        const itemToUpdate: User = InMemoryDatabase.Users.filter((i: User) => i.id === parseInt(itemSubmitted.id, 10))[0];
+        const id = parseInt(itemSubmitted.id, 10);
+        const itemToUpdate: User = InMemoryDatabase.Users.filter((i: User) => i.id === id && i.removed === false)[0];
 
         if (itemToUpdate != null) {
           itemToUpdate.name = itemSubmitted.name;
           itemToUpdate.updatedBy = itemSubmitted.updatedBy;
           itemToUpdate.updatedDate = itemSubmitted.updatedDate;
+          itemToUpdate.removed = itemSubmitted.removed;
           resOptions = this.generateGetResponse(itemToUpdate, resOptions);
         } else {
           this.generateUnableToFindItemResponse(itemSubmitted.id, resOptions);
         }
       } else if (url.indexOf('api/v1/users/') > -1) { // GET (Get via ID)
         const id = this.getLastRestVariable(url);
-        const data: User = InMemoryDatabase.Users.filter((i: User) => i.id === parseInt(id, 10))[0];
+        const data: User = InMemoryDatabase.Users.filter((i: User) => i.id === parseInt(id, 10) && i.removed === false)[0];
         resOptions = this.generateGetResponse(data, resOptions);
       } else if (url === 'api/v1/users') { // GET (Get All)
         resOptions.body = InMemoryDatabase.GenerateUsersResponse();

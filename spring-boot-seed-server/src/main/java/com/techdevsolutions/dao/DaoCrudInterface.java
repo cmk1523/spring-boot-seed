@@ -1,9 +1,11 @@
-package com.techdevsolutions.dao.test;
+package com.techdevsolutions.dao;
 
 import java.util.List;
 
-interface DaoTestCrudInterface<T> {
+public interface DaoCrudInterface<T> {
     T get(Integer id) throws Exception;
+
+    void remove(Integer id) throws Exception;
 
     void delete(Integer id) throws Exception;
 

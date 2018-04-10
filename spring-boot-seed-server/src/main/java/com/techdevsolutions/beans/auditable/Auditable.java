@@ -13,6 +13,7 @@ public class Auditable implements Serializable {
     private String updatedBy = "";
     private Long createdDate = 0L;
     private Long updatedDate = 0L;
+    private Boolean removed = false;
 
     public static ValidationResponse Validate(Auditable i) {
         return Auditable.Validate(i, false);
@@ -53,44 +54,47 @@ public class Auditable implements Serializable {
     public Auditable() {
     }
 
-    public Auditable(Integer id, String name, String createdBy, String updatedBy, Long createdDate, Long updatedDate) {
+    public Auditable(Integer id, String name, String createdBy, String updatedBy, Long createdDate, Long updatedDate,
+                     Boolean removed) {
         this.id = id;
         this.name = name;
         this.createdBy = createdBy;
         this.updatedBy = updatedBy;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
-    }
-
-    @Override
-    public String toString() {
-        return "BaseItem{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", createdBy='" + createdBy + '\'' +
-                ", updatedBy='" + updatedBy + '\'' +
-                ", createdDate='" + createdDate + '\'' +
-                ", updatedDate='" + updatedDate + '\'' +
-                '}';
+        this.removed = removed;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Auditable baseItem = (Auditable) o;
-        return Objects.equals(id, baseItem.id) &&
-                Objects.equals(name, baseItem.name) &&
-                Objects.equals(createdBy, baseItem.createdBy) &&
-                Objects.equals(updatedBy, baseItem.updatedBy) &&
-                Objects.equals(createdDate, baseItem.createdDate) &&
-                Objects.equals(updatedDate, baseItem.updatedDate);
+        Auditable auditable = (Auditable) o;
+        return Objects.equals(id, auditable.id) &&
+                Objects.equals(name, auditable.name) &&
+                Objects.equals(createdBy, auditable.createdBy) &&
+                Objects.equals(updatedBy, auditable.updatedBy) &&
+                Objects.equals(createdDate, auditable.createdDate) &&
+                Objects.equals(updatedDate, auditable.updatedDate) &&
+                Objects.equals(removed, auditable.removed);
+    }
+
+    @Override
+    public String toString() {
+        return "Auditable{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", createdBy='" + createdBy + '\'' +
+                ", updatedBy='" + updatedBy + '\'' +
+                ", createdDate=" + createdDate +
+                ", updatedDate=" + updatedDate +
+                ", removed=" + removed +
+                '}';
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(id, name, createdBy, updatedBy, createdDate, updatedDate);
+        return Objects.hash(id, name, createdBy, updatedBy, createdDate, updatedDate, removed);
     }
 
     public Integer getId() {
@@ -139,5 +143,13 @@ public class Auditable implements Serializable {
 
     public void setUpdatedDate(Long updatedDate) {
         this.updatedDate = updatedDate;
+    }
+
+    public Boolean getRemoved() {
+        return removed;
+    }
+
+    public void setRemoved(Boolean removed) {
+        this.removed = removed;
     }
 }
