@@ -4,7 +4,6 @@ import java.util.List;
 
 public interface BasicServiceInterface<T> {
     List<T> getAll() throws Exception;
-    T get(T item) throws Exception;
     T get(Integer id) throws Exception;
     T create(T item) throws Exception;
     void delete(Integer id) throws Exception;

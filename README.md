@@ -22,6 +22,14 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Loading bar
 - Basic CRUD views for reading, creating, updating and deleting a custom object
 
+Note: To disable the Angular "in memory" database, comment out the following lines in app.module.ts:
+
+```
+HttpClientInMemoryWebApiModule.forRoot(
+  InMemoryDatabase, { delay: 750, apiBase: 'api/v1/', dataEncapsulation: false }
+)
+```
+
 ##### TODO
 - Integrate Angular Material Design
 - Implement backend item removal (vs item deletion)
