@@ -1,9 +1,11 @@
 package com.techdevsolutions.service;
 
+import com.techdevsolutions.beans.Search;
+
 import java.util.List;
 
 public interface CrudServiceInterface<T> {
-    List<T> search() throws Exception;
+    List<T> search(Search search) throws Exception;
     List<T> getAll() throws Exception;
     T get(Integer id) throws Exception;
     T create(T item) throws Exception;

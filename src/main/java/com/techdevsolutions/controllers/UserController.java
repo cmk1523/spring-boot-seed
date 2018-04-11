@@ -2,12 +2,12 @@ package com.techdevsolutions.controllers;
 
 import com.techdevsolutions.beans.Response;
 import com.techdevsolutions.beans.ResponseList;
+import com.techdevsolutions.beans.Search;
 import com.techdevsolutions.beans.auditable.User;
 import com.techdevsolutions.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,9 +28,23 @@ public class UserController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "search", method = RequestMethod.GET)
-    public Object search(HttpServletRequest request) {
+    public Object search(HttpServletRequest request,
+                        @RequestParam(value = "size") Optional<Integer> size,
+                        @RequestParam(value = "page") Optional<Integer> page,
+                        @RequestParam(value = "sort") Optional<String> sort,
+                        @RequestParam(value = "order") Optional<String> order,
+                        @RequestParam(value = "filters") Optional<String> filters,
+                        @RequestParam(value = "filterLogic") Optional<String> filterLogic) {
         try {
-            List<User> list = this.userService.search();
+            Search search = new Search();
+            search.setSize((size.isPresent()) ? size.get() : Search.DEFAULT_SIZE);
+            search.setPage((page.isPresent()) ? page.get() : Search.DEFAULT_PAGE);
+            search.setSort((sort.isPresent()) ? sort.get() : Search.DEFAULT_SORT);
+            search.setOrder((order.isPresent()) ? order.get() : Search.DEFAULT_ORDER);
+            search.setFilters((filters.isPresent()) ? filters.get() : Search.DEFAULT_FILTER);
+            search.setFilterLogic((filterLogic.isPresent()) ? filterLogic.get() : Search.DEFAULT_FILTER_LOGIC);
+
+            List<User> list = this.userService.search(search);
             return new ResponseList(list, this.getTimeTook(request));
         } catch (Exception e) {
             e.printStackTrace();

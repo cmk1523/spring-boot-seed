@@ -1,5 +1,6 @@
 package com.techdevsolutions.service.user;
 
+import com.techdevsolutions.beans.Search;
 import com.techdevsolutions.beans.auditable.User;
 import com.techdevsolutions.beans.ValidationResponse;
 import com.techdevsolutions.dao.test.UserTestDao;
@@ -27,9 +28,9 @@ public class UserService implements CrudServiceInterface<User> {
 //        this.userDao = userDao;
 //    }
 
-    public List<User> search() throws Exception {
-        logger.info("UserService - search");
-        List<User> users = this.userDao.search();
+    public List<User> search(Search search) throws Exception {
+        logger.info("UserService - search: " + search.toString());
+        List<User> users = this.userDao.search(search);
 
         for (User user : users) {
             ValidationResponse vr = User.Validate(user);

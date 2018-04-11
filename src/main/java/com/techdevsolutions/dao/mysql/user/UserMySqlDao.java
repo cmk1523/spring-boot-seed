@@ -1,5 +1,6 @@
 package com.techdevsolutions.dao.mysql.user;
 
+import com.techdevsolutions.beans.Search;
 import com.techdevsolutions.beans.auditable.User;
 import com.techdevsolutions.dao.DaoCrudInterface;
 import com.techdevsolutions.dao.mysql.BaseMySqlDao;
@@ -26,7 +27,7 @@ public class UserMySqlDao extends BaseMySqlDao implements DaoCrudInterface<User>
         super(jdbcTemplate);
     }
 
-    public List<User> search() throws Exception {
+    public List<User> search(Search search) throws Exception {
         logger.info("UserMySqlDao - search");
 
         // TODO: Search...
