@@ -1,0 +1,9 @@
+
+
+    ${application.title}
+    ${application.name} v${application.version}.${application.buildNumber} ${application.buildDateTime}
+
+    MySQL...
+    URL: ${spring.datasource.url}
+    Username: ${spring.datasource.username}
+
