@@ -1,0 +1,96 @@
+<form #userForm="ngForm">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group has-feedback"
+           [class.has-success]="!userForm_name.pristine && userForm_name.valid"
+           [class.has-error]="!userForm_name.pristine && !userForm_name.valid">
+        <label class="control-label" for="userForm_name">
+          Name
+          <span class="required-form-item">*</span>
+        </label>
+        <input type="text" class="form-control" name="userForm_name" id="userForm_name"
+               autofocus tabindex="1" placeholder="Name" required
+               [(ngModel)]="user.name" #userForm_name="ngModel">
+        <span class="glyphicon glyphicon-remove form-control-feedback"
+              *ngIf="!userForm_name.pristine && !userForm_name.valid"></span>
+        <span class="glyphicon glyphicon-ok form-control-feedback"
+              *ngIf="!userForm_name.pristine && userForm_name.valid"></span>
+        <div class="alert alert-danger" role="alert" *ngIf="!userForm_name.pristine && !userForm_name.valid">
+          Name is required
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="read-only-toggle row small clickable">
+    <div class="col-xs-12">
+      <a *ngIf="!showDisabledFields" (click)="readOnlyFieldsBtnClicked()">
+        <span class="glyphicon glyphicon glyphicon-chevron-down"></span> Show Read-Only Fields
+      </a>
+      <a *ngIf="showDisabledFields" (click)="readOnlyFieldsBtnClicked()">
+        <span class="glyphicon glyphicon glyphicon-chevron-up"></span> Hide Read-Only Fields
+      </a>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="showDisabledFields">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label class="control-label" for="userForm_id">
+          ID
+        </label>
+        <input type="text" class="form-control" name="userForm_id" id="userForm_id"
+               disabled [disabled]="true"
+               [(ngModel)]="user.id" #userForm_id="ngModel">
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="showDisabledFields">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label class="control-label" for="userForm_createdBy">
+          Created By
+        </label>
+        <input type="text" class="form-control" name="userForm_createdBy" id="userForm_createdBy"
+               disabled [disabled]="true"
+               [(ngModel)]="user.createdBy" #userForm_createdBy="ngModel">
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="showDisabledFields">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label class="control-label" for="userForm_createdDate">
+          Created On
+        </label>
+        <input type="text" class="form-control" name="userForm_createdDate" id="userForm_createdDate"
+               disabled [disabled]="true"
+               [(ngModel)]="user['createdDateStr']" #userForm_createdDate="ngModel">
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="showDisabledFields">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label class="control-label" for="userForm_updatedBy">
+          Last Updated By
+        </label>
+        <input type="text" class="form-control" name="userForm_updatedBy" id="userForm_updatedBy"
+               disabled [disabled]="true"
+               [(ngModel)]="user.updatedBy" #userForm_updatedBy="ngModel">
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="showDisabledFields">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label class="control-label" for="userForm_updatedDate">
+          Last Updated On
+        </label>
+        <input type="text" class="form-control" name="userForm_updatedDate" id="userForm_updatedDate"
+               disabled [disabled]="true"
+               [(ngModel)]="user['updatedDateStr']" #userForm_updatedDate="ngModel">
+      </div>
+    </div>
+  </div>
+</form>

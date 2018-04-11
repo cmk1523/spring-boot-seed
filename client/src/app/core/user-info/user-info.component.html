@@ -1,0 +1,19 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><a [routerLink]="['/']">Home</a></li>
+    <li>User Information</li>
+  </ol>
+
+  <p>
+    <b>Username: </b> {{ appInfo.user.username }}
+  </p>
+  <p>
+    <b>Roles: </b>
+    <span *ngFor="let item of appInfo.user.authorities">
+      {{ item.authority }},
+    </span>
+  </p>
+</div>
+
+
+
