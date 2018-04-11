@@ -33,7 +33,7 @@ HttpClientInMemoryWebApiModule.forRoot(
 ##### TODO
 - Integrate Angular Material Design
 - Implement backend audit event system
-- Design search object
+- Implement search and filtering on MySQL Dao
 - Add Java unit tests
 - Add Facebook OAuth
 - Add Elastic DAO

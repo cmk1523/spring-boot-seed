@@ -1,5 +1,6 @@
 package com.techdevsolutions.dao.mysql.user;
 
+import com.techdevsolutions.beans.Filter;
 import com.techdevsolutions.beans.Search;
 import com.techdevsolutions.beans.auditable.User;
 import com.techdevsolutions.dao.DaoCrudInterface;
@@ -35,8 +36,8 @@ public class UserMySqlDao extends BaseMySqlDao implements DaoCrudInterface<User>
         return new ArrayList<>();
     }
 
-    public List<User> getAll() throws Exception {
-        logger.info("UserMySqlDao - getAll");
+    public List<User> get(Filter filter) throws Exception {
+        logger.info("UserMySqlDao - get");
         final String sql = "SELECT " + UserMySqlDao.SELECT_FIELDS +
                 " FROM " + UserMySqlDao.TABLE_NAME +
                 " WHERE removed = 0";

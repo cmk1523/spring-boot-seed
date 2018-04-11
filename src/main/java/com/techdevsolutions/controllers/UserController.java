@@ -2,6 +2,7 @@ package com.techdevsolutions.controllers;
 
 import com.techdevsolutions.beans.Response;
 import com.techdevsolutions.beans.ResponseList;
+import com.techdevsolutions.beans.Filter;
 import com.techdevsolutions.beans.Search;
 import com.techdevsolutions.beans.auditable.User;
 import com.techdevsolutions.service.user.UserService;
@@ -29,6 +30,7 @@ public class UserController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "search", method = RequestMethod.GET)
     public Object search(HttpServletRequest request,
+                        @RequestParam(value = "term") Optional<String> term,
                         @RequestParam(value = "size") Optional<Integer> size,
                         @RequestParam(value = "page") Optional<Integer> page,
                         @RequestParam(value = "sort") Optional<String> sort,
@@ -37,12 +39,13 @@ public class UserController extends BaseController {
                         @RequestParam(value = "filterLogic") Optional<String> filterLogic) {
         try {
             Search search = new Search();
-            search.setSize((size.isPresent()) ? size.get() : Search.DEFAULT_SIZE);
-            search.setPage((page.isPresent()) ? page.get() : Search.DEFAULT_PAGE);
-            search.setSort((sort.isPresent()) ? sort.get() : Search.DEFAULT_SORT);
-            search.setOrder((order.isPresent()) ? order.get() : Search.DEFAULT_ORDER);
-            search.setFilters((filters.isPresent()) ? filters.get() : Search.DEFAULT_FILTER);
-            search.setFilterLogic((filterLogic.isPresent()) ? filterLogic.get() : Search.DEFAULT_FILTER_LOGIC);
+            search.setTerm((term.isPresent()) ? term.get() : "");
+            search.setSize((size.isPresent()) ? size.get() : Filter.DEFAULT_SIZE);
+            search.setPage((page.isPresent()) ? page.get() : Filter.DEFAULT_PAGE);
+            search.setSort((sort.isPresent()) ? sort.get() : Filter.DEFAULT_SORT);
+            search.setOrder((order.isPresent()) ? order.get() : Filter.DEFAULT_ORDER);
+            search.setFilters((filters.isPresent()) ? filters.get() : "");
+            search.setFilterLogic((filterLogic.isPresent()) ? filterLogic.get() : Filter.DEFAULT_FILTER_LOGIC);
 
             List<User> list = this.userService.search(search);
             return new ResponseList(list, this.getTimeTook(request));
@@ -54,9 +57,23 @@ public class UserController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public Object getAll(HttpServletRequest request) {
+    public Object getAll(HttpServletRequest request,
+                         @RequestParam(value = "size") Optional<Integer> size,
+                         @RequestParam(value = "page") Optional<Integer> page,
+                         @RequestParam(value = "sort") Optional<String> sort,
+                         @RequestParam(value = "order") Optional<String> order,
+                         @RequestParam(value = "filters") Optional<String> filters,
+                         @RequestParam(value = "filterLogic") Optional<String> filterLogic) {
         try {
-            List<User> list = this.userService.getAll();
+            Filter filter = new Filter();
+            filter.setSize((size.isPresent()) ? size.get() : Filter.DEFAULT_SIZE);
+            filter.setPage((page.isPresent()) ? page.get() : Filter.DEFAULT_PAGE);
+            filter.setSort((sort.isPresent()) ? sort.get() : Filter.DEFAULT_SORT);
+            filter.setOrder((order.isPresent()) ? order.get() : Filter.DEFAULT_ORDER);
+            filter.setFilters((filters.isPresent()) ? filters.get() : "");
+            filter.setFilterLogic((filterLogic.isPresent()) ? filterLogic.get() : Filter.DEFAULT_FILTER_LOGIC);
+
+            List<User> list = this.userService.get(filter);
             return new ResponseList(list, this.getTimeTook(request));
         } catch (Exception e) {
             e.printStackTrace();

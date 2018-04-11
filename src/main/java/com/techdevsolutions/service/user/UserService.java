@@ -1,5 +1,6 @@
 package com.techdevsolutions.service.user;
 
+import com.techdevsolutions.beans.Filter;
 import com.techdevsolutions.beans.Search;
 import com.techdevsolutions.beans.auditable.User;
 import com.techdevsolutions.beans.ValidationResponse;
@@ -40,9 +41,9 @@ public class UserService implements CrudServiceInterface<User> {
         return users;
     }
 
-    public List<User> getAll() throws Exception {
-        logger.info("UserService - getAll");
-        List<User> users = this.userDao.getAll();
+    public List<User> get(Filter filter) throws Exception {
+        logger.info("UserService - get: " + filter.toString());
+        List<User> users = this.userDao.get(filter);
 
         for (User user : users) {
             ValidationResponse vr = User.Validate(user);
