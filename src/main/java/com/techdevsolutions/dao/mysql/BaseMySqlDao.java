@@ -12,6 +12,7 @@ public class BaseMySqlDao  {
 
     protected JdbcTemplate jdbcTemplate;
 
+    @Autowired
     public BaseMySqlDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }

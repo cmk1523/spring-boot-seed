@@ -1,10 +1,13 @@
 package com.techdevsolutions.controllers;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -23,6 +26,9 @@ public class ControllerInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         this.logger.info(this.getRestURI(request));
+        Authentication authentication = (Authentication) request.getUserPrincipal();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        request.getSession().setAttribute("username", userDetails.getUsername());
         request.setAttribute("requestStartTime", new Date().getTime());
         return true;
     }

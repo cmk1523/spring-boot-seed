@@ -7,6 +7,7 @@ declare let toastr: any;
 @Injectable()
 export class BaseService {
   constructor(protected http: HttpClient, protected eventService: EventService) { }
+  protected baseUrl = '/';
 
   public static IsDifferent(a: any, b: any) {
     return JSON.stringify(a) !== JSON.stringify(b);

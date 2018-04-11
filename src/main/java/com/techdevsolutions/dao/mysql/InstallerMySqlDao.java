@@ -1,10 +1,12 @@
 package com.techdevsolutions.dao.mysql;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
 public class InstallerMySqlDao extends BaseMySqlDao {
+    @Autowired
     public InstallerMySqlDao(JdbcTemplate jdbcTemplate) {
         super(jdbcTemplate);
     }

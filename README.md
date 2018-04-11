@@ -34,3 +34,4 @@ HttpClientInMemoryWebApiModule.forRoot(
 - Integrate Angular Material Design
 - Implement backend audit event system
 - Add Java unit tests
+- Add Facebook OAuth

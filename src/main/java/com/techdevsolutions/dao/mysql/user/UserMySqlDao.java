@@ -3,6 +3,7 @@ package com.techdevsolutions.dao.mysql.user;
 import com.techdevsolutions.beans.auditable.User;
 import com.techdevsolutions.dao.DaoCrudInterface;
 import com.techdevsolutions.dao.mysql.BaseMySqlDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -11,6 +12,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,8 +21,17 @@ public class UserMySqlDao extends BaseMySqlDao implements DaoCrudInterface<User>
     private static final String INSERT_FIELDS = "NAME, CREATEDBY, UPDATEDBY, CREATEDDATE, UPDATEDDATE, REMOVED";
     private static final String SELECT_FIELDS = "ID, " + INSERT_FIELDS;
 
+    @Autowired
     public UserMySqlDao(JdbcTemplate jdbcTemplate) {
         super(jdbcTemplate);
+    }
+
+    public List<User> search() throws Exception {
+        logger.info("UserMySqlDao - search");
+
+        // TODO: Search...
+
+        return new ArrayList<>();
     }
 
     public List<User> getAll() throws Exception {

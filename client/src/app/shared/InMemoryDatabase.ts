@@ -20,9 +20,9 @@ export class InMemoryDatabase implements InMemoryDbService {
     response.took = 1;
     response.data = {
       name: 'spring-boot-seed',
-      title: 'Technical Development Solutions'
+      title: 'Technical Development Solutions',
       version: '0.1',
-      buildNumber: 'in-memory',
+      buildNumber: '1',
       buildDateTime: '01-01-2018 00:00',
       user: {
         username: 'user',
@@ -64,8 +64,8 @@ export class InMemoryDatabase implements InMemoryDbService {
 
     // console.log('InMemoryDatabase - responseInterceptor - reqInfo - url: ' + url + ', reqInfo: ', reqInfo);
 
-    if (url.indexOf('api/v1/users') > -1) {
-      if (reqInfo['method'] === 'put' && url === 'api/v1/users') { // PUT (Create)
+    if (url.indexOf('/api/v1/users') > -1) {
+      if (reqInfo['method'] === 'put' && url === '/api/v1/users') { // PUT (Create)
         const itemSubmitted = reqInfo['req'].body;
         const itemToCreate: User = InMemoryDatabase.Users.filter((i: User) => i.id === parseInt(itemSubmitted.id, 10))[0];
 
@@ -92,7 +92,7 @@ export class InMemoryDatabase implements InMemoryDbService {
         } else {
           this.generateItemAlreadyExistsResponse(resOptions);
         }
-      } else if (reqInfo['method'] === 'delete' && url.indexOf('api/v1/users/') > -1) {
+      } else if (reqInfo['method'] === 'delete' && url.indexOf('/api/v1/users/') > -1) {
         const id = this.getLastRestVariable(url);
         const deleteParam = UtilitiesService.GetUrlParam(url, 'delete');
 
@@ -112,7 +112,7 @@ export class InMemoryDatabase implements InMemoryDbService {
             this.generateUnableToFindItemResponse(id, resOptions);
           }
         }
-      } else if (reqInfo['method'] === 'post' && url.indexOf('api/v1/users/') > -1) { // POST (Update)
+      } else if (reqInfo['method'] === 'post' && url.indexOf('/api/v1/users/') > -1) { // POST (Update)
         const itemSubmitted = reqInfo['req'].body;
         const id = parseInt(itemSubmitted.id, 10);
         const itemToUpdate: User = InMemoryDatabase.Users.filter((i: User) => i.id === id && i.removed === false)[0];
@@ -126,15 +126,15 @@ export class InMemoryDatabase implements InMemoryDbService {
         } else {
           this.generateUnableToFindItemResponse(itemSubmitted.id, resOptions);
         }
-      } else if (url.indexOf('api/v1/users/') > -1) { // GET (Get via ID)
+      } else if (url.indexOf('/api/v1/users/') > -1) { // GET (Get via ID)
         const id = this.getLastRestVariable(url);
         const data: User = InMemoryDatabase.Users.filter((i: User) => i.id === parseInt(id, 10) && i.removed === false)[0];
         resOptions = this.generateGetResponse(data, resOptions);
-      } else if (url === 'api/v1/users') { // GET (Get All)
+      } else if (url === '/api/v1/users') { // GET (Get All)
         resOptions.body = InMemoryDatabase.GenerateUsersResponse();
       }
-    } else if (url.indexOf('api/v1/app') > -1) {
-      if (url === 'api/v1/app') {
+    } else if (url.indexOf('/api/v1/app') > -1) {
+      if (url === '/api/v1/app') {
         resOptions.body = InMemoryDatabase.APP_INFO;
       }
     } else {

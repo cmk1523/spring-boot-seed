@@ -27,6 +27,7 @@ export class AppComponent extends BaseAngularComponent implements OnInit {
     const subscription = this.appService.appInfo.subscribe(
       (appInfo: any) => {
         this.appInfo = appInfo;
+        document.title = this.appInfo.title;
         this.loading = false;
         const diff = new Date().getTime() - startTime;
 

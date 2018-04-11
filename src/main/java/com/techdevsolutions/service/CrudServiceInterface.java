@@ -2,7 +2,8 @@ package com.techdevsolutions.service;
 
 import java.util.List;
 
-public interface BasicServiceInterface<T> {
+public interface CrudServiceInterface<T> {
+    List<T> search() throws Exception;
     List<T> getAll() throws Exception;
     T get(Integer id) throws Exception;
     T create(T item) throws Exception;

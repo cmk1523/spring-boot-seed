@@ -4,6 +4,7 @@ import com.techdevsolutions.beans.Response;
 import com.techdevsolutions.beans.ResponseList;
 import com.techdevsolutions.beans.auditable.User;
 import com.techdevsolutions.service.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
@@ -20,13 +21,26 @@ import java.util.Optional;
 public class UserController extends BaseController {
     private UserService userService;
 
+    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @ResponseBody
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "search", method = RequestMethod.GET)
     public Object search(HttpServletRequest request) {
+        try {
+            List<User> list = this.userService.search();
+            return new ResponseList(list, this.getTimeTook(request));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return this.generateErrorResponse(request, HttpStatus.INTERNAL_SERVER_ERROR, e.toString());
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public Object getAll(HttpServletRequest request) {
         try {
             List<User> list = this.userService.getAll();
             return new ResponseList(list, this.getTimeTook(request));

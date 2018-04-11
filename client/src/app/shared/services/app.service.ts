@@ -9,8 +9,7 @@ import {EventService} from './event.service';
 @Injectable()
 export class AppService extends BaseService {
   public static APP_INFO: any = null;
-
-  private appUrl = 'api/v1/app';
+  protected appUrl = this.baseUrl + 'api/v1/app';
   public appInfo: ReplaySubject<any> = new ReplaySubject<any>();
 
   constructor(protected http: HttpClient, protected eventService: EventService) {

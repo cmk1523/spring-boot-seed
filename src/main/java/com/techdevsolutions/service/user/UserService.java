@@ -2,9 +2,9 @@ package com.techdevsolutions.service.user;
 
 import com.techdevsolutions.beans.auditable.User;
 import com.techdevsolutions.beans.ValidationResponse;
-import com.techdevsolutions.dao.mysql.user.UserMySqlDao;
 import com.techdevsolutions.dao.test.UserTestDao;
-import com.techdevsolutions.service.BasicServiceInterface;
+import com.techdevsolutions.service.CrudServiceInterface;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,18 +12,32 @@ import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
 @Service
-public class UserService implements BasicServiceInterface<User> {
+public class UserService implements CrudServiceInterface<User> {
     private Logger logger = Logger.getLogger(UserService.class.getName());
     UserTestDao userDao;
 //    UserMySqlDao userDao;
 
+    @Autowired
     public UserService(UserTestDao userDao) {
         this.userDao = userDao;
     }
 
+//    @Autowired
 //    public UserService(UserMySqlDao userDao) {
 //        this.userDao = userDao;
 //    }
+
+    public List<User> search() throws Exception {
+        logger.info("UserService - search");
+        List<User> users = this.userDao.search();
+
+        for (User user : users) {
+            ValidationResponse vr = User.Validate(user);
+            if (!vr.getValid()) { throw new Exception("Invalid item: " + vr.getMessage()); }
+        }
+
+        return users;
+    }
 
     public List<User> getAll() throws Exception {
         logger.info("UserService - getAll");

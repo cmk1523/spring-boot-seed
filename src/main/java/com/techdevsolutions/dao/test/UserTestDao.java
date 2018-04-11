@@ -2,6 +2,7 @@ package com.techdevsolutions.dao.test;
 
 import com.techdevsolutions.beans.auditable.User;
 import com.techdevsolutions.dao.DaoCrudInterface;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 public class UserTestDao implements DaoCrudInterface<User> {
     private static List<User> Users = new ArrayList<>();
 
+    @Autowired
     public UserTestDao() {
         User user1 = new User();
         user1.setId(1);
@@ -24,9 +26,12 @@ public class UserTestDao implements DaoCrudInterface<User> {
         UserTestDao.Users.add(user1);
     }
 
+    public List<User> search() {
+        return new ArrayList<>();
+    }
+
     public List<User> getAll() {
         return UserTestDao.Users.stream().filter(item -> !item.getRemoved()).collect(Collectors.toList());
-
     }
 
     public User get(Integer id) {

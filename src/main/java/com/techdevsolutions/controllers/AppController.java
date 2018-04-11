@@ -2,6 +2,7 @@ package com.techdevsolutions.controllers;
 
 import com.techdevsolutions.beans.Response;
 import com.techdevsolutions.service.InstallerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,7 @@ public class AppController extends BaseController {
     private Environment environment;
     private InstallerService installerService;
 
+    @Autowired
     public AppController(Environment environment, InstallerService installerService) {
         this.environment = environment;
         this.installerService = installerService;
@@ -42,11 +44,11 @@ public class AppController extends BaseController {
             map.put("buildNumber", environment.getProperty("application.buildNumber"));
             map.put("buildDateTime", environment.getProperty("application.buildDateTime"));
 
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            Authentication authentication = (Authentication) request.getUserPrincipal();
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
             Map<String, Object> userObject = new HashMap<>();
-            userObject.put("username", authentication.getName());
+            userObject.put("username", userDetails.getUsername());
             userObject.put("authorities", userDetails.getAuthorities());
 
             map.put("user", userObject);
