@@ -8,8 +8,15 @@ Spring Boot Angular 5 Seed Application!
 1. NodeJS - https://nodejs.org/en/download/current/
 2. Run: ```sudo npm install -g npm```
 3. Run: ```sudo npm install -g @angular/cli@1.7.4```
-4. Change directory to ```./client``` and run: ```npm install npm```
-4. Run: npm run start:open
+
+## Installing
+
+1. Change directory to ```./client``` and run: ```npm install npm```
+
+
+## Running
+
+1. Run: ```npm run start:open```
 
 
 ## Backend (Java) Features
