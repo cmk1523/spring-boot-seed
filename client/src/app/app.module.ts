@@ -26,6 +26,9 @@ import {EventService} from './shared/services/event.service';
 import {UserResolver} from './shared/resolvers/UserResolver';
 import {PreferenceService} from './shared/services/preference.service';
 import {UtilitiesService} from './shared/services/utilities.service';
+import {environment} from '../environments/environment';
+
+console.log('environment: ', environment);
 
 @NgModule({
   declarations: [
@@ -47,9 +50,9 @@ import {UtilitiesService} from './shared/services/utilities.service';
 
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
 
-    // HttpClientInMemoryWebApiModule.forRoot(
-    //   InMemoryDatabase, { delay: 750, apiBase: 'api/v1/', dataEncapsulation: false }
-    // )
+    environment.inmemory ? HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDatabase, { delay: 750, apiBase: 'api/v1/', dataEncapsulation: false }
+    ) : []
   ],
   providers: [
     BaseService,

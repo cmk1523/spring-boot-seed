@@ -8,6 +8,7 @@ declare let toastr: any;
 export class BaseService {
   constructor(protected http: HttpClient, protected eventService: EventService) { }
   protected baseUrl = '/';
+  protected timeout = 10000;
 
   public static IsDifferent(a: any, b: any) {
     return JSON.stringify(a) !== JSON.stringify(b);

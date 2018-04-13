@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  inmemory: false
+  inmemory: true
 };

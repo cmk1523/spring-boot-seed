@@ -1,6 +1,16 @@
 # Spring Boot Seed Application and Angular 5
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
+Spring Boot Angular 5 Seed Application!
+
+## Prerequisites
+
+1. NodeJS - https://nodejs.org/en/download/current/
+2. Run: ```sudo npm install -g npm```
+3. Run: ```sudo npm install -g @angular/cli@1.7.4```
+4. Change directory to ```./client``` and run: ```npm install npm```
+4. Run: npm run start:open
+
+
 
 ## Backend (Java) Features
 

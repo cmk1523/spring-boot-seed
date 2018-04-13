@@ -21,7 +21,9 @@ export class AppService extends BaseService {
       if (!AppService.APP_INFO) {
         this.eventService.loading.next(true);
 
-        const subscription = this.http.get<Response>(this.appUrl).subscribe(
+        const subscription = this.http.get<Response>(this.appUrl)
+          .timeout(this.timeout)
+          .subscribe(
           (rsp: Response) => {
             this.appInfo.next(rsp.data);
             AppService.APP_INFO = rsp.data;

@@ -7,6 +7,7 @@ import {BaseService} from './base.service';
 import {ResponseList} from '../objects/ResponseList';
 import {Response} from '../objects/Response';
 import {EventService} from './event.service';
+import 'rxjs/add/operator/timeout';
 
 @Injectable()
 export class UserService extends BaseService implements CrudInterface<User> {
@@ -20,7 +21,9 @@ export class UserService extends BaseService implements CrudInterface<User> {
     return new Observable((observer) => {
       this.eventService.loading.next(true);
 
-      const subscription = this.http.get<ResponseList>(this.usersUrl).subscribe(
+      const subscription = this.http.get<ResponseList>(this.usersUrl)
+        .timeout(this.timeout)
+        .subscribe(
         (rsp: ResponseList) => {
           rsp.data = (rsp.data).map((item: any) => new User(item));
           observer.next(rsp.data);
@@ -39,7 +42,9 @@ export class UserService extends BaseService implements CrudInterface<User> {
     return new Observable((observer) => {
       this.eventService.loading.next(true);
 
-      const subscription = this.http.get<Response>(this.usersUrl + '/' + id).subscribe(
+      const subscription = this.http.get<Response>(this.usersUrl + '/' + id)
+        .timeout(this.timeout)
+        .subscribe(
         (rsp: Response) => {
           observer.next(new User(rsp.data as User));
         }, (rsp: any) => {
@@ -56,7 +61,9 @@ export class UserService extends BaseService implements CrudInterface<User> {
     return new Observable((observer) => {
       this.eventService.loading.next(true);
 
-      const subscription = this.http.put<Response>(this.usersUrl, item.removeGettersSetters()).subscribe(
+      const subscription = this.http.put<Response>(this.usersUrl, item.removeGettersSetters())
+        .timeout(this.timeout)
+        .subscribe(
         (rsp: Response) => {
           observer.next(new User(rsp.data as User));
         }, (rsp: any) => {
@@ -73,7 +80,9 @@ export class UserService extends BaseService implements CrudInterface<User> {
     return new Observable((observer) => {
       this.eventService.loading.next(true);
 
-      const subscription = this.http.delete<User>(this.usersUrl + '/' + id).subscribe(
+      const subscription = this.http.delete<User>(this.usersUrl + '/' + id)
+        .timeout(this.timeout)
+        .subscribe(
         () => {
           observer.next();
         }, (rsp: any) => {
@@ -90,7 +99,9 @@ export class UserService extends BaseService implements CrudInterface<User> {
     return new Observable((observer) => {
       this.eventService.loading.next(true);
 
-      const subscription = this.http.delete<User>(this.usersUrl + '/' + id + '?delete=true').subscribe(
+      const subscription = this.http.delete<User>(this.usersUrl + '/' + id + '?delete=true')
+        .timeout(this.timeout)
+        .subscribe(
         () => {
           observer.next();
         }, (rsp: any) => {
@@ -107,7 +118,9 @@ export class UserService extends BaseService implements CrudInterface<User> {
     return new Observable((observer) => {
       this.eventService.loading.next(true);
 
-      const subscription = this.http.post<Response>(this.usersUrl + '/' + item.id, item.removeGettersSetters()).subscribe(
+      const subscription = this.http.post<Response>(this.usersUrl + '/' + item.id, item.removeGettersSetters())
+        .timeout(this.timeout)
+        .subscribe(
         (rsp: Response) => {
           observer.next(new User(rsp.data));
         }, (rsp: any) => {

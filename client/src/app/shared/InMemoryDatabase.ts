@@ -9,7 +9,6 @@ export class InMemoryDatabase implements InMemoryDbService {
   public static Users: User[] = [];
 
   public static APP_INFO_TEST: Response = InMemoryDatabase.GenerateAppInfo();
-  public static APP_USERS_TEST: Response = InMemoryDatabase.GenerateDefaultUsers();
 
   constructor() {
     InMemoryDatabase.APP_INFO = InMemoryDatabase.GenerateAppInfo();
@@ -22,7 +21,7 @@ export class InMemoryDatabase implements InMemoryDbService {
       name: 'spring-boot-seed',
       title: 'Technical Development Solutions',
       version: '0.1',
-      buildNumber: '1',
+      buildNumber: 'inmemory',
       buildDateTime: '01-01-2018 00:00',
       user: {
         username: 'user',
