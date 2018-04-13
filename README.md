@@ -2,6 +2,7 @@
 
 Spring Boot Angular 5 Seed Application!
 
+
 ## Prerequisites
 
 1. NodeJS - https://nodejs.org/en/download/current/
@@ -9,7 +10,6 @@ Spring Boot Angular 5 Seed Application!
 3. Run: ```sudo npm install -g @angular/cli@1.7.4```
 4. Change directory to ```./client``` and run: ```npm install npm```
 4. Run: npm run start:open
-
 
 
 ## Backend (Java) Features
@@ -23,6 +23,7 @@ Spring Boot Angular 5 Seed Application!
 - MySql database (utilizing Spring JdbcTemplate)
 - Simple "in memory" database
 
+
 ## Frontend (Angular) Features
 - Simple Angular 5 CLI application
 - Bootstrap, jQuery and Toastr integration
@@ -32,13 +33,6 @@ Spring Boot Angular 5 Seed Application!
 - Loading bar
 - Basic CRUD views for reading, creating, updating and deleting a custom object
 
-Note: To disable the Angular "in memory" database, comment out the following lines in app.module.ts:
-
-```
-HttpClientInMemoryWebApiModule.forRoot(
-  InMemoryDatabase, { delay: 750, apiBase: 'api/v1/', dataEncapsulation: false }
-)
-```
 
 ##### TODO
 - Integrate Angular Material Design
