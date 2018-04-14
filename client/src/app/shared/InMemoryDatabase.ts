@@ -5,142 +5,49 @@ import {Response} from './objects/Response';
 import {UtilitiesService} from './services/utilities.service';
 
 export class InMemoryDatabase implements InMemoryDbService {
-  public static APP_INFO: Response = new Response();
-  public static Users: User[] = [];
+  public static TestUser = 'Test User';
+  public static HTTP_GET = 'get';
+  public static HTTP_PUT = 'put';
+  public static HTTP_POST = 'post';
+  public static HTTP_DELETE = 'delete';
 
-  public static APP_INFO_TEST: Response = InMemoryDatabase.GenerateAppInfo();
+  public static Users: User[] = [
+    new User({
+      id: 1,
+      name: InMemoryDatabase.TestUser,
+      createdBy: InMemoryDatabase.TestUser,
+      createdDate: new Date().getTime(),
+      updatedBy: InMemoryDatabase.TestUser,
+      updatedDate: new Date().getTime(),
+      removed: false
+    })
+  ];
+
+  public static AppInfo: any = {
+    name: 'spring-boot-seed',
+    title: 'Technical Development Solutions',
+    version: '0.1',
+    buildNumber: 'inmemory',
+    buildDateTime: '04-14-2018 18:00',
+    user: {
+      username: 'user',
+      authorities: [
+        {
+          authority: 'ROLE_USER'
+        }
+      ]
+    }
+  };
 
   constructor() {
-    InMemoryDatabase.APP_INFO = InMemoryDatabase.GenerateAppInfo();
   }
 
-  public static GenerateAppInfo(): Response {
-    const response: Response = new Response();
-    response.took = 1;
-    response.data = {
-      name: 'spring-boot-seed',
-      title: 'Technical Development Solutions',
-      version: '0.1',
-      buildNumber: 'inmemory',
-      buildDateTime: '01-01-2018 00:00',
-      user: {
-        username: 'user',
-        authorities: [
-          {
-            authority: 'ROLE_USER'
-          }
-        ]
-      }
-    };
-    return response;
+  public static GenerateAppInfoResponse(): Response {
+    return new Response( { tool: 1, data: InMemoryDatabase.AppInfo } );
   }
 
-  public static GenerateDefaultUsers(): ResponseList {
-    const testUser = 'Test User';
-    const user: User = new User();
-    user.id = 1;
-    user.name = testUser;
-    user.createdBy = testUser;
-    user.createdDate = new Date().getTime();
-    user.updatedBy = user.createdBy;
-    user.updatedDate = user.createdDate;
-    user.removed = false;
-
-    InMemoryDatabase.Users.push(user);
-    return InMemoryDatabase.GenerateUsersResponse();
-  }
-
-  public static GenerateUsersResponse(): ResponseList {
-    const responseList: ResponseList = new ResponseList();
-    responseList.size = InMemoryDatabase.Users.length;
-    responseList.data = InMemoryDatabase.Users;
-    responseList.took = 1;
-    return responseList;
-  }
-
-  responseInterceptor(resOptions: ResponseOptions, reqInfo: RequestInfo) {
-    const url = reqInfo['url'];
-
-    // console.log('InMemoryDatabase - responseInterceptor - reqInfo - url: ' + url + ', reqInfo: ', reqInfo);
-
-    if (url.indexOf('/api/v1/users') > -1) {
-      if (reqInfo['method'] === 'put' && url === '/api/v1/users') { // PUT (Create)
-        const itemSubmitted = reqInfo['req'].body;
-        const itemToCreate: User = InMemoryDatabase.Users.filter((i: User) => i.id === parseInt(itemSubmitted.id, 10))[0];
-
-        if (itemToCreate == null) {
-          const data: User = new User({
-            id: InMemoryDatabase.Users.length + 1,
-            name: itemSubmitted.name,
-            createdBy: itemSubmitted.createdBy,
-            createdDate: itemSubmitted.createdDate,
-            updatedBy: itemSubmitted.updatedBy,
-            updatedDate: itemSubmitted.updatedDate,
-            removed: itemSubmitted.removed
-          });
-
-          const vr = User.Validate(data, true);
-
-          if (!vr.isValid) {
-            console.error('InMemoryDatabase - responseInterceptor - creating user failed: ' + vr.message);
-          } else {
-            InMemoryDatabase.Users.push(data);
-          }
-
-          resOptions = this.generateCreateResponse(data, resOptions);
-        } else {
-          this.generateItemAlreadyExistsResponse(resOptions);
-        }
-      } else if (reqInfo['method'] === 'delete' && url.indexOf('/api/v1/users/') > -1) {
-        const id = this.getLastRestVariable(url);
-        const deleteParam = UtilitiesService.GetUrlParam(url, 'delete');
-
-        if (deleteParam != null && deleteParam !== '' && (deleteParam === true || deleteParam === 'true')) {
-          if (id != null) {
-            InMemoryDatabase.Users = InMemoryDatabase.Users.filter((i: User) => i.id !== parseInt(id, 10));
-            resOptions = this.generateDeleteResponse(resOptions);
-          } else {
-            this.generateUnableToFindItemResponse(id, resOptions);
-          }
-        } else {
-          if (id != null) {
-            const data: User = InMemoryDatabase.Users.filter((i: User) => i.id === parseInt(id, 10) && i.removed === false)[0];
-            data.removed = true;
-            resOptions = this.generateDeleteResponse(resOptions);
-          } else {
-            this.generateUnableToFindItemResponse(id, resOptions);
-          }
-        }
-      } else if (reqInfo['method'] === 'post' && url.indexOf('/api/v1/users/') > -1) { // POST (Update)
-        const itemSubmitted = reqInfo['req'].body;
-        const id = parseInt(itemSubmitted.id, 10);
-        const itemToUpdate: User = InMemoryDatabase.Users.filter((i: User) => i.id === id && i.removed === false)[0];
-
-        if (itemToUpdate != null) {
-          itemToUpdate.name = itemSubmitted.name;
-          itemToUpdate.updatedBy = itemSubmitted.updatedBy;
-          itemToUpdate.updatedDate = itemSubmitted.updatedDate;
-          itemToUpdate.removed = itemSubmitted.removed;
-          resOptions = this.generateGetResponse(itemToUpdate, resOptions);
-        } else {
-          this.generateUnableToFindItemResponse(itemSubmitted.id, resOptions);
-        }
-      } else if (url.indexOf('/api/v1/users/') > -1) { // GET (Get via ID)
-        const id = this.getLastRestVariable(url);
-        const data: User = InMemoryDatabase.Users.filter((i: User) => i.id === parseInt(id, 10) && i.removed === false)[0];
-        resOptions = this.generateGetResponse(data, resOptions);
-      } else if (url === '/api/v1/users') { // GET (Get All)
-        resOptions.body = InMemoryDatabase.GenerateUsersResponse();
-      }
-    } else if (url.indexOf('/api/v1/app') > -1) {
-      if (url === '/api/v1/app') {
-        resOptions.body = InMemoryDatabase.APP_INFO;
-      }
-    } else {
-      console.error('InMemoryDatabase - responseInterceptor - Unknown endpoint: ' + url);
-    }
-
-    return resOptions;
+  public static GenerateUsersResponse(): Response {
+    return new ResponseList( { tool: 1, data: InMemoryDatabase.Users, size: InMemoryDatabase.Users.length } );
   }
 
   createDb() {
@@ -152,6 +59,126 @@ export class InMemoryDatabase implements InMemoryDbService {
         { id: 'users' }
       ]
     };
+  }
+
+  responseInterceptor(resOptions: ResponseOptions, reqInfo: RequestInfo) {
+    const url = reqInfo['url'];
+
+    // console.log('InMemoryDatabase - responseInterceptor - reqInfo - url: ' + url + ', reqInfo: ', reqInfo);
+
+    if (url.indexOf('/api/v1/users') > -1) {
+      console.log('handling users...');
+      this.handleUsers(resOptions, reqInfo);
+    } else if (url.indexOf('/api/v1/app') > -1) {
+      this.handleApp(resOptions, reqInfo);
+    } else {
+      console.error('InMemoryDatabase - responseInterceptor - Unknown endpoint: ' + url);
+    }
+
+    return resOptions;
+  }
+
+  handleApp(resOptions: ResponseOptions, reqInfo: RequestInfo) {
+    const url = reqInfo['url'];
+    const method = reqInfo['method'];
+    const endpoint = '/api/v1/app';
+
+    if (method === InMemoryDatabase.HTTP_GET) {
+      resOptions = this.generateGetResponse(InMemoryDatabase.AppInfo, resOptions);
+    }
+  }
+
+  handleUsers(resOptions: ResponseOptions, reqInfo: RequestInfo) {
+    const url = reqInfo['url'];
+    const method = reqInfo['method'];
+    const endpoint = '/api/v1/users';
+
+    if (method === InMemoryDatabase.HTTP_PUT) {
+      const itemSubmitted = reqInfo['req'].body;
+      const itemToCreate: User = this.getUser(InMemoryDatabase.Users.length + 1);
+
+      if (itemToCreate == null) {
+        const data: User = new User({
+          id: InMemoryDatabase.Users.length + 1,
+          name: itemSubmitted.name,
+          createdBy: itemSubmitted.createdBy,
+          createdDate: itemSubmitted.createdDate,
+          updatedBy: itemSubmitted.updatedBy,
+          updatedDate: itemSubmitted.updatedDate,
+          removed: itemSubmitted.removed
+        });
+
+        const vr = User.Validate(data, true);
+
+        if (!vr.isValid) {
+          console.error('InMemoryDatabase - responseInterceptor - creating user failed: ' + vr.message);
+        } else {
+          InMemoryDatabase.Users.push(data);
+        }
+
+        resOptions = this.generateCreateResponse(data, resOptions);
+      } else {
+        this.generateItemAlreadyExistsResponse(resOptions);
+      }
+    } else if (method === InMemoryDatabase.HTTP_DELETE) {
+      const id = parseInt(this.getLastRestVariable(url), 10);
+      const deleteParam = UtilitiesService.GetUrlParam(url, 'delete');
+
+      if (deleteParam != null && deleteParam !== '' && (deleteParam === true || deleteParam === 'true')) {
+        if (id != null) {
+          InMemoryDatabase.Users = this.getUsers().filter((i: User) => i.id !== id);
+          resOptions = this.generateDeleteResponse(resOptions);
+        } else {
+          this.generateUnableToFindItemResponse(id, resOptions);
+        }
+      } else {
+        if (id != null) {
+          const data: User = this.getUser(id);
+          data.removed = true;
+          resOptions = this.generateDeleteResponse(resOptions);
+        } else {
+          this.generateUnableToFindItemResponse(id, resOptions);
+        }
+      }
+    } else if (method === InMemoryDatabase.HTTP_POST) {
+      const itemSubmitted = reqInfo['req'].body;
+      const id = parseInt(itemSubmitted.id, 10);
+      const data: User = this.getUser(id);
+
+      if (data != null) {
+        data.name = itemSubmitted.name;
+        data.updatedBy = itemSubmitted.updatedBy;
+        data.updatedDate = itemSubmitted.updatedDate;
+        data.removed = itemSubmitted.removed;
+        resOptions = this.generateGetResponse(data, resOptions);
+      } else {
+        this.generateUnableToFindItemResponse(itemSubmitted.id, resOptions);
+      }
+    } else if (method === InMemoryDatabase.HTTP_GET && this.urlHasParam(url, endpoint)) {
+      const id = parseInt(this.getLastRestVariable(url));
+      const data: User = this.getUser(id);
+      resOptions = this.generateGetResponse(data, resOptions);
+    } else if (method === InMemoryDatabase.HTTP_GET && !this.urlHasParam(url, endpoint)) {
+      resOptions.body = this.generateGetResponseList(this.getUsers(), resOptions);
+    }
+  }
+
+  getUsers(): User[] {
+    return InMemoryDatabase.Users;
+  }
+
+  getUser(id: number): User {
+    const items: User[] = InMemoryDatabase.Users.filter((i: User) => i.id === id);
+
+    if (items != null && items.length > 0) {
+      return items[0];
+    } else {
+      return null;
+    }
+  }
+
+  urlHasParam(url: string, endpoint: string): boolean {
+    return url.indexOf(endpoint + '/') > -1;
   }
 
   generateUnableToFindItemResponse(id: any, resOptions: ResponseOptions) {
@@ -174,34 +201,29 @@ export class InMemoryDatabase implements InMemoryDbService {
     resOptions.status = 500;
   }
 
-  generateGetResponse(data: any, resOptions: ResponseOptions) {
-    const response: Response = new Response();
-    response.data = data;
-    response.took = 1;
+  generateGetResponseList(data: any, resOptions: ResponseOptions) {
+    resOptions.body = new ResponseList( { took: 1, data: data, size: data.size } );
+    resOptions.status = 200;
+    resOptions.statusText = '';
+    return resOptions;
+  }
 
-    resOptions.body = response;
+  generateGetResponse(data: any, resOptions: ResponseOptions) {
+    resOptions.body = new Response({ took: 1, data: data } );
     resOptions.status = 200;
     resOptions.statusText = '';
     return resOptions;
   }
 
   generateCreateResponse(data: any, resOptions: ResponseOptions) {
-    const response: Response = new Response();
-    response.data = data;
-    response.took = 1;
-
-    resOptions.body = response;
+    resOptions.body = new Response({ took: 1, data: data } );
     resOptions.status = 201;
     resOptions.statusText = '';
     return resOptions;
   }
 
   generateDeleteResponse(resOptions: ResponseOptions) {
-    const response: Response = new Response();
-    response.data = null;
-    response.took = 1;
-
-    resOptions.body = response;
+    resOptions.body = new Response({ took: 1, data: null } );
     resOptions.status = 202;
     resOptions.statusText = '';
     return resOptions;

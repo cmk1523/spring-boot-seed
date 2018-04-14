@@ -25,7 +25,7 @@ describe('FooterComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
-    component.appInfo = InMemoryDatabase.APP_INFO_TEST.data;
+    component.appInfo = InMemoryDatabase.GenerateAppInfoResponse().data;
     fixture.detectChanges();
   });
 

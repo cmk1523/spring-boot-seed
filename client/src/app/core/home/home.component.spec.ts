@@ -38,7 +38,7 @@ describe('HomeComponent', () => {
     location = TestBed.get(Location);
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
-    component.appInfo = InMemoryDatabase.APP_INFO_TEST.data;
+    component.appInfo = InMemoryDatabase.GenerateAppInfoResponse().data;
     fixture.detectChanges();
   });
 

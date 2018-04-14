@@ -28,8 +28,6 @@ import {PreferenceService} from './shared/services/preference.service';
 import {UtilitiesService} from './shared/services/utilities.service';
 import {environment} from '../environments/environment';
 
-console.log('environment: ', environment);
-
 @NgModule({
   declarations: [
     AppComponent,

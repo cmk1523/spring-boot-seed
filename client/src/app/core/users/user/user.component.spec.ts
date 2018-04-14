@@ -39,8 +39,8 @@ describe('UserComponent', () => {
     location = TestBed.get(Location);
     fixture = TestBed.createComponent(UserComponent);
     component = fixture.componentInstance;
-    component.appInfo = InMemoryDatabase.APP_INFO_TEST.data;
-    component.user = InMemoryDatabase.GenerateDefaultUsers().data[0];
+    component.appInfo = InMemoryDatabase.GenerateAppInfoResponse().data;
+    component.user = InMemoryDatabase.GenerateUsersResponse().data[0];
     fixture.detectChanges();
   });
 

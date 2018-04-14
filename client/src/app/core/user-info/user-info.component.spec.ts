@@ -35,7 +35,7 @@ describe('UserInfoComponent', () => {
     location = TestBed.get(Location);
     fixture = TestBed.createComponent(UserInfoComponent);
     component = fixture.componentInstance;
-    component.appInfo = InMemoryDatabase.APP_INFO_TEST.data;
+    component.appInfo = InMemoryDatabase.GenerateAppInfoResponse().data;
     fixture.detectChanges();
   });
 

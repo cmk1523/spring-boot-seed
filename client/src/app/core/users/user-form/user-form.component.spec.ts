@@ -26,8 +26,8 @@ describe('UserFormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(UserFormComponent);
     component = fixture.componentInstance;
-    component.appInfo = InMemoryDatabase.APP_INFO_TEST.data;
-    component.user = InMemoryDatabase.GenerateDefaultUsers().data[0];
+    component.appInfo = InMemoryDatabase.GenerateAppInfoResponse().data;
+    component.user = InMemoryDatabase.GenerateAppInfoResponse().data[0];
     fixture.detectChanges();
   });
 
