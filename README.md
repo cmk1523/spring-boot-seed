@@ -11,7 +11,7 @@ Spring Boot Angular 5 Seed Application!
 
 ## Installing
 
-1. Change directory to ```./client``` and run: ```npm install npm```
+1. Change directory to ```./client``` and run: ```npm install```
 
 
 ## Running
