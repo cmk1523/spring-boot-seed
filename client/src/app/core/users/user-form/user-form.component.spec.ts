@@ -27,7 +27,7 @@ describe('UserFormComponent', () => {
     fixture = TestBed.createComponent(UserFormComponent);
     component = fixture.componentInstance;
     component.appInfo = InMemoryDatabase.GenerateAppInfoResponse().data;
-    component.user = InMemoryDatabase.GenerateAppInfoResponse().data[0];
+    component.user = InMemoryDatabase.GenerateUsersResponse().data[0];
     fixture.detectChanges();
   });
 

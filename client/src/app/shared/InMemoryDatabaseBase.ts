@@ -1,9 +1,6 @@
-import {InMemoryDbService, ResponseOptions} from 'angular-in-memory-web-api';
-import {User} from './objects/auditable/User';
+import {ResponseOptions} from 'angular-in-memory-web-api';
 import {ResponseList} from './objects/ResponseList';
 import {Response} from './objects/Response';
-import {UtilitiesService} from './services/utilities.service';
-import {Role} from './objects/auditable/Role';
 
 export class InMemoryDatabaseBase {
   public static TestUser = 'Test User';

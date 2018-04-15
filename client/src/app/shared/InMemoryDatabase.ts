@@ -151,7 +151,7 @@ export class InMemoryDatabase extends InMemoryDatabaseBase implements InMemoryDb
         this.generateUnableToFindItemResponse(itemSubmitted.id, resOptions);
       }
     } else if (method === InMemoryDatabaseBase.HTTP_GET && this.urlHasParam(url, endpoint)) {
-      const id = parseInt(this.getLastRestVariable(url));
+      const id = parseInt(this.getLastRestVariable(url), 10);
       const data: User = this.getUser(id);
       resOptions = this.generateGetResponse(data, resOptions);
     } else if (method === InMemoryDatabaseBase.HTTP_GET && !this.urlHasParam(url, endpoint)) {
