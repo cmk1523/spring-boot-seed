@@ -3,21 +3,16 @@ import {User} from './objects/auditable/User';
 import {ResponseList} from './objects/ResponseList';
 import {Response} from './objects/Response';
 import {UtilitiesService} from './services/utilities.service';
+import {InMemoryDatabaseBase} from './InMemoryDatabaseBase';
 
-export class InMemoryDatabase implements InMemoryDbService {
-  public static TestUser = 'Test User';
-  public static HTTP_GET = 'get';
-  public static HTTP_PUT = 'put';
-  public static HTTP_POST = 'post';
-  public static HTTP_DELETE = 'delete';
-
+export class InMemoryDatabase extends InMemoryDatabaseBase implements InMemoryDbService {
   public static Users: User[] = [
     new User({
       id: 1,
-      name: InMemoryDatabase.TestUser,
-      createdBy: InMemoryDatabase.TestUser,
+      name: InMemoryDatabaseBase.TestUser,
+      createdBy: InMemoryDatabaseBase.TestUser,
       createdDate: new Date().getTime(),
-      updatedBy: InMemoryDatabase.TestUser,
+      updatedBy: InMemoryDatabaseBase.TestUser,
       updatedDate: new Date().getTime(),
       removed: false
     })
@@ -40,6 +35,7 @@ export class InMemoryDatabase implements InMemoryDbService {
   };
 
   constructor() {
+    super();
   }
 
   public static GenerateAppInfoResponse(): Response {
@@ -83,7 +79,7 @@ export class InMemoryDatabase implements InMemoryDbService {
     const method = reqInfo['method'];
     const endpoint = '/api/v1/app';
 
-    if (method === InMemoryDatabase.HTTP_GET) {
+    if (method === InMemoryDatabaseBase.HTTP_GET) {
       resOptions = this.generateGetResponse(InMemoryDatabase.AppInfo, resOptions);
     }
   }
@@ -93,7 +89,7 @@ export class InMemoryDatabase implements InMemoryDbService {
     const method = reqInfo['method'];
     const endpoint = '/api/v1/users';
 
-    if (method === InMemoryDatabase.HTTP_PUT) {
+    if (method === InMemoryDatabaseBase.HTTP_PUT) {
       const itemSubmitted = reqInfo['req'].body;
       const itemToCreate: User = this.getUser(InMemoryDatabase.Users.length + 1);
 
@@ -120,7 +116,7 @@ export class InMemoryDatabase implements InMemoryDbService {
       } else {
         this.generateItemAlreadyExistsResponse(resOptions);
       }
-    } else if (method === InMemoryDatabase.HTTP_DELETE) {
+    } else if (method === InMemoryDatabaseBase.HTTP_DELETE) {
       const id = parseInt(this.getLastRestVariable(url), 10);
       const deleteParam = UtilitiesService.GetUrlParam(url, 'delete');
 
@@ -140,7 +136,7 @@ export class InMemoryDatabase implements InMemoryDbService {
           this.generateUnableToFindItemResponse(id, resOptions);
         }
       }
-    } else if (method === InMemoryDatabase.HTTP_POST) {
+    } else if (method === InMemoryDatabaseBase.HTTP_POST) {
       const itemSubmitted = reqInfo['req'].body;
       const id = parseInt(itemSubmitted.id, 10);
       const data: User = this.getUser(id);
@@ -154,11 +150,11 @@ export class InMemoryDatabase implements InMemoryDbService {
       } else {
         this.generateUnableToFindItemResponse(itemSubmitted.id, resOptions);
       }
-    } else if (method === InMemoryDatabase.HTTP_GET && this.urlHasParam(url, endpoint)) {
+    } else if (method === InMemoryDatabaseBase.HTTP_GET && this.urlHasParam(url, endpoint)) {
       const id = parseInt(this.getLastRestVariable(url));
       const data: User = this.getUser(id);
       resOptions = this.generateGetResponse(data, resOptions);
-    } else if (method === InMemoryDatabase.HTTP_GET && !this.urlHasParam(url, endpoint)) {
+    } else if (method === InMemoryDatabaseBase.HTTP_GET && !this.urlHasParam(url, endpoint)) {
       resOptions = this.generateGetResponseList(this.getUsers(), resOptions);
     }
   }
@@ -175,63 +171,6 @@ export class InMemoryDatabase implements InMemoryDbService {
     } else {
       return null;
     }
-  }
-
-  urlHasParam(url: string, endpoint: string): boolean {
-    return url.indexOf(endpoint + '/') > -1;
-  }
-
-  generateUnableToFindItemResponse(id: any, resOptions: ResponseOptions) {
-    resOptions.body = null;
-    resOptions['error'] = {
-      status: 500,
-      error: 'InMemoryDatabase Error',
-      message: 'Unable to find item: ' + id
-    };
-    resOptions.status = 500;
-  }
-
-  generateItemAlreadyExistsResponse(resOptions: ResponseOptions) {
-    resOptions.body = null;
-    resOptions['error'] = {
-      status: 500,
-      error: 'InMemoryDatabase Error',
-      message: 'Itme already exists'
-    };
-    resOptions.status = 500;
-  }
-
-  generateGetResponseList(data: any, resOptions: ResponseOptions) {
-    resOptions.body = new ResponseList( { took: 1, data: data, size: data.size } );
-    resOptions.status = 200;
-    resOptions.statusText = '';
-    return resOptions;
-  }
-
-  generateGetResponse(data: any, resOptions: ResponseOptions) {
-    resOptions.body = new Response({ took: 1, data: data } );
-    resOptions.status = 200;
-    resOptions.statusText = '';
-    return resOptions;
-  }
-
-  generateCreateResponse(data: any, resOptions: ResponseOptions) {
-    resOptions.body = new Response({ took: 1, data: data } );
-    resOptions.status = 201;
-    resOptions.statusText = '';
-    return resOptions;
-  }
-
-  generateDeleteResponse(resOptions: ResponseOptions) {
-    resOptions.body = new Response({ took: 1, data: null } );
-    resOptions.status = 202;
-    resOptions.statusText = '';
-    return resOptions;
-  }
-
-  getLastRestVariable(s: string) {
-    const split = s.split('/');
-    return split[split.length - 1];
   }
 
 }
