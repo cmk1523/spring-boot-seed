@@ -159,7 +159,7 @@ export class InMemoryDatabase implements InMemoryDbService {
       const data: User = this.getUser(id);
       resOptions = this.generateGetResponse(data, resOptions);
     } else if (method === InMemoryDatabase.HTTP_GET && !this.urlHasParam(url, endpoint)) {
-      resOptions.body = this.generateGetResponseList(this.getUsers(), resOptions);
+      resOptions = this.generateGetResponseList(this.getUsers(), resOptions);
     }
   }
 

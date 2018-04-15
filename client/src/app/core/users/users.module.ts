@@ -31,7 +31,8 @@ import {CreateUserComponent} from './create-user/create-user.component';
   exports: [
     UserComponent,
     UsersComponent,
-    UserFormComponent
+    UserFormComponent,
+    CreateUserComponent
   ]
 })
 export class UsersModule { }
