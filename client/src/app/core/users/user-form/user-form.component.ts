@@ -46,7 +46,7 @@ export class UserFormComponent extends BaseAngularComponent implements OnInit, O
     this.user['updatedDateStr'] = moment(this.user.updatedDate).format(MillisecondToDate.MMDDYYYY_HH_MM_SS).toUpperCase();
   }
 
-  public readOnlyFieldsBtnClicked() {
+  readOnlyFieldsBtnClicked() {
     this.showDisabledFields = !this.showDisabledFields;
     PreferenceService.USER_FORM_SHOW_READONLY_FIELDS = this.showDisabledFields;
   }

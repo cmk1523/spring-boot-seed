@@ -4,7 +4,7 @@ import com.techdevsolutions.beans.Filter;
 import com.techdevsolutions.beans.Search;
 import com.techdevsolutions.beans.auditable.User;
 import com.techdevsolutions.beans.ValidationResponse;
-import com.techdevsolutions.dao.test.UserTestDao;
+import com.techdevsolutions.dao.test.user.UserTestDao;
 import com.techdevsolutions.service.CrudServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,14 +43,14 @@ public class UserService implements CrudServiceInterface<User> {
 
     public List<User> get(Filter filter) throws Exception {
         logger.info("UserService - get: " + filter.toString());
-        List<User> users = this.userDao.get(filter);
+        List<User> items = this.userDao.get(filter);
 
-        for (User user : users) {
-            ValidationResponse vr = User.Validate(user);
+        for (User item : items) {
+            ValidationResponse vr = User.Validate(item);
             if (!vr.getValid()) { throw new Exception("Invalid item: " + vr.getMessage()); }
         }
 
-        return users;
+        return items;
     }
 
     public User get(Integer id) throws Exception {

@@ -1,11 +1,13 @@
-package com.techdevsolutions.dao.test;
+package com.techdevsolutions.dao.test.user;
 
 import com.techdevsolutions.beans.Filter;
 import com.techdevsolutions.beans.Search;
 import com.techdevsolutions.beans.auditable.User;
 import com.techdevsolutions.dao.DaoCrudInterface;
+import com.techdevsolutions.dao.test.BaseTestDao;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -13,20 +15,22 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @Service
-public class UserTestDao implements DaoCrudInterface<User> {
+public class UserTestDao extends BaseTestDao implements DaoCrudInterface<User> {
     private Logger logger = Logger.getLogger(UserTestDao.class.getName());
     private static List<User> Users = new ArrayList<>();
 
     @Autowired
-    public UserTestDao() {
-        User user1 = new User();
-        user1.setId(1);
-        user1.setName("test name");
-        user1.setCreatedBy("test created user");
-        user1.setCreatedDate(new Date().getTime());
-        user1.setUpdatedBy(user1.getCreatedBy());
-        user1.setUpdatedDate(user1.getCreatedDate());
-        UserTestDao.Users.add(user1);
+    public UserTestDao(JdbcTemplate jdbcTemplate) {
+        super(jdbcTemplate);
+
+        User i = new User();
+        i.setId(1);
+        i.setName("test name");
+        i.setCreatedBy("test");
+        i.setCreatedDate(new Date().getTime());
+        i.setUpdatedBy(i.getCreatedBy());
+        i.setUpdatedDate(i.getCreatedDate());
+        UserTestDao.Users.add(i);
     }
 
 
@@ -80,29 +84,22 @@ public class UserTestDao implements DaoCrudInterface<User> {
     public User create(User item) throws Exception {
         logger.info("UserMySqlDao - create - id: " + item.getId());
         item.setId(UserTestDao.Users.size() + 1);
-
-        User user = this.get(item.getId());
-
-        if (user == null) {
-            UserTestDao.Users.add(item);
-            return item;
-        } else {
-            throw new Exception("Item already exists: " + item.getId());
-        }
+        UserTestDao.Users.add(item);
+        return item;
     }
 
     @Override
-    public User update(User item) throws Exception {
-        logger.info("UserMySqlDao - update - id: " + item.getId());
-        User user = this.get(item.getId());
+    public User update(User newItem) throws Exception {
+        logger.info("UserMySqlDao - update - id: " + newItem.getId());
+        User item = this.get(newItem.getId());
 
-        if (user != null) {
-            user.setName(item.getName());
-            user.setUpdatedBy(item.getUpdatedBy());
-            user.setUpdatedDate(item.getUpdatedDate());
+        if (item != null) {
+            item.setName(newItem.getName());
+            item.setUpdatedBy(newItem.getUpdatedBy());
+            item.setUpdatedDate(newItem.getUpdatedDate());
             return item;
         } else {
-            throw new Exception("Unable to find item by id: " + item.getId());
+            throw new Exception("Unable to find item by id: " + newItem.getId());
         }
     }
 
