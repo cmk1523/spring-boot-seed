@@ -2,6 +2,7 @@ package com.techdevsolutions.dao.test.user;
 
 import com.techdevsolutions.beans.Filter;
 import com.techdevsolutions.beans.Search;
+import com.techdevsolutions.beans.auditable.Auditable;
 import com.techdevsolutions.beans.auditable.User;
 import com.techdevsolutions.dao.DaoCrudInterface;
 import com.techdevsolutions.dao.test.BaseTestDao;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class UserTestDao extends BaseTestDao implements DaoCrudInterface<User> {
@@ -112,40 +114,7 @@ public class UserTestDao extends BaseTestDao implements DaoCrudInterface<User> {
                 String key = split[0];
                 String value = split[1];
 
-                if (filter.getFilterLogic().equals(Filter.FILTER_LOGIC_AND)) {
-                    list = ("id".equals(key)) ? UserTestDao.Users.stream().filter(item -> item.getId()
-                            .equals(value)).collect(Collectors.toList()) : list;
-                    list = ("name".equals(key)) ? UserTestDao.Users.stream().filter(item -> item.getName()
-                            .equals(value)).collect(Collectors.toList()) : list;
-                    list = ("createdBy".equals(key)) ? UserTestDao.Users.stream().filter(item -> item.getCreatedBy()
-                            .equals(value)).collect(Collectors.toList()) : list;
-                    list = ("createdDate".equals(key)) ? UserTestDao.Users.stream().filter(item -> item.getCreatedDate()
-                            .equals(value)).collect(Collectors.toList()) : list;
-                    list = ("updatedBy".equals(key)) ? UserTestDao.Users.stream().filter(item -> item.getUpdatedBy()
-                            .equals(value)).collect(Collectors.toList()) : list;
-                    list = ("updatedDate".equals(key)) ? UserTestDao.Users.stream().filter(item -> item.getUpdatedDate()
-                            .equals(value)).collect(Collectors.toList()) : list;
-                    list = ("removed".equals(key)) ? UserTestDao.Users.stream().filter(item -> item.getRemoved()
-                            .equals(value)).collect(Collectors.toList()) : list;
-                } else if (filter.getFilterLogic().equals(Filter.FILTER_LOGIC_NOT)) {
-                    list = ("id".equals(key)) ? UserTestDao.Users.stream().filter(item -> !item.getId()
-                            .equals(value)).collect(Collectors.toList()) : list;
-                    list = ("name".equals(key)) ? UserTestDao.Users.stream().filter(item -> !item.getName()
-                            .equals(value)).collect(Collectors.toList()) : list;
-                    list = ("createdBy".equals(key)) ? UserTestDao.Users.stream().filter(item -> !item.getCreatedBy()
-                            .equals(value)).collect(Collectors.toList()) : list;
-                    list = ("createdDate".equals(key)) ? UserTestDao.Users.stream().filter(item -> !item.getCreatedDate()
-                            .equals(value)).collect(Collectors.toList()) : list;
-                    list = ("updatedBy".equals(key)) ? UserTestDao.Users.stream().filter(item -> !item.getUpdatedBy()
-                            .equals(value)).collect(Collectors.toList()) : list;
-                    list = ("updatedDate".equals(key)) ? UserTestDao.Users.stream().filter(item -> !item.getUpdatedDate()
-                            .equals(value)).collect(Collectors.toList()) : list;
-                    list = ("removed".equals(key)) ? UserTestDao.Users.stream().filter(item -> !item.getRemoved()
-                            .equals(value)).collect(Collectors.toList()) : list;
-                } else if (filter.getFilterLogic().equals(Filter.FILTER_LOGIC_OR)) {
-                    // TODO: OR logic...
-                    throw new Exception("OR Logic not implemented!");
-                }
+                list = this.filterAuditable(filter, key, value, (List) list, (List) UserTestDao.Users);
             } else {
                 throw new Exception("Invalid filter syntax: " + filter.getFilters());
             }
@@ -154,13 +123,7 @@ public class UserTestDao extends BaseTestDao implements DaoCrudInterface<User> {
         // Sort...
         if (StringUtils.isNotEmpty(filter.getSort()) && StringUtils.isNotEmpty(filter.getOrder())) {
             Comparator<User> comparator = null;
-            comparator = ("id".equals(filter.getSort())) ? Comparator.comparing(User::getId) : comparator;
-            comparator = ("name".equals(filter.getSort())) ? Comparator.comparing(User::getName) : comparator;
-            comparator = ("createdBy".equals(filter.getSort())) ? Comparator.comparing(User::getCreatedBy) : comparator;
-            comparator = ("createdDate".equals(filter.getSort())) ? Comparator.comparing(User::getCreatedDate) : comparator;
-            comparator = ("updatedBy".equals(filter.getSort())) ? Comparator.comparing(User::getUpdatedBy) : comparator;
-            comparator = ("updatedDate".equals(filter.getSort())) ? Comparator.comparing(User::getUpdatedDate) : comparator;
-            comparator = ("removed".equals(filter.getSort())) ? Comparator.comparing(User::getRemoved) : comparator;
+            comparator = this.getAuditableComparator(filter, (Comparator) comparator);
 
             if (comparator == null) {
                 throw new Exception("Unable sort field: " + filter.getSort());
@@ -178,7 +141,7 @@ public class UserTestDao extends BaseTestDao implements DaoCrudInterface<User> {
         startPos = startPos < 0 ? 0 : startPos;
 
         if (startPos > list.size() - 1) {
-            this.logger.info("Invalid start position: " + startPos);
+//            this.logger.info("Invalid start position: " + startPos);
             return new ArrayList<>();
         }
 
