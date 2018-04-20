@@ -94,15 +94,8 @@ export class InMemoryDatabase extends InMemoryDatabaseBase implements InMemoryDb
       const itemToCreate: User = this.getUser(InMemoryDatabase.Users.length + 1);
 
       if (itemToCreate == null) {
-        const data: User = new User({
-          id: InMemoryDatabase.Users.length + 1,
-          name: itemSubmitted.name,
-          createdBy: itemSubmitted.createdBy,
-          createdDate: itemSubmitted.createdDate,
-          updatedBy: itemSubmitted.updatedBy,
-          updatedDate: itemSubmitted.updatedDate,
-          removed: itemSubmitted.removed
-        });
+        const data: User = new User(itemSubmitted);
+        data.id = InMemoryDatabase.Users.length + 1;
 
         const vr = User.Validate(data, true);
 

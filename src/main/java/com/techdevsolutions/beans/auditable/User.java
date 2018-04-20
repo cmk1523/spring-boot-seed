@@ -6,11 +6,11 @@ import java.io.Serializable;
 
 public class User extends Auditable implements Serializable {
 
-    public static ValidationResponse Validate(Auditable i) {
+    public static ValidationResponse Validate(User i) {
         return User.Validate(i, false);
     }
 
-    public static ValidationResponse Validate(Auditable i, Boolean isNew) {
+    public static ValidationResponse Validate(User i, Boolean isNew) {
         if (!Auditable.Validate(i, isNew).getValid()) {
             return Auditable.Validate(i, isNew);
         }
