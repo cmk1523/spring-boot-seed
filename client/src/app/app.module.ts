@@ -27,6 +27,7 @@ import {UserResolver} from './shared/resolvers/UserResolver';
 import {PreferenceService} from './shared/services/preference.service';
 import {UtilitiesService} from './shared/services/utilities.service';
 import {environment} from '../environments/environment';
+import {ErrorComponent} from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {environment} from '../environments/environment';
     HeaderComponent,
     FooterComponent,
     PageNotFoundComponent,
+    ErrorComponent,
     UserInfoComponent,
     AppInfoComponent,
   ],

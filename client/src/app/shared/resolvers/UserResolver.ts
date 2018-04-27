@@ -24,12 +24,13 @@ export class UserResolver extends BaseResolver implements Resolve<any> {
       const subscription = this.userService.get(id).subscribe(
         (user: User) => {
           observer.next(user);
-        }, (err: any) => {
-          this.router.navigate(['/home']);
+        }, (e: any) => {
+          BaseResolver.HandleError(e, 'UserResolver - Unable to get appInfo');
+          this.router.navigate(['/error']);
           observer.complete();
         }, () => {
-          observer.complete();
           subscription.unsubscribe();
+          observer.complete();
         }, );
     });
   }

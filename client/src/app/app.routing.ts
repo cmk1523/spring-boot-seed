@@ -9,6 +9,7 @@ import {AppInfoComponent} from './core/app-info/app-info.component';
 import {UserComponent} from './core/users/user/user.component';
 import {UserResolver} from './shared/resolvers/UserResolver';
 import {CreateUserComponent} from './core/users/create-user/create-user.component';
+import {ErrorComponent} from './error/error.component';
 
 // **
 // REMINDER: Order is important!
@@ -17,6 +18,13 @@ export const routes: Route[] = [
   {
     path: '',
     component: HomeComponent,
+    resolve: {
+      data: BaseResolver
+    }
+  },
+  {
+    path: 'error',
+    component: ErrorComponent,
     resolve: {
       data: BaseResolver
     }

@@ -21,13 +21,13 @@ export class UsersResolver extends BaseResolver implements Resolve<any> {
       const subscription = this.userService.getAll().subscribe(
         (users: User[]) => {
           observer.next(users);
-        }, (err: any) => {
-          BaseResolver.HandleError('UserResolver - Unable to get users: ' + err);
-          this.router.navigate(['/home']);
+        }, (e: any) => {
+          BaseResolver.HandleError(e, 'UserResolver - Unable to get users');
+          this.router.navigate(['/error']);
           observer.complete();
         }, () => {
-          observer.complete();
           subscription.unsubscribe();
+          observer.complete();
         }, );
     });
   }
