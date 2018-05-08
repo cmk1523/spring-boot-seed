@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { AppService } from './App.service';
+import { AppService } from './app.service';
 import {HttpClientModule} from '@angular/common/http';
 import {EventService} from './event.service';
 

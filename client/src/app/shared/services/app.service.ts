@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import {BaseService} from './base.service';
-import {Observable} from 'rxjs/Observable';
 import {Response} from '../objects/Response';
 import {HttpClient} from '@angular/common/http';
-import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {EventService} from './event.service';
+import {Observable, ReplaySubject} from 'rxjs';
 
 @Injectable()
 export class AppService extends BaseService {
@@ -22,7 +21,7 @@ export class AppService extends BaseService {
         this.eventService.loading.next(true);
 
         const subscription = this.http.get<Response>(this.appUrl)
-          .timeout(this.timeout)
+          // .timeout(this.timeout)
           .subscribe(
           (rsp: Response) => {
             this.appInfo.next(rsp.data);

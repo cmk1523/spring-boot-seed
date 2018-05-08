@@ -16,7 +16,12 @@ Spring Boot Angular 5 Seed Application!
 
 ## Running
 
-1. Run: ```npm run start:open```
+1. Change directory to ```./client``` and run: ```npm run start:open```
+
+## Deployment
+
+1. Change directory to ```./client``` and run: ```npm run build:prod```
+2. Run ```mvn install```
 
 
 ## Backend (Java) Features

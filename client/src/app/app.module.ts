@@ -12,7 +12,7 @@ import {UserService} from './shared/services/user.service';
 import {FormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {SharedComponentsModule} from './shared/components/shared-components.module';
-import {AppService} from './shared/services/App.service';
+import {AppService} from './shared/services/app.service';
 import {TestInterceptor} from './shared/InMemoryDatabaseInterceptor';
 import {BaseResolver} from './shared/resolvers/BaseResolver';
 import {UsersResolver} from './shared/resolvers/UsersResolver';

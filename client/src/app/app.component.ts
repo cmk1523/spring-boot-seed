@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AppService} from './shared/services/App.service';
+import {AppService} from './shared/services/app.service';
 import {BaseAngularComponent} from './shared/components/base-angular/base-angular.component';
 import {ToastrConfig} from './shared/config/ToastrConfig';
 

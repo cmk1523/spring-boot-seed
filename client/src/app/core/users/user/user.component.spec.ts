@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { UserComponent } from './user.component';
 import {SharedComponentsModule} from '../../../shared/components/shared-components.module';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -8,8 +7,7 @@ import {UsersModule} from '../users.module';
 import {HttpClientModule} from '@angular/common/http';
 import {EventService} from '../../../shared/services/event.service';
 import {Location} from '@angular/common';
-import {ActivatedRoute, Router} from '@angular/router';
-import 'rxjs/add/observable/of';
+import {Router} from '@angular/router';
 
 describe('UserComponent', () => {
   let component: UserComponent;

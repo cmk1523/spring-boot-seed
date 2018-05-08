@@ -6,7 +6,7 @@ import {Location} from '@angular/common';
 import {SharedComponentsModule} from '../../shared/components/shared-components.module';
 import {UserService} from '../../shared/services/user.service';
 import {HttpClientModule} from '@angular/common/http';
-import {AppService} from '../../shared/services/App.service';
+import {AppService} from '../../shared/services/app.service';
 import {InMemoryDatabase} from '../../shared/InMemoryDatabase';
 
 describe('HomeComponent', () => {

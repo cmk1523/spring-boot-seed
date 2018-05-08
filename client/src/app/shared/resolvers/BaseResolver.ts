@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
-import {AppService} from '../services/App.service';
+import {Observable} from 'rxjs';
+import {AppService} from '../services/app.service';
 
 declare let toastr: any;
 
