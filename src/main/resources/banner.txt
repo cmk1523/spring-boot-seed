@@ -2,10 +2,14 @@
 
     ${application.title}
     ${application.name} v${application.version}.${application.buildNumber} ${application.buildDateTime}
+    ${application.organization}
 
     Environment: ${application.environment}
 
     MySQL...
     URL: ${spring.datasource.url}
     Username: ${spring.datasource.username}
+
+    Elasticsearch...
+    Host: ${elasticsearch.host}
 

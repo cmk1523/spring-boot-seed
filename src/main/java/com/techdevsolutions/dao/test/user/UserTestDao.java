@@ -50,6 +50,12 @@ public class UserTestDao extends BaseTestDao implements DaoCrudInterface<User> {
         return this.filter(filter, list);
     }
 
+    public List<User> getAll() throws Exception {
+        logger.info("UserTestDao - getAll");
+        List<User> list = UserTestDao.Users.stream().filter(item -> !item.getRemoved()).collect(Collectors.toList());
+        return list;
+    }
+
     public User get(Integer id) {
         logger.info("UserMySqlDao - get - id: " + id);
         for (User item : UserTestDao.Users) {

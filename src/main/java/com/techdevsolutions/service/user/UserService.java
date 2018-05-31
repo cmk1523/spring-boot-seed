@@ -4,6 +4,7 @@ import com.techdevsolutions.beans.Filter;
 import com.techdevsolutions.beans.Search;
 import com.techdevsolutions.beans.auditable.User;
 import com.techdevsolutions.beans.ValidationResponse;
+import com.techdevsolutions.dao.elasticsearch.user.UserElasticsearchDao;
 import com.techdevsolutions.dao.test.user.UserTestDao;
 import com.techdevsolutions.service.CrudServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +17,12 @@ import java.util.logging.Logger;
 @Service
 public class UserService implements CrudServiceInterface<User> {
     private Logger logger = Logger.getLogger(UserService.class.getName());
-    UserTestDao userDao;
+    UserElasticsearchDao userDao;
+//    UserTestDao userDao;
 //    UserMySqlDao userDao;
 
     @Autowired
-    public UserService(UserTestDao userDao) {
+    public UserService(UserElasticsearchDao userDao) {
         this.userDao = userDao;
     }
 
@@ -53,6 +55,18 @@ public class UserService implements CrudServiceInterface<User> {
         return items;
     }
 
+    public List<User> getAll() throws Exception {
+        logger.info("UserService - getAll");
+        List<User> items = this.userDao.getAll();
+
+        for (User item : items) {
+            ValidationResponse vr = User.Validate(item);
+            if (!vr.getValid()) { throw new Exception("Invalid item: " + vr.getMessage()); }
+        }
+
+        return items;
+    }
+
     public User get(Integer id) throws Exception {
         logger.info("UserService - get - ID: " + id);
 
@@ -65,8 +79,12 @@ public class UserService implements CrudServiceInterface<User> {
         ValidationResponse vr = User.Validate(item, true);
         if (!vr.getValid()) { throw new Exception("Invalid item: " + vr.getMessage()); }
 
-        User i = this.get(item.getId());
-        if (i != null) { throw new Exception("UserService - create - Item already exists with ID: " + item.getId()); }
+        if (item.getId() != null && item.getId() != 0) {
+            User i = this.get(item.getId());
+            if (i != null) {
+                throw new Exception("UserService - create - Item already exists with ID: " + item.getId());
+            }
+        }
 
         return this.userDao.create(item);
     }

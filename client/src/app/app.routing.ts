@@ -23,7 +23,7 @@ export const routes: Route[] = [
     }
   },
   {
-    path: 'error',
+    path: 'angularerror',
     component: ErrorComponent,
     resolve: {
       data: BaseResolver

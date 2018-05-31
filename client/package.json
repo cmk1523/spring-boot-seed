@@ -6,7 +6,7 @@
     "start": "ng serve --configuration=inmemory",
     "start:open": "npm run start -- --o",
     "build": "ng build",
-    "build:watch": "npm run build -- --watch --configuration=inmemory",
+    "build:watch": "npm run build -- --watch",
     "build:prod": "npm run build -- --aot --configuration=production",
     "test": "ng test",
     "test:watch": "npm run test -- --watch",

@@ -26,7 +26,7 @@ export class UserResolver extends BaseResolver implements Resolve<any> {
           observer.next(user);
         }, (e: any) => {
           BaseResolver.HandleError(e, 'UserResolver - Unable to get appInfo');
-          this.router.navigate(['/error']);
+          this.router.navigate(['/angularerror']);
           observer.complete();
         }, () => {
           subscription.unsubscribe();
