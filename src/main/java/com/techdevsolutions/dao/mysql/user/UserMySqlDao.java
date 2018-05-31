@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -22,6 +23,18 @@ public class UserMySqlDao extends BaseMySqlDao implements DaoCrudInterface<User>
     private static final String TABLE_NAME = "users";
     private static final String INSERT_FIELDS = "NAME, CREATEDBY, UPDATEDBY, CREATEDDATE, UPDATEDDATE, REMOVED";
     private static final String SELECT_FIELDS = "ID, " + INSERT_FIELDS;
+//    public static final String INSERT_FIELDSV2 = "" +
+//            "companies.NAME as companies_name, " +
+//            "companies.CREATEDBY as companies_createdBy, " +
+//            "companies.CREATEDDATE as companies_createdDate, " +
+//            "companies.UPDATEDBY as companies_updatedBy, " +
+//            "companies.UPDATEDDATE as companies_updatedDate, " +
+//            "companies.REMOVED as companies_removed, " +
+//            "companies.VERSION as companies_version, " +
+//            "companies.BASECOLOR as companies_baseColor ";
+//    public static final String SELECT_FIELDSV2 = "companies.ID as companies_id, " + INSERT_FIELDSV2;
+//    private static final List<String> NumericFields = Arrays.asList("ID", "CREATEDDATE", "UPDATEDDATE");
+//    public static final String PREFIX = "companies";
 
     @Autowired
     public UserMySqlDao(JdbcTemplate jdbcTemplate) {
@@ -29,19 +42,27 @@ public class UserMySqlDao extends BaseMySqlDao implements DaoCrudInterface<User>
     }
 
     public List<User> search(Search search) throws Exception {
-        logger.info("UserMySqlDao - search");
-
-        // TODO: Search...
-
+//        logger.info("UserMySqlDao - search");
+//        String sql = "SELECT " + UserMySqlDao.SELECT_FIELDS +
+//                " FROM " + UserMySqlDao.TABLE_NAME +
+//                " WHERE removed = 0" +
+//                this.generateFilters(search, UserMySqlDao.NumericFields) +
+//                " ORDER BY " + search.getSort() + " " + search.getOrder() +
+//                " LIMIT " + search.getSize() + " OFFSET " + search.getOffset();
+////        this.logger.info("CompanyPostgresDao - search - SQL: " + sql);
+//        return this.jdbcTemplate.query(sql, new Object[] {}, new ExpenseRowMapper(userService, companyService,
+//                rateService, locationService, fileService));
         return new ArrayList<>();
     }
 
     public List<User> get(Filter filter) throws Exception {
-        logger.info("UserMySqlDao - get");
-        final String sql = "SELECT " + UserMySqlDao.SELECT_FIELDS +
-                " FROM " + UserMySqlDao.TABLE_NAME +
-                " WHERE removed = 0";
-        return this.jdbcTemplate.query(sql, new Object[] {}, new UserRowMapper());
+//        logger.info("UserMySqlDao - get");
+//        final String sql = "SELECT " + UserMySqlDao.SELECT_FIELDS +
+//                " FROM " + UserMySqlDao.TABLE_NAME +
+//                " WHERE removed = 0";
+//        return this.jdbcTemplate.query(sql, new Object[] {}, new ExpenseRowMapper(userService, companyService,
+//                rateService, locationService, fileService));
+        return new ArrayList<>();
     }
 
     public User get(Integer id) throws Exception {

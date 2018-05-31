@@ -1,0 +1,16 @@
+PUT _template/users
+{
+  "index_patterns": ["users*"],
+  "settings": {
+    "number_of_shards": 2
+  },
+  "mappings": {
+    "doc": {
+      "properties": {
+        "name": {
+          "type": "text"
+        }
+      }
+    }
+  }
+}

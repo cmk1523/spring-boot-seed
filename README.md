@@ -7,7 +7,7 @@ Spring Boot Angular 5 Seed Application!
 
 1. NodeJS - https://nodejs.org/en/download/current/
 2. Run: ```sudo npm install -g npm```
-3. Run: ```sudo npm install -g @angular/cli@1.7.4```
+3. Run: ```sudo npm install -g @angular/cli@6.0.0```
 
 ## Installing
 
@@ -37,7 +37,7 @@ Spring Boot Angular 5 Seed Application!
 
 
 ## Frontend (Angular) Features
-- Simple Angular 5 CLI application
+- Simple Angular 6 CLI application
 - Bootstrap, jQuery and Toastr integration
 - Basic Favicon set (using https://realfavicongenerator.net/)
 - Basic example of Angular binding, routing and services
@@ -52,5 +52,4 @@ Spring Boot Angular 5 Seed Application!
 - Implement search and filtering on MySQL Dao
 - Add Java unit tests
 - Add Facebook OAuth
-- Add Elastic DAO
 - Add File I/O DAO
