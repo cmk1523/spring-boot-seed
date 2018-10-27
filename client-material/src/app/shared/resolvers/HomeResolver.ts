@@ -3,10 +3,9 @@ import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@ang
 import {AppService} from '../services/app.service';
 import {BaseResolver} from './BaseResolver';
 import {MatSnackBar} from '@angular/material';
-import {Report} from '../objects/auditable/Report';
-import {Search} from '../objects/Search';
 import {User} from '../objects/auditable/User';
 import {Observable} from 'rxjs/index';
+import {first} from 'rxjs/operators';
 
 @Injectable()
 export class HomeResolver extends BaseResolver implements Resolve<any> {
@@ -18,9 +17,10 @@ export class HomeResolver extends BaseResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
     return new Observable((observer) => {
-      const subscription = super.resolve(route, state).subscribe(() => {
+      super.resolve(route, state).pipe(first()).subscribe(() => {
         if ((this.appInfo.user as User).isAdmin()) {
-          this.router.navigate(['/admin']);
+          console.log('goto admin...')
+          // this.router.navigate(['/admin']);
           observer.complete();
         } else {
           this.router.navigate(['/home']);
@@ -28,7 +28,6 @@ export class HomeResolver extends BaseResolver implements Resolve<any> {
         }
       }, (e: any) => {
         observer.complete();
-        subscription.unsubscribe();
       }, () => {
         observer.complete();
       });

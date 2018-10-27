@@ -4,6 +4,7 @@ import {AppService} from '../services/app.service';
 import {MatSnackBar} from '@angular/material';
 import {User} from '../objects/auditable/User';
 import {Observable} from 'rxjs/index';
+import {first} from 'rxjs/operators';
 
 @Injectable()
 export class BaseResolver implements Resolve<any> {
@@ -20,7 +21,7 @@ export class BaseResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
     return new Observable((observer) => {
-      this.appService.getAppInfo().subscribe(
+      this.appService.getAppInfo().pipe(first()).subscribe(
         (appInfo: any) => {
           this.appInfo = appInfo;
 

@@ -3,7 +3,6 @@ import {BaseAngularComponent} from '../../shared/components/base-angular/base-an
 import {User} from '../../shared/objects/auditable/User';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
-import {Role} from '../../shared/objects/auditable/Role';
 
 @Component({
   selector: 'app-user-info',
@@ -12,7 +11,7 @@ import {Role} from '../../shared/objects/auditable/Role';
 })
 export class UserInfoComponent extends BaseAngularComponent implements OnInit {
   user: User = null;
-  roles: Role[] = null;
+  // roles: Role[] = null;
 
   constructor(protected router: Router, protected route: ActivatedRoute, protected snackBar: MatSnackBar) {
     super();
@@ -21,9 +20,9 @@ export class UserInfoComponent extends BaseAngularComponent implements OnInit {
   ngOnInit() {
     super.ngOnInit();
 
-    if (this.user == null && this.roles == null && this.route.snapshot.data['data']) {
+    if (this.user == null && this.route.snapshot.data['data']) {
       this.user = this.route.snapshot.data['data'].user;
-      this.roles = this.route.snapshot.data['data'].roles;
+      // this.roles = this.route.snapshot.data['data'].roles;
     }
   }
 

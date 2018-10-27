@@ -1,5 +1,4 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {Report} from '../shared/objects/auditable/Report';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BaseAngularComponent} from '../shared/components/base-angular/base-angular.component';
 import {MatSort, MatTableDataSource} from '@angular/material';
@@ -11,7 +10,6 @@ import {MatSort, MatTableDataSource} from '@angular/material';
 })
 export class HomeComponent extends BaseAngularComponent implements OnInit, AfterViewInit {
   displayedColumns = ['name', 'createdDate', 'comment', 'status', 'total'];
-  reports: Report[] = null;
   dataSource = new MatTableDataSource([]);
   @ViewChild(MatSort) sort: MatSort;
 
@@ -22,9 +20,9 @@ export class HomeComponent extends BaseAngularComponent implements OnInit, After
   ngOnInit() {
     super.ngOnInit();
 
-    if (this.reports == null && this.route.snapshot.data['data']) {
-      this.reports = this.route.snapshot.data['data'];
-    }
+    // if (this.reports == null && this.route.snapshot.data['data']) {
+    //   this.reports = this.route.snapshot.data['data'];
+    // }
   }
 
   ngAfterViewInit() {
@@ -32,15 +30,15 @@ export class HomeComponent extends BaseAngularComponent implements OnInit, After
   }
 
   initializeForDisplay() {
-    this.reports.forEach((report: Report) => {
-      report['total'] = report.getTotalExpenses() + report.getTotalTimes();
-    });
+    // this.reports.forEach((report: Report) => {
+    //   report['total'] = report.getTotalExpenses() + report.getTotalTimes();
+    // });
 
-    this.dataSource = new MatTableDataSource(this.reports);
+    this.dataSource = new MatTableDataSource([]);
     this.dataSource.sort = this.sort;
   }
 
   createBtnClicked() {
-    this.router.navigate(['/reports/create']);
+    // this.router.navigate(['/reports/create']);
   }
 }

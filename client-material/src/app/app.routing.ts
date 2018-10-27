@@ -18,7 +18,7 @@ export const routes: Route[] = [
     path: '',
     component: HomeComponent,
     resolve: {
-      data: HomeResolver
+      data: BaseResolver
     }
   },
   {
@@ -46,6 +46,7 @@ export const routes: Route[] = [
     path: 'home',
     component: HomeComponent,
     resolve: {
+      data: BaseResolver
     }
   },
   {

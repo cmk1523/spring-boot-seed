@@ -6,7 +6,6 @@ import {HttpClient} from '@angular/common/http';
 import {GenericFile} from '../objects/auditable/GenericFile';
 import * as CryptoJS from 'crypto-js';
 import {AppService} from './app.service';
-import {Company} from '../objects/auditable/Company';
 import {Observable} from 'rxjs/index';
 
 @Injectable()

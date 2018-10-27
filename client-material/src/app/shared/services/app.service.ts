@@ -5,7 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {EventService} from './event.service';
 import {MatSnackBar} from '@angular/material';
 import {User} from '../objects/auditable/User';
-import {timeout} from 'rxjs/internal/operators';
+import {first, timeout} from 'rxjs/internal/operators';
 import {Observable, ReplaySubject} from 'rxjs';
 
 @Injectable()
@@ -23,8 +23,9 @@ export class AppService extends BaseService {
       if (!AppService.APP_INFO) {
         this.eventService.loading.next(true);
 
-        const subscription = this.http.get<Response>(this.appUrl)
+        this.http.get<Response>(this.appUrl)
           .pipe(
+            first(),
             timeout(this.timeout)
           )
           .subscribe(
@@ -38,7 +39,6 @@ export class AppService extends BaseService {
           }, () => {
             this.eventService.loading.next(false);
             observer.complete();
-            subscription.unsubscribe();
           });
       } else {
         observer.next(AppService.APP_INFO);
@@ -51,8 +51,9 @@ export class AppService extends BaseService {
     return new Observable((observer) => {
       this.eventService.loading.next(true);
 
-      const subscription = this.http.post<Response>(this.appUrl + '/settings', settings)
+      this.http.post<Response>(this.appUrl + '/settings', settings)
         .pipe(
+          first(),
           timeout(this.timeout)
         )
         .subscribe(
@@ -65,7 +66,6 @@ export class AppService extends BaseService {
           }, () => {
             this.eventService.loading.next(false);
             observer.complete();
-            subscription.unsubscribe();
           });
     });
   }
