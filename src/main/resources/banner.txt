@@ -7,9 +7,10 @@
     Environment: ${application.environment}
 
     MySQL...
-    URL: ${spring.datasource.url}
+    Host: ${spring.datasource.url}
     Username: ${spring.datasource.username}
 
     Elasticsearch...
     Host: ${elasticsearch.host}
+    Username: ${elasticsearch.username}
 
