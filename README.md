@@ -1,13 +1,13 @@
-# Spring Boot Seed Application and Angular 5
+# Spring Boot Seed Application and Angular 7
 
-Spring Boot Angular 5 Seed Application!
+Spring Boot & Angular 7 Seed Application!
 
 
 ## Prerequisites
 
 1. NodeJS - https://nodejs.org/en/download/current/
 2. Run: ```sudo npm install -g npm```
-3. Run: ```sudo npm install -g @angular/cli@6.0.0```
+3. Run: ```sudo npm install -g @angular/cli```
 
 ## Installing
 
@@ -37,7 +37,7 @@ Spring Boot Angular 5 Seed Application!
 
 
 ## Frontend (Angular) Features
-- Simple Angular 6 CLI application
+- Simple Angular 7 CLI application
 - Bootstrap, jQuery and Toastr integration
 - Basic Favicon set (using https://realfavicongenerator.net/)
 - Basic example of Angular binding, routing and services

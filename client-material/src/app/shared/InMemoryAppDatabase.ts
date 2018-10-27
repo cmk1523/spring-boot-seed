@@ -3,8 +3,8 @@ import {InMemoryDatabaseBase} from './InMemoryDatabaseBase';
 
 export class InMemoryAppDatabase extends InMemoryDatabaseBase {
   public static AppInfo: any = {
-    name: 'voucher',
-    title: 'Voucher',
+    name: 'spring-boot-seed-client',
+    title: 'Spring Boot Seed Client',
     version: '0.1',
     buildNumber: 'inmemory',
     buildDateTime: '04-14-2018 18:00',

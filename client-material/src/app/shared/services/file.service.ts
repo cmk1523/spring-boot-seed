@@ -23,7 +23,7 @@ export class FileService extends BaseService {
       const genericFiles: GenericFile[] = [];
 
       for (let i = 0; i < files.length; i++) {
-        const file = files.item(i);
+        const file: File = files.item(i);
         const fileReader = new FileReader();
 
         fileReader.onload = (fileLoadedEvent: any) => {
@@ -49,7 +49,7 @@ export class FileService extends BaseService {
                 type: file.type,
                 base64: base64,
                 path: 'data:' + file.type + ';base64,' + base64,
-                lastModified: file.lastModifiedDate.getTime()
+                lastModified: file.lastModified
               });
 
               genericFiles.push(newItem);

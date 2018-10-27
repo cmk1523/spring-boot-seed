@@ -5,9 +5,8 @@ import {HttpClient} from '@angular/common/http';
 import {EventService} from './event.service';
 import {MatSnackBar} from '@angular/material';
 import {User} from '../objects/auditable/User';
-import {Company} from '../objects/auditable/Company';
 import {timeout} from 'rxjs/internal/operators';
-import {Observable, ReplaySubject} from 'rxjs/index';
+import {Observable, ReplaySubject} from 'rxjs';
 
 @Injectable()
 export class AppService extends BaseService {
