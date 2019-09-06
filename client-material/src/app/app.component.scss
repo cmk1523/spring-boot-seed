@@ -1,0 +1,66 @@
+@import '../styles';
+
+.animation {
+  width: 100%;
+  text-align: center;
+  padding-top: 100px;
+
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fade-in {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes fade-in {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.fade-in {
+  -webkit-animation-name: fade-in;
+  animation-name: fade-in;
+}
+
+@-webkit-keyframes fade-out {
+  0% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+@keyframes fade-out {
+  0% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+.fade-out {
+  -webkit-animation-name: fade-out;
+  animation-name: fade-out;
+}
+
+
+.loader  {
+  margin: auto;
+  width: 125px;
+  margin-top: 50px;
+}
+
+h3 > mat-icon, h3 > img, h3 > span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+h3 > img {
+  height: 32px;
+}
+
+.mat-card {
+  text-align: center;
+  margin: auto;
+  width: 25%;
+  background-color: mat-color($primary);
+  color: #fff;
+}
