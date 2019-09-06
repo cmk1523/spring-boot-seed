@@ -1,0 +1,7 @@
+
+
+    ${application.title}
+    ${application.name} v${application.version} ${application.buildDateTime}
+    ${application.organization}
+
+    Environment: ${application.environment}

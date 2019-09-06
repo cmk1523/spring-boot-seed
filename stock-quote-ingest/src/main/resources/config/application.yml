@@ -1,0 +1,7 @@
+application.name: @project.name@
+application.title: TDS Stock Quote
+application.organization: Technical Development Solutions
+application.version: @project.version@
+application.buildDateTime: @timestamp@
+
+logging.level.=INFO

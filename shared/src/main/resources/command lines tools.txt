@@ -1,0 +1,10 @@
+
+# prereqs on macos...
+brew install jq
+
+# get results from elasticsearch
+curl -XGET 'localhost:9200/collection-events/_search?pretty=true&size=100' > backup.json
+
+# convert elasticsearch json string output to a list of json objects
+jq -c '.hits.hits[]' backup.json > backup2.json
+

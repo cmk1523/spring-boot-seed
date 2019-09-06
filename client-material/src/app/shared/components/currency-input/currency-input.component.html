@@ -1,7 +1,0 @@
-<mat-form-field class="full-width">
-  <span matPrefix>$</span>
-  <input type="text" matInput placeholder="{{ placeholder }}" [attr.name]="name" [attr.id]="id"
-         [required]="required" (change)="valueChanged($event.target.value)"
-         [(ngModel)]="valueAsStr">
-  <!--<mat-error *ngIf="comment.invalid">{{ getErrorMessage() }}</mat-error>-->
-</mat-form-field>

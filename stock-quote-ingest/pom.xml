@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>spring-boot-tools</artifactId>
+        <groupId>com.techdevsolutions</groupId>
+        <version>0.2</version>
+    </parent>
+
+    <packaging>war</packaging>
+
+    <name>stock-quote-ingest</name>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>stock-quote-ingest</artifactId>
+
+    <properties>
+        <elasticsearch.version>7.3.1</elasticsearch.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.techdevsolutions</groupId>
+            <artifactId>shared</artifactId>
+            <version>0.2</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>ROOT</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webappDirectory>./src/main/webapp</webappDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
